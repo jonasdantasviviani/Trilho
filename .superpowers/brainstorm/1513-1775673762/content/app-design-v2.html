@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>App Design v2</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif; background: #f0f2f5; color: #111; padding: 24px; }
+  h2 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+  .subtitle { color: #666; font-size: 14px; margin-bottom: 28px; }
+  .section { background: #fff; border-radius: 16px; padding: 24px; margin-bottom: 20px; box-shadow: 0 1px 6px rgba(0,0,0,.08); }
+  .section h3 { font-size: 16px; font-weight: 700; margin-bottom: 16px; color: #111; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; }
+  .label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: #888; margin-bottom: 8px; }
+  .row { display: flex; gap: 24px; flex-wrap: wrap; align-items: flex-start; justify-content: center; }
+  .phone { width: 190px; border-radius: 28px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,.18); display: inline-block; }
+</style>
+</head>
+<body>
+
+<h2>Chips de linha — centralizados acima do mapa</h2>
+<p class="subtitle">Filtros com scroll horizontal, centralizados, flutuando sobre o mapa</p>
+
+<div class="section">
+  <h3>Comparação: antes × depois</h3>
+  <div class="row">
+
+    <!-- ANTES -->
+    <div>
+      <div class="label" style="text-align:center;margin-bottom:8px;">❌ Antes — alinhado à esquerda</div>
+      <div class="phone" style="background:#fff;">
+        <div style="background:#f5f5f5;height:28px;display:flex;align-items:center;padding:0 12px;font-size:11px;font-weight:600;color:#111;border-bottom:1px solid #e8e8e8;">☀️ Trilho · SP</div>
+        <!-- chips left-aligned -->
+        <div style="padding:8px 6px 8px 6px;display:flex;gap:4px;overflow:hidden;background:#fff;border-bottom:1px solid #eee;justify-content:flex-start;">
+          <span style="background:#0455A1;color:#fff;font-size:9px;font-weight:700;padding:4px 10px;border-radius:14px;box-shadow:0 2px 6px rgba(0,0,0,.2);white-space:nowrap;outline:2px solid #000;outline-offset:2px;">● 1</span>
+          <span style="background:#007E5E;color:#fff;font-size:9px;font-weight:700;padding:4px 10px;border-radius:14px;white-space:nowrap;">● 2</span>
+          <span style="background:#EF4136;color:#fff;font-size:9px;font-weight:700;padding:4px 10px;border-radius:14px;white-space:nowrap;">● 3</span>
+          <span style="background:#FFD900;color:#111;font-size:9px;font-weight:700;padding:4px 10px;border-radius:14px;white-space:nowrap;">● 4</span>
+          <span style="background:#9B2990;color:#fff;font-size:9px;font-weight:700;padding:4px 10px;border-radius:14px;white-space:nowrap;">● 5</span>
+        </div>
+        <svg width="190" height="252" viewBox="0 0 190 252" style="background:#fff;display:block;">
+          <line x1="10" y1="108" x2="180" y2="108" stroke="#EF4136" stroke-width="5"/>
+          <line x1="95" y1="10" x2="95" y2="242" stroke="#0455A1" stroke-width="5"/>
+          <polyline points="20,178 65,108 140,108 175,73" fill="none" stroke="#007E5E" stroke-width="4"/>
+          <line x1="95" y1="108" x2="30" y2="193" stroke="#FFD900" stroke-width="4"/>
+          <polyline points="10,193 50,173 95,173 145,193" fill="none" stroke="#9B2990" stroke-width="4"/>
+          <circle cx="95" cy="108" r="7" fill="#fff" stroke="#555" stroke-width="1.5"/>
+          <circle cx="95" cy="108" r="4" fill="#fff" stroke="#333" stroke-width="1.5"/>
+          <line x1="95" y1="101" x2="95" y2="88" stroke="#ccc" stroke-width="0.8" stroke-dasharray="2,2"/>
+          <text x="95" y="85" font-size="7" fill="#111" font-family="sans-serif" font-weight="700" text-anchor="middle">Luz</text>
+          <circle cx="50" cy="108" r="4" fill="#fff" stroke="#EF4136" stroke-width="1.8"/>
+          <circle cx="145" cy="108" r="4" fill="#FFD740" stroke="#EF4136" stroke-width="1.8"/>
+          <circle cx="95" cy="55" r="4" fill="#fff" stroke="#0455A1" stroke-width="1.8"/>
+          <circle cx="95" cy="173" r="4" fill="#fff" stroke="#0455A1" stroke-width="1.8"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- DEPOIS Light -->
+    <div>
+      <div class="label" style="text-align:center;margin-bottom:8px;">✅ Depois — centralizados · Light</div>
+      <div class="phone" style="background:#fff;">
+        <div style="background:#f5f5f5;height:28px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#111;border-bottom:1px solid #e8e8e8;">☀️ Trilho · SP</div>
+        <!-- mapa ocupa tudo, chips flutuam sobre ele -->
+        <div style="position:relative;">
+          <svg width="190" height="280" viewBox="0 0 190 280" style="background:#fff;display:block;">
+            <line x1="10" y1="130" x2="180" y2="130" stroke="#EF4136" stroke-width="5"/>
+            <line x1="95" y1="10" x2="95" y2="270" stroke="#0455A1" stroke-width="5"/>
+            <polyline points="20,200 65,130 140,130 175,95" fill="none" stroke="#007E5E" stroke-width="4"/>
+            <line x1="95" y1="130" x2="30" y2="215" stroke="#FFD900" stroke-width="4"/>
+            <polyline points="10,215 50,195 95,195 145,215" fill="none" stroke="#9B2990" stroke-width="4"/>
+            <polyline points="82,10 72,40 58,80 48,130" fill="none" stroke="#CF202E" stroke-width="3"/>
+            <polyline points="10,142 38,142 60,134" fill="none" stroke="#97999B" stroke-width="3"/>
+            <circle cx="95" cy="130" r="7" fill="#fff" stroke="#555" stroke-width="1.5"/>
+            <circle cx="95" cy="130" r="4" fill="#fff" stroke="#333" stroke-width="1.5"/>
+            <line x1="95" y1="123" x2="95" y2="110" stroke="#ccc" stroke-width="0.8" stroke-dasharray="2,2"/>
+            <text x="95" y="107" font-size="7" fill="#111" font-family="sans-serif" font-weight="700" text-anchor="middle">Luz</text>
+            <circle cx="50" cy="130" r="4" fill="#fff" stroke="#EF4136" stroke-width="1.8"/>
+            <circle cx="145" cy="130" r="4" fill="#FFD740" stroke="#EF4136" stroke-width="1.8"/>
+            <circle cx="95" cy="65" r="4" fill="#fff" stroke="#0455A1" stroke-width="1.8"/>
+            <circle cx="95" cy="200" r="4" fill="#fff" stroke="#0455A1" stroke-width="1.8"/>
+          </svg>
+          <!-- chips flutuando centralizados, com blur bg -->
+          <div style="position:absolute;top:10px;left:0;right:0;display:flex;justify-content:center;">
+            <div style="display:flex;gap:4px;padding:6px 10px;background:rgba(255,255,255,0.88);backdrop-filter:blur(8px);border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,.12);">
+              <span style="background:#0455A1;color:#fff;font-size:9px;font-weight:700;padding:4px 10px;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,.25);outline:2px solid #000;outline-offset:1px;">● 1</span>
+              <span style="background:#007E5E;color:#fff;font-size:9px;font-weight:700;padding:4px 10px;border-radius:12px;">● 2</span>
+              <span style="background:#EF4136;color:#fff;font-size:9px;font-weight:700;padding:4px 10px;border-radius:12px;">● 3</span>
+              <span style="background:#FFD900;color:#111;font-size:9px;font-weight:700;padding:4px 10px;border-radius:12px;">● 4</span>
+              <span style="background:#9B2990;color:#fff;font-size:9px;font-weight:700;padding:4px 10px;border-radius:12px;">● 5</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEPOIS Dark -->
+    <div>
+      <div class="label" style="text-align:center;margin-bottom:8px;">✅ Depois — centralizados · Dark</div>
+      <div class="phone" style="background:#121212;">
+        <div style="background:#1e1e1e;height:28px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#fff;border-bottom:1px solid #333;">🌙 Trilho · SP</div>
+        <div style="position:relative;">
+          <svg width="190" height="280" viewBox="0 0 190 280" style="background:#121212;display:block;">
+            <line x1="10" y1="130" x2="180" y2="130" stroke="#c62828" stroke-width="5"/>
+            <line x1="95" y1="10" x2="95" y2="270" stroke="#1565C0" stroke-width="5"/>
+            <polyline points="20,200 65,130 140,130 175,95" fill="none" stroke="#00695C" stroke-width="4"/>
+            <line x1="95" y1="130" x2="30" y2="215" stroke="#F9A825" stroke-width="4"/>
+            <polyline points="10,215 50,195 95,195 145,215" fill="none" stroke="#6A1B9A" stroke-width="4"/>
+            <polyline points="82,10 72,40 58,80 48,130" fill="none" stroke="#b71c1c" stroke-width="3"/>
+            <polyline points="10,142 38,142 60,134" fill="none" stroke="#616161" stroke-width="3"/>
+            <circle cx="95" cy="130" r="7" fill="#1e1e1e" stroke="#aaa" stroke-width="1.5"/>
+            <circle cx="95" cy="130" r="4" fill="#1e1e1e" stroke="#ddd" stroke-width="1.5"/>
+            <line x1="95" y1="123" x2="95" y2="110" stroke="#555" stroke-width="0.8" stroke-dasharray="2,2"/>
+            <text x="95" y="107" font-size="7" fill="#eee" font-family="sans-serif" font-weight="700" text-anchor="middle">Luz</text>
+            <circle cx="50" cy="130" r="4" fill="#121212" stroke="#c62828" stroke-width="1.8"/>
+            <circle cx="145" cy="130" r="4" fill="#FFD740" stroke="#c62828" stroke-width="1.8"/>
+            <circle cx="95" cy="65" r="4" fill="#121212" stroke="#1565C0" stroke-width="1.8"/>
+            <circle cx="95" cy="200" r="4" fill="#121212" stroke="#1565C0" stroke-width="1.8"/>
+          </svg>
+          <!-- chips dark flutuando centralizados -->
+          <div style="position:absolute;top:10px;left:0;right:0;display:flex;justify-content:center;">
+            <div style="display:flex;gap:4px;padding:6px 10px;background:rgba(30,30,30,0.88);backdrop-filter:blur(8px);border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,.4);">
+              <span style="background:#1565C0;color:#fff;font-size:9px;font-weight:700;padding:4px 10px;border-radius:12px;outline:2px solid #90caf9;outline-offset:1px;">● 1</span>
+              <span style="background:#00695C;color:#fff;font-size:9px;font-weight:700;padding:4px 10px;border-radius:12px;">● 2</span>
+              <span style="background:#c62828;color:#fff;font-size:9px;font-weight:700;padding:4px 10px;border-radius:12px;">● 3</span>
+              <span style="background:#F9A825;color:#111;font-size:9px;font-weight:700;padding:4px 10px;border-radius:12px;">● 4</span>
+              <span style="background:#6A1B9A;color:#fff;font-size:9px;font-weight:700;padding:4px 10px;border-radius:12px;">● 5</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <p style="font-size:12px;color:#666;margin-top:20px;text-align:center;">
+    Chips flutuam sobre o mapa em pill com <strong>background blur</strong> (glassmorphism leve) · centralizados · scroll horizontal quando todas as linhas visíveis
+  </p>
+</div>
+
+<div style="text-align:center;margin-top:8px;">
+  <p style="font-size:13px;color:#555;">Aprovado? Responda no terminal para finalizar o design e escrever o spec.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+# Ambiente HML (homologação)
+# Uso: docker compose -f docker-compose.yml -f docker-compose.hml.yml up -d
+
+services:
+  api:
+    image: ghcr.io/${GH_OWNER}/trilho-api:${IMAGE_TAG}
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Staging
+      - Jwt__Secret=${JWT_SECRET}
+      - AdminApiKey=${ADMIN_API_KEY}
+      - Firebase__ProjectId=${FIREBASE_PROJECT_ID}
+      - Firebase__ServiceAccountJson=${FIREBASE_SERVICE_ACCOUNT_JSON}
+      - OlhoVivo__Token=${OLHOVIVO_TOKEN:-}
+    ports:
+      - "5000:8080"
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 512M
+    logging:
+      driver: json-file
+      options:
+        max-size: "20m"
+        max-file: "5"
+
+  web:
+    image: ghcr.io/${GH_OWNER}/trilho-web:${IMAGE_TAG}
+    profiles: [web]
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - BACKEND_URL=http://api:8080
+      - JWT_SECRET=${JWT_SECRET}
+      - NEXT_PUBLIC_FIREBASE_API_KEY=${NEXT_PUBLIC_FIREBASE_API_KEY}
+      - NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=${NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN}
+      - NEXT_PUBLIC_FIREBASE_PROJECT_ID=${NEXT_PUBLIC_FIREBASE_PROJECT_ID}
+      - NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=${NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
+      - NEXT_PUBLIC_APP_URL=https://hml.trilho.app
+    depends_on:
+      - api
+
+  admin:
+    image: ghcr.io/${GH_OWNER}/trilho-admin:${IMAGE_TAG}
+    profiles: [admin]
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - BACKEND_URL=http://api:8080
+      - ADMIN_API_KEY=${ADMIN_API_KEY}
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+      - NEXTAUTH_URL=https://hml-admin.trilho.app
+    depends_on:
+      - api
+
+  db:
+    environment:
+      - POSTGRES_DB=trilho_hml
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
+  redis:
+    deploy:
+      resources:
+        limits:
+          memory: 128M

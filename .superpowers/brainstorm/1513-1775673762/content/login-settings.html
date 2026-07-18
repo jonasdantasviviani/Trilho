@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login + Settings</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif; background: #f0f2f5; color: #111; padding: 24px; }
+  h2 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+  .subtitle { color: #666; font-size: 14px; margin-bottom: 28px; }
+  .section { background: #fff; border-radius: 16px; padding: 24px; margin-bottom: 24px; box-shadow: 0 1px 6px rgba(0,0,0,.08); }
+  .section h3 { font-size: 16px; font-weight: 700; margin-bottom: 20px; color: #111; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; }
+  .label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: #888; margin-bottom: 10px; text-align:center; }
+  .row { display: flex; gap: 28px; flex-wrap: wrap; align-items: flex-start; justify-content: center; }
+  .phone { width: 200px; border-radius: 32px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,.18); flex-shrink: 0; }
+
+  /* Light inputs */
+  .input-l { background:#F8F9FA; border:1.5px solid #E0E4EA; border-radius:12px; padding:12px 16px; font-size:13px; color:#111; width:100%; margin-bottom:10px; }
+  .btn-primary-l { background:#0455A1; color:#fff; border:none; border-radius:12px; padding:13px; font-size:13px; font-weight:700; width:100%; cursor:pointer; }
+  .btn-ghost-l { background:transparent; color:#0455A1; border:1.5px solid #0455A1; border-radius:12px; padding:12px; font-size:13px; font-weight:600; width:100%; cursor:pointer; margin-top:8px; }
+  .divider-l { display:flex; align-items:center; gap:8px; margin:14px 0; color:#aaa; font-size:11px; }
+  .divider-l::before, .divider-l::after { content:''; flex:1; height:1px; background:#E0E4EA; }
+
+  /* Dark inputs */
+  .input-d { background:#2A2A2A; border:1.5px solid #3A3A3A; border-radius:12px; padding:12px 16px; font-size:13px; color:#eee; width:100%; margin-bottom:10px; }
+  .btn-primary-d { background:#2979FF; color:#fff; border:none; border-radius:12px; padding:13px; font-size:13px; font-weight:700; width:100%; cursor:pointer; }
+  .btn-ghost-d { background:transparent; color:#90CAF9; border:1.5px solid #90CAF9; border-radius:12px; padding:12px; font-size:13px; font-weight:600; width:100%; cursor:pointer; margin-top:8px; }
+  .divider-d { display:flex; align-items:center; gap:8px; margin:14px 0; color:#555; font-size:11px; }
+  .divider-d::before, .divider-d::after { content:''; flex:1; height:1px; background:#3A3A3A; }
+
+  /* Settings rows */
+  .srow-l { display:flex; align-items:center; justify-content:space-between; padding:13px 0; border-bottom:1px solid #F0F2F5; }
+  .srow-d { display:flex; align-items:center; justify-content:space-between; padding:13px 0; border-bottom:1px solid #2A2A2A; }
+  .toggle-on { width:38px; height:22px; background:#0455A1; border-radius:11px; position:relative; flex-shrink:0; }
+  .toggle-on::after { content:''; position:absolute; right:3px; top:3px; width:16px; height:16px; background:#fff; border-radius:50%; }
+  .toggle-off-l { width:38px; height:22px; background:#E0E4EA; border-radius:11px; position:relative; flex-shrink:0; }
+  .toggle-off-l::after { content:''; position:absolute; left:3px; top:3px; width:16px; height:16px; background:#fff; border-radius:50%; }
+  .toggle-off-d { width:38px; height:22px; background:#3A3A3A; border-radius:11px; position:relative; flex-shrink:0; }
+  .toggle-off-d::after { content:''; position:absolute; left:3px; top:3px; width:16px; height:16px; background:#888; border-radius:50%; }
+  .toggle-on-d { width:38px; height:22px; background:#2979FF; border-radius:11px; position:relative; flex-shrink:0; }
+  .toggle-on-d::after { content:''; position:absolute; right:3px; top:3px; width:16px; height:16px; background:#fff; border-radius:50%; }
+  .chevron { font-size:14px; color:#bbb; }
+  .icon-circle-l { width:32px; height:32px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:16px; margin-right:10px; flex-shrink:0; }
+  .icon-circle-d { width:32px; height:32px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:16px; margin-right:10px; flex-shrink:0; }
+</style>
+</head>
+<body>
+
+<h2>Login + Settings — Light & Dark</h2>
+<p class="subtitle">Wireframes das telas para aprovação</p>
+
+<!-- LOGIN -->
+<div class="section">
+  <h3>Tela de Login</h3>
+  <div class="row">
+
+    <!-- Login Light -->
+    <div>
+      <div class="label">Light</div>
+      <div class="phone" style="background:#fff;">
+        <!-- Header com logo -->
+        <div style="background:#fff;padding:32px 20px 20px;text-align:center;border-bottom:1px solid #F0F2F5;">
+          <div style="width:56px;height:56px;background:#0455A1;border-radius:18px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 14px rgba(4,85,161,.3);">🚇</div>
+          <div style="font-size:22px;font-weight:800;color:#111;letter-spacing:-0.5px;">Trilho</div>
+          <div style="font-size:12px;color:#888;margin-top:4px;">Transporte em tempo real</div>
+        </div>
+        <!-- Form -->
+        <div style="padding:20px;">
+          <div style="font-size:13px;font-weight:600;color:#111;margin-bottom:14px;">Entre na sua conta</div>
+          <input class="input-l" placeholder="E-mail" type="text" style="display:block;" readonly>
+          <input class="input-l" placeholder="Senha" type="text" style="display:block;" readonly>
+          <button class="btn-primary-l">Entrar</button>
+          <div class="divider-l">ou</div>
+          <button class="btn-ghost-l">Criar conta</button>
+          <div style="text-align:center;margin-top:14px;">
+            <span style="font-size:11px;color:#0455A1;font-weight:600;">Esqueceu a senha?</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Login Dark -->
+    <div>
+      <div class="label">Dark</div>
+      <div class="phone" style="background:#121212;">
+        <div style="background:#1E1E1E;padding:32px 20px 20px;text-align:center;border-bottom:1px solid #2A2A2A;">
+          <div style="width:56px;height:56px;background:#2979FF;border-radius:18px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 14px rgba(41,121,255,.35);">🚇</div>
+          <div style="font-size:22px;font-weight:800;color:#EEE;letter-spacing:-0.5px;">Trilho</div>
+          <div style="font-size:12px;color:#666;margin-top:4px;">Transporte em tempo real</div>
+        </div>
+        <div style="padding:20px;background:#121212;">
+          <div style="font-size:13px;font-weight:600;color:#EEE;margin-bottom:14px;">Entre na sua conta</div>
+          <div class="input-d" style="display:block;margin-bottom:10px;">E-mail</div>
+          <div class="input-d" style="display:block;margin-bottom:10px;">Senha</div>
+          <button class="btn-primary-d">Entrar</button>
+          <div class="divider-d">ou</div>
+          <button class="btn-ghost-d">Criar conta</button>
+          <div style="text-align:center;margin-top:14px;">
+            <span style="font-size:11px;color:#90CAF9;font-weight:600;">Esqueceu a senha?</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SETTINGS -->
+<div class="section">
+  <h3>Tela de Configurações</h3>
+  <div class="row">
+
+    <!-- Settings Light -->
+    <div>
+      <div class="label">Light</div>
+      <div class="phone" style="background:#F8F9FA;">
+        <!-- AppBar -->
+        <div style="background:#fff;padding:14px 16px;display:flex;align-items:center;border-bottom:1px solid #E0E4EA;">
+          <span style="font-size:18px;margin-right:10px;">←</span>
+          <span style="font-size:16px;font-weight:700;color:#111;">Configurações</span>
+        </div>
+        <div style="padding:12px;">
+
+          <!-- Seção Aparência -->
+          <div style="font-size:10px;font-weight:700;color:#888;letter-spacing:.8px;padding:0 4px;margin-bottom:6px;margin-top:4px;">APARÊNCIA</div>
+          <div style="background:#fff;border-radius:14px;padding:0 14px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,.06);">
+            <div class="srow-l">
+              <div style="display:flex;align-items:center;">
+                <div class="icon-circle-l" style="background:#EEF2FF;">🌙</div>
+                <div>
+                  <div style="font-size:13px;font-weight:600;color:#111;">Modo escuro</div>
+                  <div style="font-size:11px;color:#888;">Tema dark</div>
+                </div>
+              </div>
+              <div class="toggle-off-l"></div>
+            </div>
+            <div class="srow-l" style="border-bottom:none;">
+              <div style="display:flex;align-items:center;">
+                <div class="icon-circle-l" style="background:#FFF3E0;">🌍</div>
+                <div>
+                  <div style="font-size:13px;font-weight:600;color:#111;">Idioma</div>
+                  <div style="font-size:11px;color:#888;">Português (BR)</div>
+                </div>
+              </div>
+              <span class="chevron">›</span>
+            </div>
+          </div>
+
+          <!-- Seção Notificações -->
+          <div style="font-size:10px;font-weight:700;color:#888;letter-spacing:.8px;padding:0 4px;margin-bottom:6px;">NOTIFICAÇÕES</div>
+          <div style="background:#fff;border-radius:14px;padding:0 14px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,.06);">
+            <div class="srow-l">
+              <div style="display:flex;align-items:center;">
+                <div class="icon-circle-l" style="background:#E8F5E9;">🔔</div>
+                <div>
+                  <div style="font-size:13px;font-weight:600;color:#111;">Alertas de lotação</div>
+                  <div style="font-size:11px;color:#888;">Avisar quando cheio</div>
+                </div>
+              </div>
+              <div class="toggle-on"></div>
+            </div>
+            <div class="srow-l" style="border-bottom:none;">
+              <div style="display:flex;align-items:center;">
+                <div class="icon-circle-l" style="background:#FFF8E1;">⚡</div>
+                <div>
+                  <div style="font-size:13px;font-weight:600;color:#111;">Atualizações</div>
+                  <div style="font-size:11px;color:#888;">30 segundos</div>
+                </div>
+              </div>
+              <span class="chevron">›</span>
+            </div>
+          </div>
+
+          <!-- Seção Conta -->
+          <div style="font-size:10px;font-weight:700;color:#888;letter-spacing:.8px;padding:0 4px;margin-bottom:6px;">CONTA</div>
+          <div style="background:#fff;border-radius:14px;padding:0 14px;box-shadow:0 1px 3px rgba(0,0,0,.06);">
+            <div class="srow-l">
+              <div style="display:flex;align-items:center;">
+                <div class="icon-circle-l" style="background:#F3E5F5;">👤</div>
+                <div style="font-size:13px;font-weight:600;color:#111;">Perfil</div>
+              </div>
+              <span class="chevron">›</span>
+            </div>
+            <div class="srow-l" style="border-bottom:none;">
+              <div style="display:flex;align-items:center;">
+                <div class="icon-circle-l" style="background:#FFEBEE;">🚪</div>
+                <div style="font-size:13px;font-weight:600;color:#EF4136;">Sair</div>
+              </div>
+              <span class="chevron" style="color:#EF4136;">›</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Dark -->
+    <div>
+      <div class="label">Dark</div>
+      <div class="phone" style="background:#121212;">
+        <div style="background:#1E1E1E;padding:14px 16px;display:flex;align-items:center;border-bottom:1px solid #2A2A2A;">
+          <span style="font-size:18px;margin-right:10px;color:#eee;">←</span>
+          <span style="font-size:16px;font-weight:700;color:#EEE;">Configurações</span>
+        </div>
+        <div style="padding:12px;background:#121212;">
+
+          <div style="font-size:10px;font-weight:700;color:#555;letter-spacing:.8px;padding:0 4px;margin-bottom:6px;margin-top:4px;">APARÊNCIA</div>
+          <div style="background:#1E1E1E;border-radius:14px;padding:0 14px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,.3);">
+            <div class="srow-d">
+              <div style="display:flex;align-items:center;">
+                <div class="icon-circle-d" style="background:#1A237E;margin-right:10px;">🌙</div>
+                <div>
+                  <div style="font-size:13px;font-weight:600;color:#EEE;">Modo escuro</div>
+                  <div style="font-size:11px;color:#666;">Tema dark</div>
+                </div>
+              </div>
+              <div class="toggle-on-d"></div>
+            </div>
+            <div class="srow-d" style="border-bottom:none;">
+              <div style="display:flex;align-items:center;">
+                <div class="icon-circle-d" style="background:#1B3A1B;margin-right:10px;">🌍</div>
+                <div>
+                  <div style="font-size:13px;font-weight:600;color:#EEE;">Idioma</div>
+                  <div style="font-size:11px;color:#666;">Português (BR)</div>
+                </div>
+              </div>
+              <span class="chevron">›</span>
+            </div>
+          </div>
+
+          <div style="font-size:10px;font-weight:700;color:#555;letter-spacing:.8px;padding:0 4px;margin-bottom:6px;">NOTIFICAÇÕES</div>
+          <div style="background:#1E1E1E;border-radius:14px;padding:0 14px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,.3);">
+            <div class="srow-d">
+              <div style="display:flex;align-items:center;">
+                <div class="icon-circle-d" style="background:#1B3A1B;margin-right:10px;">🔔</div>
+                <div>
+                  <div style="font-size:13px;font-weight:600;color:#EEE;">Alertas de lotação</div>
+                  <div style="font-size:11px;color:#666;">Avisar quando cheio</div>
+                </div>
+              </div>
+              <div class="toggle-on-d"></div>
+            </div>
+            <div class="srow-d" style="border-bottom:none;">
+              <div style="display:flex;align-items:center;">
+                <div class="icon-circle-d" style="background:#3E2800;margin-right:10px;">⚡</div>
+                <div>
+                  <div style="font-size:13px;font-weight:600;color:#EEE;">Atualizações</div>
+                  <div style="font-size:11px;color:#666;">30 segundos</div>
+                </div>
+              </div>
+              <span class="chevron">›</span>
+            </div>
+          </div>
+
+          <div style="font-size:10px;font-weight:700;color:#555;letter-spacing:.8px;padding:0 4px;margin-bottom:6px;">CONTA</div>
+          <div style="background:#1E1E1E;border-radius:14px;padding:0 14px;box-shadow:0 1px 4px rgba(0,0,0,.3);">
+            <div class="srow-d">
+              <div style="display:flex;align-items:center;">
+                <div class="icon-circle-d" style="background:#2A1A2E;margin-right:10px;">👤</div>
+                <div style="font-size:13px;font-weight:600;color:#EEE;">Perfil</div>
+              </div>
+              <span class="chevron">›</span>
+            </div>
+            <div class="srow-d" style="border-bottom:none;">
+              <div style="display:flex;align-items:center;">
+                <div class="icon-circle-d" style="background:#3E0000;margin-right:10px;">🚪</div>
+                <div style="font-size:13px;font-weight:600;color:#EF5350;">Sair</div>
+              </div>
+              <span class="chevron" style="color:#EF5350;">›</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div style="text-align:center;margin-top:8px;">
+  <p style="font-size:13px;color:#555;">Aprovado ou quer ajustar algo? Responda no terminal.</p>
+</div>
+
+</body>
+</html>

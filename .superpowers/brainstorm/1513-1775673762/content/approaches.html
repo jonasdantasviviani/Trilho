@@ -1,0 +1,68 @@
+<h2>Como implementar</h2>
+<p class="subtitle">3 abordagens — cada uma com trade-offs diferentes</p>
+
+<div class="options">
+
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>CustomPainter turbinado <span style="background:#1a73e8;color:#fff;font-size:11px;padding:2px 8px;border-radius:12px;margin-left:6px;">recomendado</span></h3>
+      <p>Reescrever o schematic com geometria fiel ao mapa oficial: polylines com múltiplos segmentos, coordenadas calibradas manualmente para todas as ~20 linhas. O painter ganha: labels de estações, marcadores de integração (círculo branco com bordas coloridas), modo dark adaptativo.</p>
+      <div class="pros-cons" style="margin-top:8px;">
+        <div class="pros"><h4>Prós</h4><ul>
+          <li>Animações suaves (já existe)</li>
+          <li>Dados em tempo real integrados</li>
+          <li>Zoom/pan fluido com InteractiveViewer</li>
+          <li>Dark mode perfeito</li>
+        </ul></div>
+        <div class="cons"><h4>Contras</h4><ul>
+          <li>Coordenadas precisam ser digitalizadas manualmente</li>
+          <li>Trabalho de calibração das ~20 linhas</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>SVG embutido + overlay interativo</h3>
+      <p>Usar o SVG oficial do mapa da CPTM/Metro como imagem base, renderizar por cima overlay de interatividade (taps, indicadores de lotação) usando Stack + Positioned.</p>
+      <div class="pros-cons" style="margin-top:8px;">
+        <div class="pros"><h4>Prós</h4><ul>
+          <li>Visual 100% idêntico ao impresso</li>
+          <li>Zero esforço de calibração</li>
+        </ul></div>
+        <div class="cons"><h4>Contras</h4><ul>
+          <li>Dark mode impossível (SVG é imagem fixa)</li>
+          <li>Animações da linha selecionada muito difíceis</li>
+          <li>Indicadores de lotação desalinhados ao zoom</li>
+          <li>SVG oficial não disponível gratuitamente</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>flutter_map + tiles geográficos</h3>
+      <p>Usar coordenadas geográficas reais (lat/lon) e renderizar sobre mapa de fundo (Mapbox/OSM com estilo monocromático). Estações são markers sobrepostos.</p>
+      <div class="pros-cons" style="margin-top:8px;">
+        <div class="pros"><h4>Prós</h4><ul>
+          <li>Posições geograficamente precisas</li>
+          <li>Escala automática</li>
+        </ul></div>
+        <div class="cons"><h4>Contras</h4><ul>
+          <li>Mapa geográfico ≠ mapa esquemático (confuso)</li>
+          <li>Requer API key + custos de tiles</li>
+          <li>Perde a identidade visual do mapa de metrô</li>
+          <li>Animações por linha muito complexas</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top:16px;">Em paralelo ao mapa: design system premium aplicado em todo o app — typography Inter/SF Pro, espaçamentos consistentes, dark mode completo com <code>ThemeData.dark()</code>.</p>

@@ -1,0 +1,106 @@
+<h2>Ao tocar numa estação, como exibir os detalhes?</h2>
+<p class="subtitle">Previsão de chegada, lotação, sentidos — como organizar essas informações?</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="A" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0d1117;padding:0;min-height:220px;display:flex;flex-direction:column;overflow:hidden;border-radius:8px">
+      <!-- Map peek at top -->
+      <div style="height:60px;background:linear-gradient(180deg,#1a2332 0%,#1e2a3a 100%);display:flex;align-items:center;justify-content:center;color:#555;font-size:10px">mapa ao fundo</div>
+      <!-- Bottom sheet sliding up -->
+      <div style="flex:1;background:#1e2a3a;border-radius:12px 12px 0 0;padding:12px;border-top:2px solid #1565C0">
+        <div style="width:32px;height:3px;background:#3a4a5a;border-radius:2px;margin:0 auto 8px"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <div style="font-size:12px;color:white;font-weight:bold">Ana Rosa</div>
+          <div style="background:#f44336;border-radius:10px;padding:2px 8px;font-size:9px;color:white">Lotado</div>
+        </div>
+        <!-- Directions tabs -->
+        <div style="display:flex;gap:6px;margin-bottom:8px">
+          <div style="background:#1565C0;border-radius:6px;padding:3px 8px;font-size:9px;color:white">→ Jd. São Paulo</div>
+          <div style="background:#2a3a4a;border-radius:6px;padding:3px 8px;font-size:9px;color:#90caf9">← Capão Redondo</div>
+        </div>
+        <!-- Next trains -->
+        <div style="font-size:9px;color:#90caf9;margin-bottom:4px">Próximos trens</div>
+        <div style="display:flex;flex-direction:column;gap:3px">
+          <div style="display:flex;justify-content:space-between;font-size:9px;color:#e0e0e0">
+            <span>🚆 Chegando agora</span><span style="color:#4caf50">~1 min</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:9px;color:#aaa">
+            <span>🚆 A caminho</span><span>~6 min</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Bottom sheet expandível</h3>
+      <p>Painel desliza de baixo. Em meia tela mostra resumo. Arrasta para cima expande com histórico e mais detalhes. Mapa fica visível.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="B" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0d1117;padding:12px;min-height:220px;display:flex;flex-direction:column;gap:8px">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div style="font-size:12px;color:white;font-weight:bold">← Ana Rosa</div>
+        <div style="background:#f44336;border-radius:10px;padding:2px 8px;font-size:9px;color:white">Lotado · 90%</div>
+      </div>
+      <!-- People estimate -->
+      <div style="background:#1a2332;border-radius:8px;padding:8px;text-align:center">
+        <div style="font-size:18px;color:#f44336;font-weight:bold">~850</div>
+        <div style="font-size:9px;color:#888">pessoas estimadas</div>
+      </div>
+      <!-- Directions side by side -->
+      <div style="display:flex;gap:6px;flex:1">
+        <div style="flex:1;background:#1a2332;border-radius:8px;padding:8px">
+          <div style="font-size:9px;color:#90caf9;margin-bottom:4px">→ Jd. São Paulo</div>
+          <div style="font-size:9px;color:#4caf50;margin-bottom:2px">~1 min</div>
+          <div style="font-size:9px;color:#888">~6 min</div>
+        </div>
+        <div style="flex:1;background:#1a2332;border-radius:8px;padding:8px">
+          <div style="font-size:9px;color:#90caf9;margin-bottom:4px">← Capão Redondo</div>
+          <div style="font-size:9px;color:#ff9800;margin-bottom:2px">~3 min</div>
+          <div style="font-size:9px;color:#888">~8 min</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Tela completa com layout em cards</h3>
+      <p>Navega para uma tela dedicada. Todos os sentidos visíveis lado a lado. Estimativa de pessoas em destaque. Sem mapa ao fundo.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="C" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0d1117;padding:0;min-height:220px;display:flex;flex-direction:column;overflow:hidden">
+      <div style="height:80px;background:linear-gradient(180deg,#1a2332 0%,#1e2a3a 100%);display:flex;align-items:center;justify-content:center;color:#555;font-size:10px;position:relative">
+        mapa ao fundo
+        <!-- Floating card -->
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#1e2a3a;border:1px solid #1565C0;border-radius:10px;padding:8px 14px;text-align:center;min-width:120px">
+          <div style="font-size:11px;color:white;font-weight:bold">Ana Rosa</div>
+          <div style="font-size:9px;color:#f44336">Lotado</div>
+        </div>
+      </div>
+      <div style="flex:1;background:#1e2a3a;padding:12px;display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;gap:6px">
+          <div style="flex:1;background:#1a2332;border-radius:6px;padding:6px;text-align:center">
+            <div style="font-size:9px;color:#90caf9">→ Jd. São Paulo</div>
+            <div style="font-size:11px;color:#4caf50;font-weight:bold">1 min</div>
+          </div>
+          <div style="flex:1;background:#1a2332;border-radius:6px;padding:6px;text-align:center">
+            <div style="font-size:9px;color:#90caf9">← Capão Redondo</div>
+            <div style="font-size:11px;color:#ff9800;font-weight:bold">3 min</div>
+          </div>
+        </div>
+        <div style="background:#1a2332;border-radius:6px;padding:6px">
+          <div style="font-size:9px;color:#888;margin-bottom:3px">Lotação atual</div>
+          <div style="height:5px;background:#2a1a1a;border-radius:3px;overflow:hidden">
+            <div style="height:100%;width:90%;background:#f44336;border-radius:3px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Popup flutuante + mini painel</h3>
+      <p>Um card flutua sobre o marcador no mapa. Abaixo aparece um painel compacto com sentidos e lotação. Toque novamente para tela cheia.</p>
+    </div>
+  </div>
+
+</div>

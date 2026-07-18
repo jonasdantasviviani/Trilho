@@ -1,0 +1,52 @@
+<h2>Telas pós-login: que tipo de mudança?</h2>
+<p class="subtitle">TransitMapScreen · SubscriptionScreen · EmailAuthScreen · AnonymousGateSheet</p>
+
+<div class="split" style="margin-bottom: 28px;">
+  <!-- Antes -->
+  <div class="mockup">
+    <div class="mockup-header">Estado atual (problema)</div>
+    <div class="mockup-body" style="padding: 14px; background: #121212;">
+      <div style="font-size: 11px; color: #ef4444; margin-bottom: 8px;">❌ Cores hardcoded (não seguem tokens)</div>
+      <div style="font-size: 11px; color: #ef4444; margin-bottom: 8px;">❌ Background branco no light mode (Colors.white)</div>
+      <div style="font-size: 11px; color: #ef4444; margin-bottom: 8px;">❌ AppBar sem estilo definido</div>
+      <div style="font-size: 11px; color: #ef4444; margin-bottom: 8px;">❌ FAB e chips sem padrão visual</div>
+      <div style="font-size: 11px; color: #ef4444; margin-bottom: 4px;">❌ SubscriptionScreen sem design system</div>
+    </div>
+  </div>
+  <!-- Depois -->
+  <div class="mockup">
+    <div class="mockup-header">Meta mínima (polish)</div>
+    <div class="mockup-body" style="padding: 14px; background: #0a0a14;">
+      <div style="font-size: 11px; color: #22c55e; margin-bottom: 8px;">✓ Todos os bg → AppTheme tokens</div>
+      <div style="font-size: 11px; color: #22c55e; margin-bottom: 8px;">✓ AppBar com tema correto</div>
+      <div style="font-size: 11px; color: #22c55e; margin-bottom: 8px;">✓ FAB e chips com cores do design system</div>
+      <div style="font-size: 11px; color: #22c55e; margin-bottom: 8px;">✓ SubscriptionScreen com visual premium</div>
+      <div style="font-size: 11px; color: #22c55e; margin-bottom: 4px;">✓ Consistência com Login/WelcomeScreen</div>
+    </div>
+  </div>
+</div>
+
+<h3>O que você quer para essas telas?</h3>
+<div class="options">
+  <div class="option" data-choice="polish-tokens" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Polish visual — aplicar design system</h3>
+      <p>Corrigir todas as cores hardcoded, backgrounds e estilos para usar os tokens do AppTheme. Sem mudar layouts existentes.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="redesign-total" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Redesign estrutural</h3>
+      <p>Além do polish, mudar layouts: nova SubscriptionScreen estilo paywall premium, bottom sheet redesenhado, nova estrutura de chips no mapa.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="misto" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Misto — polish + redesign em SubscriptionScreen</h3>
+      <p>Polish em TransitMapScreen, EmailAuthScreen e AnonymousGateSheet. Redesign completo apenas da SubscriptionScreen (mais impacto visual).</p>
+    </div>
+  </div>
+</div>

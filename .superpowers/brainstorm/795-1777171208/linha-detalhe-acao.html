@@ -1,0 +1,60 @@
+<h2>O que acontece ao tocar na linha?</h2>
+<p class="subtitle">Na tela de detalhe da estação, há cartões mostrando a direção e os próximos trens. Qual ação o toque deve realizar?</p>
+
+<div class="mockup" style="margin-bottom: 28px;">
+  <div class="mockup-header">Tela atual — Detalhe da Estação</div>
+  <div class="mockup-body" style="padding: 16px; background: #0d0d1a; border-radius: 0 0 10px 10px;">
+    <!-- station crowd card -->
+    <div style="background: rgba(239,68,68,0.12); border: 1.5px solid #ef4444; border-radius: 12px; padding: 16px; text-align: center; margin-bottom: 16px;">
+      <div style="font-size: 22px; font-weight: 700; color: #ef4444;">~840 pessoas</div>
+      <div style="height: 8px; background: rgba(239,68,68,0.2); border-radius: 4px; margin: 10px 0;">
+        <div style="height: 8px; width: 70%; background: #ef4444; border-radius: 4px;"></div>
+      </div>
+      <div style="font-size: 12px; color: #888;">70% — Cheio</div>
+    </div>
+    <!-- direction cards -->
+    <div style="font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 8px;">Próximos trens</div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+      <div style="background: #1e1e2e; border-radius: 10px; padding: 12px; position: relative; cursor: pointer; border: 1.5px dashed rgba(0,200,255,0.5);">
+        <div style="font-size: 11px; color: #00c8ff; margin-bottom: 6px;">→ Barra Funda</div>
+        <div style="font-size: 13px; color: #fff; font-weight: 700;">🚆 2 min</div>
+        <div style="font-size: 12px; color: #888;">🚆 ~7 min</div>
+        <div style="font-size: 12px; color: #888;">🚆 12 min</div>
+        <div style="position: absolute; top: 8px; right: 8px; font-size: 16px; opacity: 0.5;">👆</div>
+      </div>
+      <div style="background: #1e1e2e; border-radius: 10px; padding: 12px; position: relative; cursor: pointer; border: 1.5px dashed rgba(0,200,255,0.5);">
+        <div style="font-size: 11px; color: #00c8ff; margin-bottom: 6px;">← Palmeiras</div>
+        <div style="font-size: 13px; color: #fff; font-weight: 700;">🚆 4 min</div>
+        <div style="font-size: 12px; color: #888;">🚆 9 min</div>
+        <div style="font-size: 12px; color: #888;">🚆 ~15 min</div>
+        <div style="position: absolute; top: 8px; right: 8px; font-size: 16px; opacity: 0.5;">👆</div>
+      </div>
+    </div>
+    <div style="font-size: 11px; color: #555; text-align: center; margin-top: 10px;">Cartões com dashed = tocável</div>
+  </div>
+</div>
+
+<h3>Ao tocar no cartão de direção, o que deve acontecer?</h3>
+<div class="options">
+  <div class="option" data-choice="voltar-mapa-linha" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Voltar ao mapa com a linha destacada</h3>
+      <p>Fecha o detalhe e retorna ao mapa mostrando somente as estações daquela linha selecionada.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="bottomsheet-linha" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Abrir painel com todas as estações da linha</h3>
+      <p>Abre um bottom sheet listando todas as estações desta linha com status de lotação de cada uma.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="nada-por-ora" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Sem ação por ora</h3>
+      <p>Os cartões ficam somente para visualização de chegadas. Navegação para linha fica para uma versão futura.</p>
+    </div>
+  </div>
+</div>

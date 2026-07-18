@@ -1,0 +1,103 @@
+<h2>Qual estilo visual para o mapa?</h2>
+<p class="subtitle">O mapa atual usa cores hardcoded e visuais básicos. Qual direção você quer seguir?</p>
+
+<div class="cards">
+
+  <!-- Opção A: Metro escuro clean -->
+  <div class="card" data-choice="metro-escuro" onclick="toggleSelect(this)">
+    <div class="card-image" style="background: #0a0a14; padding: 20px; min-height: 180px; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 10px 10px 0 0;">
+      <svg width="220" height="140" viewBox="0 0 220 140">
+        <!-- Line 2 (blue) -->
+        <line x1="20" y1="70" x2="200" y2="70" stroke="#0055FF" stroke-width="5" stroke-linecap="round"/>
+        <!-- Line 3 (red) cross -->
+        <line x1="110" y1="15" x2="110" y2="125" stroke="#e11d48" stroke-width="5" stroke-linecap="round"/>
+        <!-- Stations on horizontal line -->
+        <circle cx="45" cy="70" r="7" fill="#0a0a14" stroke="#0055FF" stroke-width="2.5"/>
+        <circle cx="85" cy="70" r="7" fill="#0a0a14" stroke="#0055FF" stroke-width="2.5"/>
+        <circle cx="110" cy="70" r="10" fill="#0a0a14" stroke="#ffffff" stroke-width="2.5"/>
+        <circle cx="145" cy="70" r="7" fill="#0a0a14" stroke="#0055FF" stroke-width="2.5"/>
+        <circle cx="180" cy="70" r="7" fill="#0a0a14" stroke="#0055FF" stroke-width="2.5"/>
+        <!-- Stations on vertical line -->
+        <circle cx="110" cy="35" r="7" fill="#0a0a14" stroke="#e11d48" stroke-width="2.5"/>
+        <circle cx="110" cy="105" r="7" fill="#0a0a14" stroke="#e11d48" stroke-width="2.5"/>
+        <!-- Labels -->
+        <text x="110" y="85" text-anchor="middle" fill="#ffffff" font-size="9" font-family="system-ui" font-weight="600">Sé</text>
+        <text x="45" y="85" text-anchor="middle" fill="#888" font-size="8" font-family="system-ui">Anhangabaú</text>
+        <text x="180" y="85" text-anchor="middle" fill="#888" font-size="8" font-family="system-ui">Belém</text>
+      </svg>
+    </div>
+    <div class="card-body">
+      <h3>A — Metro escuro clean</h3>
+      <p>Fundo escuro (#0A0A14), linhas com cor sólida vibrante, estações como círculos vazados com borda colorida. Segue os tokens do AppTheme.</p>
+    </div>
+  </div>
+
+  <!-- Opção B: Minimalista claro -->
+  <div class="card" data-choice="minimalista-claro" onclick="toggleSelect(this)">
+    <div class="card-image" style="background: #f5f5f7; padding: 20px; min-height: 180px; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 10px 10px 0 0;">
+      <svg width="220" height="140" viewBox="0 0 220 140">
+        <!-- Line 2 (blue) -->
+        <line x1="20" y1="70" x2="200" y2="70" stroke="#0055FF" stroke-width="6" stroke-linecap="round"/>
+        <!-- Line 3 (red) -->
+        <line x1="110" y1="15" x2="110" y2="125" stroke="#e11d48" stroke-width="6" stroke-linecap="round"/>
+        <!-- Stations -->
+        <circle cx="45" cy="70" r="7" fill="#ffffff" stroke="#0055FF" stroke-width="2.5"/>
+        <circle cx="85" cy="70" r="7" fill="#ffffff" stroke="#0055FF" stroke-width="2.5"/>
+        <circle cx="110" cy="70" r="10" fill="#ffffff" stroke="#333" stroke-width="2.5"/>
+        <circle cx="145" cy="70" r="7" fill="#ffffff" stroke="#0055FF" stroke-width="2.5"/>
+        <circle cx="180" cy="70" r="7" fill="#ffffff" stroke="#0055FF" stroke-width="2.5"/>
+        <circle cx="110" cy="35" r="7" fill="#ffffff" stroke="#e11d48" stroke-width="2.5"/>
+        <circle cx="110" cy="105" r="7" fill="#ffffff" stroke="#e11d48" stroke-width="2.5"/>
+        <!-- Labels -->
+        <text x="110" y="85" text-anchor="middle" fill="#111" font-size="9" font-family="system-ui" font-weight="700">Sé</text>
+        <text x="45" y="85" text-anchor="middle" fill="#555" font-size="8" font-family="system-ui">Anhangabaú</text>
+        <text x="180" y="85" text-anchor="middle" fill="#555" font-size="8" font-family="system-ui">Belém</text>
+      </svg>
+    </div>
+    <div class="card-body">
+      <h3>B — Minimalista claro</h3>
+      <p>Fundo claro (#F5F5F7), linhas em cores sólidas, estações brancas com borda. Visual de diagrama oficial de metrô.</p>
+    </div>
+  </div>
+
+  <!-- Opção C: Dark com glow -->
+  <div class="card" data-choice="dark-glow" onclick="toggleSelect(this)">
+    <div class="card-image" style="background: #05050f; padding: 20px; min-height: 180px; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 10px 10px 0 0;">
+      <svg width="220" height="140" viewBox="0 0 220 140">
+        <defs>
+          <filter id="glow-blue">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="glow-red">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <!-- Line 2 glow -->
+        <line x1="20" y1="70" x2="200" y2="70" stroke="#0055FF" stroke-width="2" stroke-opacity="0.3" stroke-linecap="round"/>
+        <line x1="20" y1="70" x2="200" y2="70" stroke="#00c8ff" stroke-width="3.5" stroke-linecap="round" filter="url(#glow-blue)"/>
+        <!-- Line 3 glow -->
+        <line x1="110" y1="15" x2="110" y2="125" stroke="#e11d48" stroke-width="2" stroke-opacity="0.3" stroke-linecap="round"/>
+        <line x1="110" y1="15" x2="110" y2="125" stroke="#ff6b8a" stroke-width="3.5" stroke-linecap="round" filter="url(#glow-red)"/>
+        <!-- Stations -->
+        <circle cx="45" cy="70" r="6" fill="#05050f" stroke="#00c8ff" stroke-width="2" filter="url(#glow-blue)"/>
+        <circle cx="85" cy="70" r="6" fill="#05050f" stroke="#00c8ff" stroke-width="2"/>
+        <circle cx="110" cy="70" r="9" fill="#05050f" stroke="#ffffff" stroke-width="2" filter="url(#glow-blue)"/>
+        <circle cx="145" cy="70" r="6" fill="#05050f" stroke="#00c8ff" stroke-width="2"/>
+        <circle cx="180" cy="70" r="6" fill="#05050f" stroke="#00c8ff" stroke-width="2"/>
+        <circle cx="110" cy="35" r="6" fill="#05050f" stroke="#ff6b8a" stroke-width="2"/>
+        <circle cx="110" cy="105" r="6" fill="#05050f" stroke="#ff6b8a" stroke-width="2"/>
+        <!-- Labels -->
+        <text x="110" y="85" text-anchor="middle" fill="#ffffff" font-size="9" font-family="system-ui" font-weight="600">Sé</text>
+        <text x="45" y="85" text-anchor="middle" fill="#555" font-size="8" font-family="system-ui">Anhangabaú</text>
+        <text x="180" y="85" text-anchor="middle" fill="#555" font-size="8" font-family="system-ui">Belém</text>
+      </svg>
+    </div>
+    <div class="card-body">
+      <h3>C — Dark com glow/neon</h3>
+      <p>Fundo quase preto, linhas com efeito de brilho sutil nas cores do accent (#00C8FF). Visual tech/premium.</p>
+    </div>
+  </div>
+
+</div>

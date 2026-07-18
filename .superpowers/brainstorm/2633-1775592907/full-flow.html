@@ -1,0 +1,204 @@
+<h2>Fluxo completo da nova experiência</h2>
+<p class="subtitle">Revise cada tela antes de aprovarmos o design</p>
+
+<div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:8px">
+
+  <!-- Screen 1: Map with all stations -->
+  <div style="width:160px;flex-shrink:0">
+    <div style="font-size:10px;color:#90caf9;text-align:center;margin-bottom:6px;font-weight:bold">① Mapa inicial</div>
+    <div style="background:#0d1117;border:1px solid #2a3a4a;border-radius:12px;overflow:hidden;height:280px;display:flex;flex-direction:column">
+      <!-- Status bar -->
+      <div style="background:#1565C0;padding:6px 10px;display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:9px;color:white;font-weight:bold">Trilho</span>
+        <span style="font-size:9px;color:#90caf9">São Paulo ▾</span>
+        <span style="font-size:9px;color:white">⚙</span>
+      </div>
+      <!-- Line chips -->
+      <div style="padding:6px 8px;display:flex;gap:4px;overflow:hidden;background:#1a2332">
+        <div style="background:rgba(0,150,136,0.2);border:1px solid #009688;border-radius:10px;padding:2px 6px;font-size:8px;color:#4db6ac;white-space:nowrap">L1</div>
+        <div style="background:rgba(33,150,243,0.2);border:1px solid #2196f3;border-radius:10px;padding:2px 6px;font-size:8px;color:#90caf9;white-space:nowrap">L2</div>
+        <div style="background:rgba(255,152,0,0.2);border:1px solid #ff9800;border-radius:10px;padding:2px 6px;font-size:8px;color:#ffb74d;white-space:nowrap">⚠ L3</div>
+        <div style="background:rgba(233,30,99,0.2);border:1px solid #e91e63;border-radius:10px;padding:2px 6px;font-size:8px;color:#f48fb1;white-space:nowrap">L4</div>
+      </div>
+      <!-- Map area with station dots -->
+      <div style="flex:1;background:linear-gradient(135deg,#1a2332 0%,#1e2a3a 100%);position:relative;overflow:hidden">
+        <!-- Simulated map grid lines -->
+        <div style="position:absolute;inset:0;opacity:0.1">
+          <div style="position:absolute;top:30%;left:0;right:0;height:1px;background:#4fc3f7"></div>
+          <div style="position:absolute;top:60%;left:0;right:0;height:1px;background:#4fc3f7"></div>
+          <div style="position:absolute;left:30%;top:0;bottom:0;width:1px;background:#4fc3f7"></div>
+          <div style="position:absolute;left:65%;top:0;bottom:0;width:1px;background:#4fc3f7"></div>
+        </div>
+        <!-- Line L1 (vertical) -->
+        <div style="position:absolute;left:32%;top:15%;bottom:20%;width:2px;background:#009688;opacity:0.6"></div>
+        <!-- Line L2 (diagonal) -->
+        <div style="position:absolute;left:20%;top:40%;right:10%;height:2px;background:#2196f3;opacity:0.6;transform:rotate(-8deg);transform-origin:left center"></div>
+        <!-- Station markers L1 -->
+        <div style="position:absolute;left:29%;top:18%;width:9px;height:9px;border-radius:50%;background:#009688;border:1.5px solid white"></div>
+        <div style="position:absolute;left:29%;top:35%;width:9px;height:9px;border-radius:50%;background:#ff9800;border:1.5px solid white"></div>
+        <div style="position:absolute;left:29%;top:52%;width:9px;height:9px;border-radius:50%;background:#f44336;border:1.5px solid white"></div>
+        <div style="position:absolute;left:29%;top:68%;width:9px;height:9px;border-radius:50%;background:#4caf50;border:1.5px solid white"></div>
+        <!-- Station markers L2 -->
+        <div style="position:absolute;left:22%;top:42%;width:9px;height:9px;border-radius:50%;background:#4caf50;border:1.5px solid white"></div>
+        <div style="position:absolute;left:44%;top:38%;width:9px;height:9px;border-radius:50%;background:#ff9800;border:1.5px solid white"></div>
+        <div style="position:absolute;left:62%;top:34%;width:9px;height:9px;border-radius:50%;background:#f44336;border:1.5px solid white"></div>
+        <!-- User location -->
+        <div style="position:absolute;left:48%;top:48%;width:8px;height:8px;border-radius:50%;background:#1565C0;border:2px solid white;box-shadow:0 0 0 4px rgba(21,101,192,0.3)"></div>
+      </div>
+    </div>
+    <div style="font-size:8px;color:#888;text-align:center;margin-top:4px">Todas as estações visíveis<br>Cores = lotação atual</div>
+  </div>
+
+  <!-- Arrow -->
+  <div style="display:flex;align-items:center;color:#4fc3f7;font-size:18px;padding-top:40px">→</div>
+
+  <!-- Screen 2: Line zoom -->
+  <div style="width:160px;flex-shrink:0">
+    <div style="font-size:10px;color:#90caf9;text-align:center;margin-bottom:6px;font-weight:bold">② Zoom na linha (toque L1)</div>
+    <div style="background:#0d1117;border:1px solid #2a3a4a;border-radius:12px;overflow:hidden;height:280px;display:flex;flex-direction:column">
+      <div style="background:#1565C0;padding:6px 10px;display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:9px;color:white">← voltar</span>
+        <span style="font-size:9px;color:white;font-weight:bold">Linha 1 – Azul</span>
+        <span style="font-size:9px;color:#90caf9">status ✓</span>
+      </div>
+      <!-- Map zoomed in, other lines dimmed -->
+      <div style="flex:1;background:linear-gradient(135deg,#1a2332 0%,#1e2a3a 100%);position:relative;overflow:hidden">
+        <!-- Dimmed other line -->
+        <div style="position:absolute;left:15%;top:45%;right:5%;height:2px;background:#2196f3;opacity:0.15;transform:rotate(-8deg);transform-origin:left center"></div>
+        <!-- Main line track (highlighted) -->
+        <div style="position:absolute;left:45%;top:8%;bottom:5%;width:3px;background:#009688;opacity:0.9;border-radius:2px"></div>
+        <!-- Station + capacity bar group -->
+        <!-- S1 - Tranquilo -->
+        <div style="position:absolute;left:32%;top:10%;display:flex;align-items:center;gap:4px">
+          <div style="font-size:8px;color:#e0e0e0;text-align:right;width:42px">Tucuruvi</div>
+          <div style="width:10px;height:10px;border-radius:50%;background:#4caf50;border:1.5px solid white;z-index:2"></div>
+          <div style="width:5px;height:22px;background:#1a3a1a;border-radius:2px;overflow:hidden;position:relative">
+            <div style="position:absolute;bottom:0;left:0;right:0;height:20%;background:#4caf50;border-radius:2px"></div>
+          </div>
+        </div>
+        <!-- Train between S1 and S2 -->
+        <div style="position:absolute;left:43%;top:25%;background:#009688;border:1.5px solid #80cbc4;border-radius:4px;padding:1px 3px;font-size:9px;z-index:3">🚆</div>
+        <!-- S2 - Moderado -->
+        <div style="position:absolute;left:32%;top:38%;display:flex;align-items:center;gap:4px">
+          <div style="font-size:8px;color:#e0e0e0;text-align:right;width:42px">Parada XV</div>
+          <div style="width:10px;height:10px;border-radius:50%;background:#ff9800;border:1.5px solid white;z-index:2"></div>
+          <div style="width:5px;height:22px;background:#2a2a1a;border-radius:2px;overflow:hidden;position:relative">
+            <div style="position:absolute;bottom:0;left:0;right:0;height:60%;background:#ff9800;border-radius:2px"></div>
+          </div>
+        </div>
+        <!-- S3 - Cheio -->
+        <div style="position:absolute;left:32%;top:58%;display:flex;align-items:center;gap:4px">
+          <div style="font-size:8px;color:#e0e0e0;text-align:right;width:42px">Tiradentes</div>
+          <div style="width:10px;height:10px;border-radius:50%;background:#f44336;border:1.5px solid white;z-index:2"></div>
+          <div style="width:5px;height:22px;background:#2a1a1a;border-radius:2px;overflow:hidden;position:relative">
+            <div style="position:absolute;bottom:0;left:0;right:0;height:85%;background:#f44336;border-radius:2px"></div>
+          </div>
+        </div>
+        <!-- S4 - Tranquilo -->
+        <div style="position:absolute;left:32%;top:76%;display:flex;align-items:center;gap:4px">
+          <div style="font-size:8px;color:#e0e0e0;text-align:right;width:42px">Sé</div>
+          <div style="width:10px;height:10px;border-radius:50%;background:#4caf50;border:1.5px solid white;z-index:2"></div>
+          <div style="width:5px;height:22px;background:#1a3a1a;border-radius:2px;overflow:hidden;position:relative">
+            <div style="position:absolute;bottom:0;left:0;right:0;height:30%;background:#4caf50;border-radius:2px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:8px;color:#888;text-align:center;margin-top:4px">Mapa zooma nas estações<br>🚆 posição estimada do trem</div>
+  </div>
+
+  <!-- Arrow -->
+  <div style="display:flex;align-items:center;color:#4fc3f7;font-size:18px;padding-top:40px">→</div>
+
+  <!-- Screen 3: Station detail -->
+  <div style="width:160px;flex-shrink:0">
+    <div style="font-size:10px;color:#90caf9;text-align:center;margin-bottom:6px;font-weight:bold">③ Detalhe da estação</div>
+    <div style="background:#0d1117;border:1px solid #2a3a4a;border-radius:12px;overflow:hidden;height:280px;display:flex;flex-direction:column">
+      <div style="background:#1565C0;padding:6px 10px;display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:9px;color:white">← voltar</span>
+        <span style="font-size:9px;color:white;font-weight:bold">Tiradentes</span>
+        <span style="font-size:9px;color:#f44336">● Cheio</span>
+      </div>
+      <div style="flex:1;padding:8px;display:flex;flex-direction:column;gap:6px;overflow:hidden">
+        <!-- People estimate card -->
+        <div style="background:#1a2332;border-radius:8px;padding:8px;text-align:center;border:1px solid #2a3a4a">
+          <div style="font-size:20px;color:#f44336;font-weight:bold">~620</div>
+          <div style="font-size:8px;color:#888">pessoas estimadas agora</div>
+          <div style="margin-top:4px;height:4px;background:#2a1a1a;border-radius:2px;overflow:hidden">
+            <div style="height:100%;width:85%;background:linear-gradient(90deg,#ff9800,#f44336);border-radius:2px"></div>
+          </div>
+        </div>
+        <!-- Directions -->
+        <div style="font-size:8px;color:#90caf9;font-weight:bold">Próximos trens</div>
+        <div style="display:flex;gap:5px">
+          <!-- Direction 1 -->
+          <div style="flex:1;background:#1a2332;border-radius:8px;padding:6px;border:1px solid #2a3a4a">
+            <div style="font-size:7px;color:#90caf9;margin-bottom:4px">→ Jabaquara</div>
+            <div style="display:flex;flex-direction:column;gap:3px">
+              <div style="display:flex;justify-content:space-between;font-size:8px">
+                <span style="color:#aaa">🚆</span><span style="color:#4caf50;font-weight:bold">2 min</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:8px">
+                <span style="color:#aaa">🚆</span><span style="color:#aaa">8 min</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:8px">
+                <span style="color:#aaa">🚆</span><span style="color:#aaa">14 min</span>
+              </div>
+            </div>
+          </div>
+          <!-- Direction 2 -->
+          <div style="flex:1;background:#1a2332;border-radius:8px;padding:6px;border:1px solid #2a3a4a">
+            <div style="font-size:7px;color:#90caf9;margin-bottom:4px">← Tucuruvi</div>
+            <div style="display:flex;flex-direction:column;gap:3px">
+              <div style="display:flex;justify-content:space-between;font-size:8px">
+                <span style="color:#aaa">🚆</span><span style="color:#ff9800;font-weight:bold">4 min</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:8px">
+                <span style="color:#aaa">🚆</span><span style="color:#aaa">10 min</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:8px">
+                <span style="color:#aaa">🚆</span><span style="color:#aaa">16 min</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Crowd history mini -->
+        <div style="background:#1a2332;border-radius:8px;padding:6px;border:1px solid #2a3a4a">
+          <div style="font-size:7px;color:#888;margin-bottom:4px">Histórico 3h</div>
+          <div style="display:flex;align-items:flex-end;gap:2px;height:20px">
+            <div style="flex:1;background:#ff9800;border-radius:1px;height:40%"></div>
+            <div style="flex:1;background:#ff9800;border-radius:1px;height:55%"></div>
+            <div style="flex:1;background:#f44336;border-radius:1px;height:70%"></div>
+            <div style="flex:1;background:#f44336;border-radius:1px;height:85%"></div>
+            <div style="flex:1;background:#f44336;border-radius:1px;height:90%"></div>
+            <div style="flex:1;background:#f44336;border-radius:1px;height:85%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:8px;color:#888;text-align:center;margin-top:4px">Tela dedicada com cards<br>Todos os sentidos visíveis</div>
+  </div>
+
+</div>
+
+<div style="margin-top:20px;background:#1a2332;border-radius:8px;padding:12px;border:1px solid #2a3a4a">
+  <div style="font-size:11px;color:#90caf9;font-weight:bold;margin-bottom:8px">Animações planejadas</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:10px;color:#aaa">
+    <div>🗺️ <strong style="color:#e0e0e0">Zoom no mapa</strong> — CameraUpdate animado (600ms ease-in-out)</div>
+    <div>🎨 <strong style="color:#e0e0e0">Fade das outras linhas</strong> — opacidade 100%→20% (400ms)</div>
+    <div>📊 <strong style="color:#e0e0e0">Barras de lotação</strong> — preenchimento animado de 0→valor (800ms spring)</div>
+    <div>🚆 <strong style="color:#e0e0e0">Pulso do trem</strong> — AnimationController repeat (1.5s)</div>
+    <div>📱 <strong style="color:#e0e0e0">Entrada da tela de detalhe</strong> — slide up + fade (300ms)</div>
+    <div>🔢 <strong style="color:#e0e0e0">Contador de pessoas</strong> — count-up animado (600ms)</div>
+  </div>
+</div>
+
+<div style="margin-top:12px;text-align:center">
+  <div class="option" data-choice="aprovado" onclick="toggleSelect(this)" style="max-width:300px;margin:0 auto">
+    <div class="letter">✓</div>
+    <div class="content">
+      <h3>Design aprovado</h3>
+      <p>Pode escrever o spec e o plano de implementação</p>
+    </div>
+  </div>
+</div>

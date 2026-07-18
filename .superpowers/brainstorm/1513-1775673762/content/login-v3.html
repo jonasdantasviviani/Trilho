@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login v3</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif; background: #f0f2f5; padding: 24px; }
+  h2 { font-size: 22px; font-weight: 700; margin-bottom: 6px; color:#111; }
+  .subtitle { color: #666; font-size: 14px; margin-bottom: 28px; }
+  .section { background: #fff; border-radius: 16px; padding: 24px; margin-bottom: 24px; box-shadow: 0 1px 6px rgba(0,0,0,.08); }
+  .section h3 { font-size: 16px; font-weight: 700; margin-bottom: 20px; color: #111; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; }
+  .label-ui { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: #888; margin-bottom: 10px; text-align:center; }
+  .row { display: flex; gap: 28px; flex-wrap: wrap; align-items: flex-start; justify-content: center; }
+  .arrow { font-size: 28px; color: #ccc; align-self: center; margin-top: 40px; }
+</style>
+</head>
+<body>
+
+<h2>Login — fluxo em 2 telas</h2>
+<p class="subtitle">Tela 1: e-mail + senha principal · redes sociais pequenas embaixo · Tela 2: criar conta</p>
+
+<!-- FLUXO PRINCIPAL -->
+<div class="section">
+  <h3>Fluxo de login</h3>
+  <div class="row">
+
+    <!-- TELA 1 — Login principal (Light) -->
+    <div>
+      <div class="label-ui">Tela 1 — Entrar · Light</div>
+      <div style="width:210px;border-radius:32px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.16);background:#fff;">
+
+        <!-- Logo hero -->
+        <div style="background:linear-gradient(160deg,#0455A1 0%,#0277BD 100%);padding:36px 20px 28px;text-align:center;">
+          <div style="width:62px;height:62px;background:rgba(255,255,255,.15);border-radius:20px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:30px;backdrop-filter:blur(4px);">🚇</div>
+          <div style="font-size:24px;font-weight:800;color:#fff;letter-spacing:-0.5px;">Trilho</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.65);margin-top:3px;">Transporte em tempo real</div>
+        </div>
+
+        <!-- Form -->
+        <div style="padding:20px 18px 8px;">
+          <div style="font-size:14px;font-weight:700;color:#111;margin-bottom:16px;">Entrar na sua conta</div>
+
+          <!-- Email field -->
+          <div style="margin-bottom:10px;">
+            <div style="font-size:10px;font-weight:700;color:#888;letter-spacing:.5px;margin-bottom:5px;">E-MAIL</div>
+            <div style="background:#F8F9FA;border:1.5px solid #E0E4EA;border-radius:12px;padding:11px 14px;font-size:13px;color:#999;">seu@email.com</div>
+          </div>
+
+          <!-- Senha field -->
+          <div style="margin-bottom:16px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">
+              <div style="font-size:10px;font-weight:700;color:#888;letter-spacing:.5px;">SENHA</div>
+              <div style="font-size:10px;color:#0455A1;font-weight:600;">Esqueceu?</div>
+            </div>
+            <div style="background:#F8F9FA;border:1.5px solid #E0E4EA;border-radius:12px;padding:11px 14px;font-size:13px;color:#999;">••••••••</div>
+          </div>
+
+          <!-- Botão entrar -->
+          <div style="background:#0455A1;color:#fff;border-radius:12px;padding:13px;font-size:13px;font-weight:700;text-align:center;box-shadow:0 4px 14px rgba(4,85,161,.28);">Entrar</div>
+
+          <!-- Divisor -->
+          <div style="display:flex;align-items:center;gap:8px;margin:14px 0 10px;">
+            <div style="flex:1;height:1px;background:#E0E4EA;"></div>
+            <div style="font-size:10px;color:#bbb;font-weight:500;">ou entre com</div>
+            <div style="flex:1;height:1px;background:#E0E4EA;"></div>
+          </div>
+
+          <!-- Social icons — pequenos, em linha -->
+          <div style="display:flex;justify-content:center;gap:10px;margin-bottom:14px;">
+            <!-- Apple -->
+            <div style="width:40px;height:40px;border-radius:12px;background:#000;display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.15);"></div>
+            <!-- Google -->
+            <div style="width:40px;height:40px;border-radius:12px;background:#fff;border:1.5px solid #E0E4EA;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.07);">
+              <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.2l6.8-6.8C35.8 2.3 30.2 0 24 0 14.8 0 6.9 5.4 3 13.3l7.9 6.1C12.8 13.3 17.9 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v8.5h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17z"/><path fill="#FBBC05" d="M10.9 28.6A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.8-4.6L2.4 13.3A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.7l8.3-6.1z"/><path fill="#34A853" d="M24 48c6.2 0 11.4-2 15.2-5.5l-7.5-5.8c-2 1.4-4.6 2.2-7.7 2.2-6.1 0-11.2-3.8-13.1-9.1L2.6 35.7C6.5 43 14.6 48 24 48z"/></svg>
+            </div>
+            <!-- Facebook -->
+            <div style="width:40px;height:40px;border-radius:12px;background:#1877F2;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#fff;box-shadow:0 2px 8px rgba(24,119,242,.25);">f</div>
+          </div>
+
+          <!-- Links finais -->
+          <div style="text-align:center;padding-bottom:16px;">
+            <span style="font-size:11px;color:#888;">Não tem conta? </span>
+            <span style="font-size:11px;color:#0455A1;font-weight:700;">Criar conta</span>
+          </div>
+          <div style="text-align:center;padding-bottom:18px;">
+            <span style="font-size:11px;color:#bbb;text-decoration:underline;">Continuar sem conta</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETA -->
+    <div class="arrow">→</div>
+
+    <!-- TELA 2 — Criar conta (Light) -->
+    <div>
+      <div class="label-ui">Tela 2 — Criar conta · Light</div>
+      <div style="width:210px;border-radius:32px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.16);background:#fff;">
+
+        <!-- Header simples -->
+        <div style="background:#fff;padding:18px 18px 0;display:flex;align-items:center;gap:8px;">
+          <div style="font-size:20px;color:#0455A1;">←</div>
+          <div style="font-size:15px;font-weight:700;color:#111;">Criar conta</div>
+        </div>
+
+        <div style="padding:16px 18px 8px;">
+          <div style="font-size:12px;color:#888;margin-bottom:18px;">Preencha os dados abaixo</div>
+
+          <div style="margin-bottom:10px;">
+            <div style="font-size:10px;font-weight:700;color:#888;letter-spacing:.5px;margin-bottom:5px;">NOME</div>
+            <div style="background:#F8F9FA;border:1.5px solid #E0E4EA;border-radius:12px;padding:11px 14px;font-size:13px;color:#999;">Seu nome</div>
+          </div>
+
+          <div style="margin-bottom:10px;">
+            <div style="font-size:10px;font-weight:700;color:#888;letter-spacing:.5px;margin-bottom:5px;">E-MAIL</div>
+            <div style="background:#F8F9FA;border:1.5px solid #E0E4EA;border-radius:12px;padding:11px 14px;font-size:13px;color:#999;">seu@email.com</div>
+          </div>
+
+          <div style="margin-bottom:18px;">
+            <div style="font-size:10px;font-weight:700;color:#888;letter-spacing:.5px;margin-bottom:5px;">SENHA</div>
+            <div style="background:#F8F9FA;border:1.5px solid #E0E4EA;border-radius:12px;padding:11px 14px;font-size:13px;color:#999;">mín. 8 caracteres</div>
+          </div>
+
+          <div style="background:#0455A1;color:#fff;border-radius:12px;padding:13px;font-size:13px;font-weight:700;text-align:center;box-shadow:0 4px 14px rgba(4,85,161,.28);margin-bottom:14px;">Criar conta</div>
+
+          <div style="font-size:10px;color:#bbb;text-align:center;line-height:1.6;padding-bottom:18px;">
+            Ao criar conta você concorda com os<br>
+            <span style="color:#0455A1;font-weight:600;">Termos de uso</span> e <span style="color:#0455A1;font-weight:600;">Privacidade</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TELA 1 DARK -->
+    <div>
+      <div class="label-ui">Tela 1 — Entrar · Dark</div>
+      <div style="width:210px;border-radius:32px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.45);background:#121212;">
+
+        <div style="background:linear-gradient(160deg,#1565C0 0%,#0D47A1 100%);padding:36px 20px 28px;text-align:center;">
+          <div style="width:62px;height:62px;background:rgba(255,255,255,.12);border-radius:20px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:30px;">🚇</div>
+          <div style="font-size:24px;font-weight:800;color:#fff;letter-spacing:-0.5px;">Trilho</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.55);margin-top:3px;">Transporte em tempo real</div>
+        </div>
+
+        <div style="padding:20px 18px 8px;background:#121212;">
+          <div style="font-size:14px;font-weight:700;color:#EEE;margin-bottom:16px;">Entrar na sua conta</div>
+
+          <div style="margin-bottom:10px;">
+            <div style="font-size:10px;font-weight:700;color:#555;letter-spacing:.5px;margin-bottom:5px;">E-MAIL</div>
+            <div style="background:#2A2A2A;border:1.5px solid #3A3A3A;border-radius:12px;padding:11px 14px;font-size:13px;color:#555;">seu@email.com</div>
+          </div>
+
+          <div style="margin-bottom:16px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">
+              <div style="font-size:10px;font-weight:700;color:#555;letter-spacing:.5px;">SENHA</div>
+              <div style="font-size:10px;color:#90CAF9;font-weight:600;">Esqueceu?</div>
+            </div>
+            <div style="background:#2A2A2A;border:1.5px solid #3A3A3A;border-radius:12px;padding:11px 14px;font-size:13px;color:#555;">••••••••</div>
+          </div>
+
+          <div style="background:#2979FF;color:#fff;border-radius:12px;padding:13px;font-size:13px;font-weight:700;text-align:center;box-shadow:0 4px 14px rgba(41,121,255,.3);">Entrar</div>
+
+          <div style="display:flex;align-items:center;gap:8px;margin:14px 0 10px;">
+            <div style="flex:1;height:1px;background:#2A2A2A;"></div>
+            <div style="font-size:10px;color:#444;font-weight:500;">ou entre com</div>
+            <div style="flex:1;height:1px;background:#2A2A2A;"></div>
+          </div>
+
+          <!-- Social icons dark -->
+          <div style="display:flex;justify-content:center;gap:10px;margin-bottom:14px;">
+            <div style="width:40px;height:40px;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;color:#000;box-shadow:0 2px 8px rgba(0,0,0,.3);"></div>
+            <div style="width:40px;height:40px;border-radius:12px;background:#2A2A2A;border:1.5px solid #3A3A3A;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.3);">
+              <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.2l6.8-6.8C35.8 2.3 30.2 0 24 0 14.8 0 6.9 5.4 3 13.3l7.9 6.1C12.8 13.3 17.9 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v8.5h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17z"/><path fill="#FBBC05" d="M10.9 28.6A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.8-4.6L2.4 13.3A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.7l8.3-6.1z"/><path fill="#34A853" d="M24 48c6.2 0 11.4-2 15.2-5.5l-7.5-5.8c-2 1.4-4.6 2.2-7.7 2.2-6.1 0-11.2-3.8-13.1-9.1L2.6 35.7C6.5 43 14.6 48 24 48z"/></svg>
+            </div>
+            <div style="width:40px;height:40px;border-radius:12px;background:#1877F2;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#fff;box-shadow:0 2px 8px rgba(24,119,242,.3);">f</div>
+          </div>
+
+          <div style="text-align:center;padding-bottom:14px;">
+            <span style="font-size:11px;color:#666;">Não tem conta? </span>
+            <span style="font-size:11px;color:#90CAF9;font-weight:700;">Criar conta</span>
+          </div>
+          <div style="text-align:center;padding-bottom:18px;">
+            <span style="font-size:11px;color:#444;text-decoration:underline;">Continuar sem conta</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div style="text-align:center;margin-top:4px;">
+  <p style="font-size:13px;color:#555;">Aprovado? Responda no terminal.</p>
+</div>
+
+</body>
+</html>

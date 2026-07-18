@@ -1,0 +1,349 @@
+name: CI
+
+on:
+  push:
+    branches: [master, staging, develop]
+  pull_request:
+    branches: [master, staging, develop]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ─────────────────────────────────────────────────────────
+  # Backend: build + unit tests + integration tests
+  # ─────────────────────────────────────────────────────────
+  test-backend:
+    name: Backend (.NET 8)
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgis/postgis:16-3.4
+        env:
+          POSTGRES_DB: trilho_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 5
+
+    env:
+      ConnectionStrings__Default: Host=localhost;Port=5432;Database=trilho_test;Username=postgres;Password=postgres
+      Redis__Connection: localhost:6379
+      Jwt__Secret: ci-test-secret-32-chars-minimum-x
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ hashFiles('backend/**/*.csproj') }}
+          restore-keys: nuget-
+
+      - name: Restore
+        run: dotnet restore backend/Trilho.sln
+
+      - name: Build
+        run: dotnet build backend/Trilho.sln --no-restore -c Release
+
+      - name: Test
+        run: >
+          dotnet test backend/Trilho.sln
+          --no-build -c Release
+          --verbosity normal
+          --logger "trx;LogFileName=results.trx"
+          --results-directory ./test-results
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-test-results
+          path: ./test-results/*.trx
+
+  # ─────────────────────────────────────────────────────────
+  # web/: Vitest unit tests
+  # ─────────────────────────────────────────────────────────
+  test-web:
+    name: web/ (Vitest)
+    runs-on: ubuntu-latest
+    # Só executa se web/ existir
+    if: ${{ hashFiles('web/package.json') != '' }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install
+        run: npm ci --prefix web
+
+      - name: Test
+        run: npm test --prefix web
+
+  # ─────────────────────────────────────────────────────────
+  # admin/: Vitest unit tests
+  # ─────────────────────────────────────────────────────────
+  test-admin:
+    name: admin/ (Vitest)
+    runs-on: ubuntu-latest
+    if: ${{ hashFiles('admin/package.json') != '' }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: admin/package-lock.json
+
+      - name: Install
+        run: npm ci --prefix admin
+
+      - name: Test
+        run: npm test --prefix admin
+
+  # ─────────────────────────────────────────────────────────
+  # Pact consumer tests (geram os pacts/ para verificação no backend)
+  # ─────────────────────────────────────────────────────────
+  test-pact:
+    name: Pact consumers
+    runs-on: ubuntu-latest
+    needs: [test-web, test-admin]
+    if: ${{ always() && hashFiles('web/pact') != '' }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: web/ Pact consumer tests
+        if: ${{ hashFiles('web/package.json') != '' }}
+        run: |
+          npm ci --prefix web
+          npx --prefix web vitest run pact/
+
+      - name: admin/ Pact consumer tests
+        if: ${{ hashFiles('admin/package.json') != '' }}
+        run: |
+          npm ci --prefix admin
+          npx --prefix admin vitest run pact/
+
+      - name: Upload pacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: pact-files
+          path: pacts/
+
+  # ─────────────────────────────────────────────────────────
+  # E2E Playwright (web/) — contra backend local com banco de teste
+  # ─────────────────────────────────────────────────────────
+  e2e-web:
+    name: E2E web/ (Playwright)
+    runs-on: ubuntu-latest
+    needs: [test-backend, test-web]
+    if: ${{ hashFiles('web/playwright.config.ts') != '' }}
+
+    services:
+      postgres:
+        image: postgis/postgis:16-3.4
+        env:
+          POSTGRES_DB: trilho_e2e
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 10s
+          --health-retries 10
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Start backend (background)
+        run: |
+          dotnet restore backend/Trilho.sln
+          dotnet build backend/Trilho.sln -c Release --no-restore
+          nohup dotnet backend/Trilho.API/bin/Release/net8.0/Trilho.API.dll > /tmp/api.log 2>&1 &
+          echo "Aguardando API subir..."
+          for i in $(seq 1 30); do
+            if curl -sf http://localhost:5000/health > /dev/null 2>&1; then
+              echo "API pronta"
+              break
+            fi
+            sleep 2
+          done
+        env:
+          ConnectionStrings__Default: Host=localhost;Port=5432;Database=trilho_e2e;Username=postgres;Password=postgres
+          Redis__Connection: localhost:6379
+          Jwt__Secret: e2e-test-secret-32-chars-minimum-x
+          ASPNETCORE_URLS: http://localhost:5000
+
+      - name: Install web/ deps
+        run: npm ci --prefix web
+
+      - name: Install Playwright browsers
+        run: npx --prefix web playwright install chromium --with-deps
+
+      - name: Run E2E tests
+        run: npx --prefix web playwright test
+        env:
+          BACKEND_URL: http://localhost:5000
+          JWT_SECRET: e2e-test-secret-32-chars-minimum-x
+          NEXT_PUBLIC_FIREBASE_API_KEY: test
+          NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: test.firebaseapp.com
+          NEXT_PUBLIC_FIREBASE_PROJECT_ID: test
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-web
+          path: web/playwright-report/
+
+  # ─────────────────────────────────────────────────────────
+  # E2E Playwright (admin/)
+  # ─────────────────────────────────────────────────────────
+  e2e-admin:
+    name: E2E admin/ (Playwright)
+    runs-on: ubuntu-latest
+    needs: [test-backend, test-admin]
+    if: ${{ hashFiles('admin/playwright.config.ts') != '' }}
+
+    services:
+      postgres:
+        image: postgis/postgis:16-3.4
+        env:
+          POSTGRES_DB: trilho_e2e_admin
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 10s
+          --health-retries 10
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: admin/package-lock.json
+
+      - name: Start backend (background)
+        run: |
+          dotnet restore backend/Trilho.sln
+          dotnet build backend/Trilho.sln -c Release --no-restore
+          nohup dotnet backend/Trilho.API/bin/Release/net8.0/Trilho.API.dll > /tmp/api-admin.log 2>&1 &
+          for i in $(seq 1 30); do
+            curl -sf http://localhost:5000/health > /dev/null 2>&1 && break || sleep 2
+          done
+        env:
+          ConnectionStrings__Default: Host=localhost;Port=5432;Database=trilho_e2e_admin;Username=postgres;Password=postgres
+          Redis__Connection: localhost:6379
+          Jwt__Secret: e2e-test-secret-32-chars-minimum-x
+          ADMIN_API_KEY: ci-admin-key
+          ASPNETCORE_URLS: http://localhost:5000
+
+      - name: Install admin/ deps
+        run: npm ci --prefix admin
+
+      - name: Install Playwright browsers
+        run: npx --prefix admin playwright install chromium --with-deps
+
+      - name: Run E2E tests
+        run: npx --prefix admin playwright test
+        env:
+          BACKEND_URL: http://localhost:5000
+          ADMIN_API_KEY: ci-admin-key
+          NEXTAUTH_SECRET: ci-nextauth-secret
+          NEXTAUTH_URL: http://localhost:3001
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-admin
+          path: admin/playwright-report/
+
+  # ─────────────────────────────────────────────────────────
+  # Gate final: todos os testes passaram
+  # ─────────────────────────────────────────────────────────
+  all-tests-pass:
+    name: ✅ Todos os testes passaram
+    runs-on: ubuntu-latest
+    needs: [test-backend, test-web, test-admin]
+    if: always()
+    steps:
+      - name: Check results
+        run: |
+          if [[ "${{ needs.test-backend.result }}" == "failure" ]]; then
+            echo "❌ Backend tests failed"
+            exit 1
+          fi
+          echo "✅ Todos os testes obrigatórios passaram"

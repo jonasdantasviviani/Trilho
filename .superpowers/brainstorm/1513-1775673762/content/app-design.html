@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>App Design Premium</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif; background: #f0f2f5; color: #111; padding: 24px; }
+  h2 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+  .subtitle { color: #666; font-size: 14px; margin-bottom: 28px; }
+  .section { background: #fff; border-radius: 16px; padding: 24px; margin-bottom: 20px; box-shadow: 0 1px 6px rgba(0,0,0,.08); }
+  .section h3 { font-size: 16px; font-weight: 700; margin-bottom: 16px; color: #111; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; }
+  .label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: #888; margin-bottom: 8px; }
+  .row { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+  .col { flex: 1; min-width: 220px; }
+  .phone { width: 180px; border-radius: 28px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,.18); display: inline-block; }
+  .phone-dark { background: #121212; }
+  .phone-light { background: #ffffff; }
+  .phone-bar { height: 28px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; }
+  .phone-bar-dark { background: #1e1e1e; color: #fff; }
+  .phone-bar-light { background: #f5f5f5; color: #111; border-bottom: 1px solid #e8e8e8; }
+  .swatch { width: 36px; height: 36px; border-radius: 8px; display: inline-block; margin: 4px; vertical-align: middle; border: 1px solid rgba(0,0,0,.08); }
+  .type-row { display: flex; align-items: baseline; gap: 12px; padding: 6px 0; border-bottom: 1px solid #f5f5f5; }
+  .type-name { font-size: 11px; color: #999; min-width: 90px; }
+  .chip-line { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; color: #fff; margin: 3px; box-shadow: 0 2px 6px rgba(0,0,0,.15); }
+  .chip-line.dark-label { color: #111; }
+  .chip-selected { outline: 3px solid #000; outline-offset: 2px; }
+</style>
+</head>
+<body>
+
+<h2>Design System Premium — Todo o App</h2>
+<p class="subtitle">Seção 2 · tipografia, cores, componentes e telas</p>
+
+<!-- Typography -->
+<div class="section">
+  <h3>Tipografia — Inter (Google Fonts)</h3>
+  <div class="type-row">
+    <span class="type-name">Display / 28px 800</span>
+    <span style="font-size:28px;font-weight:800;letter-spacing:-0.5px;">São Paulo</span>
+  </div>
+  <div class="type-row">
+    <span class="type-name">Title / 20px 700</span>
+    <span style="font-size:20px;font-weight:700;">Linha 3 — Vermelha</span>
+  </div>
+  <div class="type-row">
+    <span class="type-name">Subtitle / 15px 600</span>
+    <span style="font-size:15px;font-weight:600;color:#333;">Estação Brás · Integração</span>
+  </div>
+  <div class="type-row">
+    <span class="type-name">Body / 14px 400</span>
+    <span style="font-size:14px;color:#555;">Tempo estimado de espera: ~4 min</span>
+  </div>
+  <div class="type-row">
+    <span class="type-name">Caption / 11px 500</span>
+    <span style="font-size:11px;font-weight:500;color:#888;letter-spacing:.3px;">ATUALIZADO HÁ 30 SEGUNDOS</span>
+  </div>
+</div>
+
+<!-- Colors -->
+<div class="section">
+  <h3>Paleta de cores</h3>
+  <div class="row">
+    <div class="col">
+      <div class="label">Light mode</div>
+      <span class="swatch" style="background:#ffffff;" title="#fff"></span>
+      <span class="swatch" style="background:#F8F9FA;" title="Surface"></span>
+      <span class="swatch" style="background:#F0F2F5;" title="Background"></span>
+      <span class="swatch" style="background:#E0E4EA;" title="Border"></span>
+      <span class="swatch" style="background:#111111;" title="Text primary"></span>
+      <span class="swatch" style="background:#666666;" title="Text secondary"></span>
+      <p style="font-size:11px;color:#888;margin-top:8px;">Fundo mapa: #FFFFFF · Surface: #F8F9FA · Border: #E0E4EA</p>
+    </div>
+    <div class="col">
+      <div class="label">Dark mode</div>
+      <span class="swatch" style="background:#121212;" title="Background"></span>
+      <span class="swatch" style="background:#1E1E1E;" title="Surface"></span>
+      <span class="swatch" style="background:#2A2A2A;" title="Surface 2"></span>
+      <span class="swatch" style="background:#3A3A3A;" title="Border"></span>
+      <span class="swatch" style="background:#EEEEEE;" title="Text primary"></span>
+      <span class="swatch" style="background:#AAAAAA;" title="Text secondary"></span>
+      <p style="font-size:11px;color:#888;margin-top:8px;">Fundo mapa: #121212 · Surface: #1E1E1E · Border: #3A3A3A</p>
+    </div>
+  </div>
+</div>
+
+<!-- Line chips redesign -->
+<div class="section">
+  <h3>Chips de linha — redesenhados</h3>
+  <div class="label" style="margin-bottom:12px;">Light · chips compactos com badge de número e nome curto</div>
+  <div style="background:#F8F9FA;padding:16px;border-radius:12px;overflow-x:auto;white-space:nowrap;">
+    <span class="chip-line chip-selected" style="background:#0455A1;">● 1</span>
+    <span class="chip-line" style="background:#007E5E;">● 2</span>
+    <span class="chip-line" style="background:#EF4136;">● 3</span>
+    <span class="chip-line dark-label" style="background:#FFD900;">● 4</span>
+    <span class="chip-line" style="background:#9B2990;">● 5</span>
+    <span class="chip-line" style="background:#808285;">● 15</span>
+    <span class="chip-line" style="background:#CF202E;">● 7</span>
+    <span class="chip-line" style="background:#97999B;">● 8</span>
+    <span class="chip-line" style="background:#00945A;">● 9</span>
+    <span class="chip-line" style="background:#007A87;">● 10</span>
+    <span class="chip-line" style="background:#F26522;">● 11</span>
+    <span class="chip-line" style="background:#133A8F;">● 12</span>
+    <span class="chip-line" style="background:#00A859;">● 13</span>
+    <span class="chip-line dark-label" style="background:#BE9B2F;">● 17</span>
+  </div>
+  <p style="font-size:12px;color:#666;margin-top:10px;">Linha selecionada: outline preto 3px · shadow elevado. ScrollView horizontal. Tap → zoom animado na linha.</p>
+</div>
+
+<!-- Screen mockups -->
+<div class="section">
+  <h3>Telas — mockups lado a lado</h3>
+  <div class="row" style="justify-content:center;gap:24px;flex-wrap:wrap;">
+
+    <!-- Mapa Light -->
+    <div>
+      <div class="label" style="text-align:center;margin-bottom:8px;">Mapa — Light</div>
+      <div class="phone phone-light" style="width:190px;">
+        <div class="phone-bar phone-bar-light">☀️ Trilho · SP</div>
+        <!-- chips -->
+        <div style="padding:8px 6px;display:flex;gap:4px;overflow:hidden;background:#fff;border-bottom:1px solid #eee;">
+          <span style="background:#0455A1;color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,.2);">● 1</span>
+          <span style="background:#007E5E;color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:12px;">● 2</span>
+          <span style="background:#EF4136;color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:12px;">● 3</span>
+          <span style="background:#FFD900;color:#111;font-size:9px;font-weight:700;padding:3px 8px;border-radius:12px;">● 4</span>
+          <span style="background:#9B2990;color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:12px;">● 5</span>
+        </div>
+        <!-- Mapa esquemático mini -->
+        <svg width="190" height="240" viewBox="0 0 190 240" style="background:#fff;display:block;">
+          <!-- L3 horizontal -->
+          <line x1="10" y1="100" x2="180" y2="100" stroke="#EF4136" stroke-width="5"/>
+          <!-- L1 vertical -->
+          <line x1="95" y1="10" x2="95" y2="230" stroke="#0455A1" stroke-width="5"/>
+          <!-- L2 diagonal -->
+          <polyline points="20,170 65,100 140,100 175,65" fill="none" stroke="#007E5E" stroke-width="4"/>
+          <!-- L4 diagonal -->
+          <line x1="95" y1="100" x2="30" y2="185" stroke="#FFD900" stroke-width="4"/>
+          <!-- L5 -->
+          <polyline points="10,185 50,165 95,165 145,185" fill="none" stroke="#9B2990" stroke-width="4"/>
+          <!-- L7 CPTM -->
+          <polyline points="85,10 75,40 60,70 50,100" fill="none" stroke="#CF202E" stroke-width="3.5" stroke-dasharray="0"/>
+          <!-- L8 -->
+          <polyline points="10,118 40,118 65,110" fill="none" stroke="#97999B" stroke-width="3.5"/>
+
+          <!-- Interchange Luz -->
+          <circle cx="95" cy="100" r="7" fill="#fff" stroke="#555" stroke-width="1.5"/>
+          <circle cx="95" cy="100" r="4" fill="#fff" stroke="#333" stroke-width="1.5"/>
+          <!-- label Luz -->
+          <line x1="95" y1="93" x2="95" y2="80" stroke="#ccc" stroke-width="0.8" stroke-dasharray="2,2"/>
+          <text x="95" y="77" font-size="7" fill="#111" font-family="sans-serif" font-weight="700" text-anchor="middle">Luz</text>
+
+          <!-- Some stations -->
+          <circle cx="50" cy="100" r="4" fill="#fff" stroke="#EF4136" stroke-width="1.8"/>
+          <circle cx="145" cy="100" r="4" fill="#fff" stroke="#EF4136" stroke-width="1.8"/>
+          <circle cx="95" cy="50" r="4" fill="#fff" stroke="#0455A1" stroke-width="1.8"/>
+          <circle cx="95" cy="165" r="4" fill="#fff" stroke="#0455A1" stroke-width="1.8"/>
+
+          <!-- Density dot example -->
+          <circle cx="145" cy="100" r="4" fill="#FFD740" stroke="#EF4136" stroke-width="1.8"/>
+        </svg>
+        <div style="padding:10px 12px;background:#fff;border-top:1px solid #eee;">
+          <div style="font-size:9px;color:#888;font-weight:600;">LOTAÇÃO EM TEMPO REAL</div>
+          <div style="display:flex;gap:6px;margin-top:6px;">
+            <div style="flex:1;background:#e8f5e9;border-radius:6px;padding:4px 6px;text-align:center;">
+              <div style="font-size:8px;color:#2e7d32;font-weight:700;">L1</div>
+              <div style="font-size:9px;color:#1b5e20;font-weight:800;">Normal</div>
+            </div>
+            <div style="flex:1;background:#fff3e0;border-radius:6px;padding:4px 6px;text-align:center;">
+              <div style="font-size:8px;color:#e65100;font-weight:700;">L3</div>
+              <div style="font-size:9px;color:#bf360c;font-weight:800;">Cheio</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mapa Dark -->
+    <div>
+      <div class="label" style="text-align:center;margin-bottom:8px;">Mapa — Dark</div>
+      <div class="phone phone-dark" style="width:190px;">
+        <div class="phone-bar phone-bar-dark">🌙 Trilho · SP</div>
+        <div style="padding:8px 6px;display:flex;gap:4px;overflow:hidden;background:#1e1e1e;border-bottom:1px solid #333;">
+          <span style="background:#1565C0;color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:12px;box-shadow:0 2px 6px rgba(21,101,192,.4);">● 1</span>
+          <span style="background:#00695C;color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:12px;">● 2</span>
+          <span style="background:#c62828;color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:12px;">● 3</span>
+          <span style="background:#F9A825;color:#111;font-size:9px;font-weight:700;padding:3px 8px;border-radius:12px;">● 4</span>
+          <span style="background:#6A1B9A;color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:12px;">● 5</span>
+        </div>
+        <svg width="190" height="240" viewBox="0 0 190 240" style="background:#121212;display:block;">
+          <line x1="10" y1="100" x2="180" y2="100" stroke="#c62828" stroke-width="5"/>
+          <line x1="95" y1="10" x2="95" y2="230" stroke="#1565C0" stroke-width="5"/>
+          <polyline points="20,170 65,100 140,100 175,65" fill="none" stroke="#00695C" stroke-width="4"/>
+          <line x1="95" y1="100" x2="30" y2="185" stroke="#F9A825" stroke-width="4"/>
+          <polyline points="10,185 50,165 95,165 145,185" fill="none" stroke="#6A1B9A" stroke-width="4"/>
+          <polyline points="85,10 75,40 60,70 50,100" fill="none" stroke="#b71c1c" stroke-width="3.5"/>
+          <polyline points="10,118 40,118 65,110" fill="none" stroke="#616161" stroke-width="3.5"/>
+
+          <circle cx="95" cy="100" r="7" fill="#1e1e1e" stroke="#aaa" stroke-width="1.5"/>
+          <circle cx="95" cy="100" r="4" fill="#1e1e1e" stroke="#ddd" stroke-width="1.5"/>
+          <line x1="95" y1="93" x2="95" y2="80" stroke="#555" stroke-width="0.8" stroke-dasharray="2,2"/>
+          <text x="95" y="77" font-size="7" fill="#eee" font-family="sans-serif" font-weight="700" text-anchor="middle">Luz</text>
+
+          <circle cx="50" cy="100" r="4" fill="#121212" stroke="#c62828" stroke-width="1.8"/>
+          <circle cx="145" cy="100" r="4" fill="#FFD740" stroke="#c62828" stroke-width="1.8"/>
+          <circle cx="95" cy="50" r="4" fill="#121212" stroke="#1565C0" stroke-width="1.8"/>
+          <circle cx="95" cy="165" r="4" fill="#121212" stroke="#1565C0" stroke-width="1.8"/>
+        </svg>
+        <div style="padding:10px 12px;background:#1e1e1e;border-top:1px solid #333;">
+          <div style="font-size:9px;color:#666;font-weight:600;">LOTAÇÃO EM TEMPO REAL</div>
+          <div style="display:flex;gap:6px;margin-top:6px;">
+            <div style="flex:1;background:#1b3a1b;border-radius:6px;padding:4px 6px;text-align:center;">
+              <div style="font-size:8px;color:#66bb6a;font-weight:700;">L1</div>
+              <div style="font-size:9px;color:#a5d6a7;font-weight:800;">Normal</div>
+            </div>
+            <div style="flex:1;background:#3e1a00;border-radius:6px;padding:4px 6px;text-align:center;">
+              <div style="font-size:8px;color:#ffa726;font-weight:700;">L3</div>
+              <div style="font-size:9px;color="#ffcc80;font-weight:800;">Cheio</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Station Detail -->
+    <div>
+      <div class="label" style="text-align:center;margin-bottom:8px;">Detalhe Estação</div>
+      <div class="phone phone-light" style="width:190px;">
+        <div style="background:#0455A1;padding:16px 14px 20px;color:#fff;">
+          <div style="font-size:9px;font-weight:700;opacity:.7;letter-spacing:1px;">LINHA 1 — AZUL</div>
+          <div style="font-size:18px;font-weight:800;margin-top:4px;">Sé</div>
+          <div style="font-size:10px;opacity:.8;margin-top:2px;">Integração L3 · CPTM</div>
+          <!-- density bar -->
+          <div style="margin-top:12px;">
+            <div style="display:flex;justify-content:space-between;font-size:9px;opacity:.8;margin-bottom:4px;"><span>Lotação</span><span>62%</span></div>
+            <div style="background:rgba(255,255,255,.25);border-radius:4px;height:6px;">
+              <div style="background:#fff;border-radius:4px;height:6px;width:62%;"></div>
+            </div>
+          </div>
+        </div>
+        <!-- Direction cards -->
+        <div style="background:#F8F9FA;padding:10px;display:flex;flex-direction:column;gap:8px;">
+          <div style="font-size:9px;font-weight:700;color:#888;letter-spacing:.8px;margin-bottom:-2px;">PRÓXIMOS TRENS</div>
+          <div style="background:#fff;border-radius:10px;padding:10px;box-shadow:0 1px 4px rgba(0,0,0,.06);">
+            <div style="font-size:9px;color:#888;">→ Tucuruvi</div>
+            <div style="display:flex;gap:6px;margin-top:6px;">
+              <span style="background:#0455A1;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">2 min</span>
+              <span style="background:#e3f0fd;color:#0455A1;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">8 min</span>
+            </div>
+          </div>
+          <div style="background:#fff;border-radius:10px;padding:10px;box-shadow:0 1px 4px rgba(0,0,0,.06);">
+            <div style="font-size:9px;color:#888;">← Jabaquara</div>
+            <div style="display:flex;gap:6px;margin-top:6px;">
+              <span style="background:#0455A1;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">1 min</span>
+              <span style="background:#e3f0fd;color:#0455A1;font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;">5 min</span>
+            </div>
+          </div>
+          <!-- history mini bar chart -->
+          <div style="background:#fff;border-radius:10px;padding:10px;box-shadow:0 1px 4px rgba(0,0,0,.06);">
+            <div style="font-size:9px;color:#888;margin-bottom:6px;">HISTÓRICO 3H</div>
+            <div style="display:flex;align-items:flex-end;gap:3px;height:28px;">
+              <div style="flex:1;background:#e3f0fd;border-radius:2px 2px 0 0;height:40%;"></div>
+              <div style="flex:1;background:#bbdefb;border-radius:2px 2px 0 0;height:55%;"></div>
+              <div style="flex:1;background:#90caf9;border-radius:2px 2px 0 0;height:80%;"></div>
+              <div style="flex:1;background:#ef9a9a;border-radius:2px 2px 0 0;height:95%;"></div>
+              <div style="flex:1;background:#ef9a9a;border-radius:2px 2px 0 0;height:100%;"></div>
+              <div style="flex:1;background:#ffcc80;border-radius:2px 2px 0 0;height:70%;"></div>
+              <div style="flex:1;background:#0455A1;border-radius:2px 2px 0 0;height:62%;border:1px solid #0455A1;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Design tokens -->
+<div class="section">
+  <h3>Espaçamento e elevação</h3>
+  <div class="row">
+    <div class="col">
+      <div class="label">Spacing scale</div>
+      <p style="font-size:13px;color:#555;line-height:2;">
+        4 · 8 · 12 · 16 · 20 · 24 · 32 · 48px<br>
+        Border radius cards: <strong>16px</strong><br>
+        Border radius chips: <strong>20px</strong><br>
+        Border radius botões: <strong>12px</strong>
+      </p>
+    </div>
+    <div class="col">
+      <div class="label">Elevação (shadows)</div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px;">
+        <div style="background:#fff;border-radius:8px;padding:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);font-size:12px;color:#555;">Nível 1 — cards, chips</div>
+        <div style="background:#fff;border-radius:8px;padding:10px;box-shadow:0 4px 12px rgba(0,0,0,.10);font-size:12px;color:#555;">Nível 2 — bottom sheets</div>
+        <div style="background:#fff;border-radius:8px;padding:10px;box-shadow:0 8px 28px rgba(0,0,0,.16);font-size:12px;color:#555;">Nível 3 — modals, detalhe</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center;margin-top:8px;">
+  <p style="font-size:13px;color:#555;">Este design geral do app está aprovado? Responda no terminal.</p>
+</div>
+
+</body>
+</html>

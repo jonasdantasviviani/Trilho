@@ -1,0 +1,102 @@
+<h2>Como o mapa deve ser construído?</h2>
+<p class="subtitle">O requisito "exatamente fiel ao PDF" pode ser atendido de três formas. Cada uma tem implicações diferentes para manutenção e fidelidade visual.</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="image-asset" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#111;padding:16px;min-height:180px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
+      <!-- Mock: image bg + tap targets -->
+      <div style="width:100%;height:140px;background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:8px;position:relative;overflow:hidden;">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+          <span style="color:#4a9eff;font-size:11px;font-weight:600;letter-spacing:1px;">🗺️ IMAGEM DO PDF</span>
+        </div>
+        <!-- Simulated line highlights overlaid -->
+        <div style="position:absolute;top:40%;left:10%;width:80%;height:6px;background:rgba(4,85,161,0.7);border-radius:3px;"></div>
+        <div style="position:absolute;top:55%;left:15%;width:70%;height:6px;background:rgba(239,65,54,0.7);border-radius:3px;"></div>
+        <div style="position:absolute;top:30%;left:20%;width:50%;height:5px;background:rgba(0,126,94,0.7);border-radius:3px;transform:rotate(-20deg);"></div>
+        <!-- Tap targets -->
+        <div style="position:absolute;top:38%;left:8%;width:12px;height:12px;border-radius:50%;background:#fff;border:2px solid #4a9eff;"></div>
+        <div style="position:absolute;top:53%;left:50%;width:12px;height:12px;border-radius:50%;background:#fff;border:2px solid #ef4136;"></div>
+      </div>
+      <p style="color:#aaa;font-size:10px;margin:4px 0 0;text-align:center;">Imagem como fundo · pontos de toque invisíveis por cima</p>
+    </div>
+    <div class="card-body">
+      <h3>A — Imagem do PDF como fundo</h3>
+      <p>Converte o PDF em PNG/WebP, usa como asset de imagem. Camadas invisíveis de toque são desenhadas na frente para detectar linhas e estações.</p>
+      <div class="pros-cons" style="margin-top:8px">
+        <div class="pros"><h4>Prós</h4><ul><li>100% fiel visualmente</li><li>Implementação rápida</li><li>Zoom nativo via InteractiveViewer</li></ul></div>
+        <div class="cons"><h4>Contras</h4><ul><li>Requer conversão do PDF → imagem</li><li>Filtro por linha é overlay semi-transparente (não isola linhas reais)</li><li>Tamanho de asset maior</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-choice="vector-redraw" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#111;padding:16px;min-height:180px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
+      <div style="width:100%;height:140px;background:linear-gradient(135deg,#0d1117,#161b22);border-radius:8px;position:relative;overflow:hidden;">
+        <!-- Simulated precise vector lines -->
+        <svg width="100%" height="100%" viewBox="0 0 300 140">
+          <!-- L1 vertical -->
+          <line x1="110" y1="5" x2="110" y2="135" stroke="#0455A1" stroke-width="7" stroke-linecap="round"/>
+          <!-- L3 horizontal -->
+          <line x1="10" y1="70" x2="290" y2="70" stroke="#EF4136" stroke-width="7" stroke-linecap="round"/>
+          <!-- L2 diagonal -->
+          <line x1="40" y1="40" x2="160" y2="120" stroke="#007E5E" stroke-width="6" stroke-linecap="round"/>
+          <!-- L4 -->
+          <line x1="60" y1="120" x2="110" y2="70" stroke="#FFD900" stroke-width="6" stroke-linecap="round"/>
+          <!-- L7 -->
+          <line x1="20" y1="20" x2="110" y2="70" stroke="#CF202E" stroke-width="5" stroke-linecap="round"/>
+          <!-- Interchange circles -->
+          <circle cx="110" cy="70" r="8" fill="white" stroke="#888" stroke-width="2"/>
+          <circle cx="110" cy="95" r="6" fill="white" stroke="#0455A1" stroke-width="2"/>
+          <circle cx="110" cy="110" r="6" fill="white" stroke="#0455A1" stroke-width="2"/>
+          <!-- Labels -->
+          <text x="118" y="73" fill="white" font-size="8" font-family="sans-serif">Sé</text>
+          <text x="118" y="55" fill="white" font-size="7" font-family="sans-serif">Luz</text>
+        </svg>
+      </div>
+      <p style="color:#aaa;font-size:10px;margin:4px 0 0;text-align:center;">Redesenho vetorial preciso · coordenadas mapeadas do PDF</p>
+    </div>
+    <div class="card-body">
+      <h3>B — Redesenho vetorial fiel</h3>
+      <p>Mapeamento manual de todas as coordenadas do PDF para o canvas atual (2400×1800). Cada segmento de linha e posição de estação reposicionado para corresponder ao PDF.</p>
+      <div class="pros-cons" style="margin-top:8px">
+        <div class="pros"><h4>Prós</h4><ul><li>Filtro por linha perfeitamente isolado</li><li>Sem asset externo</li><li>Dark mode funciona naturalmente</li></ul></div>
+        <div class="cons"><h4>Contras</h4><ul><li>Requer medir/mapear ~200+ coordenadas</li><li>"Exatamente fiel" depende da precisão manual</li><li>Tempo de implementação maior</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-choice="hybrid" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#111;padding:16px;min-height:180px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
+      <div style="width:100%;height:140px;background:linear-gradient(135deg,#1a1a2e,#0d1117);border-radius:8px;position:relative;overflow:hidden;">
+        <!-- Base image layer -->
+        <div style="position:absolute;inset:0;opacity:0.4;">
+          <svg width="100%" height="100%" viewBox="0 0 300 140">
+            <line x1="110" y1="5" x2="110" y2="135" stroke="#0455A1" stroke-width="7" stroke-linecap="round"/>
+            <line x1="10" y1="70" x2="290" y2="70" stroke="#EF4136" stroke-width="7" stroke-linecap="round"/>
+            <line x1="40" y1="40" x2="160" y2="120" stroke="#007E5E" stroke-width="6" stroke-linecap="round"/>
+            <line x1="60" y1="120" x2="110" y2="70" stroke="#FFD900" stroke-width="6" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <!-- Highlighted selected line on top -->
+        <svg style="position:absolute;inset:0" width="100%" height="100%" viewBox="0 0 300 140">
+          <line x1="10" y1="70" x2="290" y2="70" stroke="#EF4136" stroke-width="10" stroke-linecap="round" opacity="0.95"/>
+          <circle cx="110" cy="70" r="9" fill="white" stroke="#EF4136" stroke-width="3"/>
+          <circle cx="170" cy="70" r="6" fill="white" stroke="#EF4136" stroke-width="2"/>
+          <circle cx="230" cy="70" r="6" fill="white" stroke="#EF4136" stroke-width="2"/>
+        </svg>
+        <div style="position:absolute;bottom:6px;right:8px;background:rgba(239,65,54,0.9);color:white;font-size:9px;padding:2px 6px;border-radius:10px;font-weight:700;">L3 Vermelha</div>
+      </div>
+      <p style="color:#aaa;font-size:10px;margin:4px 0 0;text-align:center;">Imagem base + linhas vetoriais de destaque por cima</p>
+    </div>
+    <div class="card-body">
+      <h3>C — Híbrido (imagem + vetor interativo)</h3>
+      <p>Imagem do PDF como base fixa. Quando nenhuma linha está selecionada, mostra a imagem pura. Ao selecionar, sobreposição vetorial destaca a linha escolhida e apaga as outras.</p>
+      <div class="pros-cons" style="margin-top:8px">
+        <div class="pros"><h4>Prós</h4><ul><li>Fidelidade total no modo visão geral</li><li>Filtro com boa separação visual</li><li>Implementação moderada</li></ul></div>
+        <div class="cons"><h4>Contras</h4><ul><li>Requer conversão do PDF E coordenadas aproximadas</li><li>Duas camadas para manter sincronizadas</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+</div>

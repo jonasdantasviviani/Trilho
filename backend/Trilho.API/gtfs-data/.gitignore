@@ -1,0 +1,4 @@
+# GTFS feed files — too large for git
+*.txt
+*.zip
+.sync.json

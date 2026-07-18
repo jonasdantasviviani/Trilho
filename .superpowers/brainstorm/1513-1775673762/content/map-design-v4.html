@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design do Mapa v4</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f5; color: #111; padding: 24px; }
+  h2 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+  .subtitle { color: #666; font-size: 14px; margin-bottom: 24px; }
+  .section { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+  .section h3 { font-size: 15px; font-weight: 700; margin-bottom: 14px; color: #333; }
+  .row { display: flex; gap: 16px; flex-wrap: wrap; }
+  .col { flex: 1; min-width: 240px; }
+  .label-ui { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .6px; color: #888; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+
+<h2>Labels — rotacionados com a linha</h2>
+<p class="subtitle">Label segue o ângulo da linha · tracejado perpendicular à linha · texto no mesmo ângulo ao final</p>
+
+<!-- Horizontal reference -->
+<div class="section">
+  <h3>Linha horizontal (referência — L3 Vermelha)</h3>
+  <svg width="100%" height="150" viewBox="0 0 580 150" style="border-radius:8px;background:#f8f9fa;">
+    <line x1="20" y1="80" x2="560" y2="80" stroke="#EF4136" stroke-width="7" stroke-linecap="round"/>
+
+    <!-- acima -->
+    <circle cx="100" cy="80" r="6" fill="#fff" stroke="#EF4136" stroke-width="2.5"/>
+    <line x1="100" y1="74" x2="100" y2="50" stroke="#bbb" stroke-width="1.3" stroke-dasharray="3,3"/>
+    <text x="100" y="44" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Palmeiras-Barra Funda</text>
+
+    <!-- abaixo -->
+    <circle cx="260" cy="80" r="6" fill="#fff" stroke="#EF4136" stroke-width="2.5"/>
+    <line x1="260" y1="86" x2="260" y2="110" stroke="#bbb" stroke-width="1.3" stroke-dasharray="3,3"/>
+    <text x="260" y="122" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Marechal Deodoro</text>
+
+    <!-- integração -->
+    <circle cx="420" cy="80" r="11" fill="#fff" stroke="#ccc" stroke-width="1.5"/>
+    <circle cx="420" cy="80" r="7" fill="#fff" stroke="#444" stroke-width="2.5"/>
+    <line x1="420" y1="69" x2="420" y2="46" stroke="#bbb" stroke-width="1.3" stroke-dasharray="3,3"/>
+    <text x="420" y="40" font-size="11" fill="#111" font-family="-apple-system,sans-serif" font-weight="700" text-anchor="middle">Brás</text>
+  </svg>
+</div>
+
+<!-- Diagonal line — label rotates with line, tick perpendicular to line -->
+<div class="section">
+  <h3>Linha diagonal ~35° (L4 Amarela) — label e tracejado no ângulo da linha</h3>
+  <svg width="100%" height="260" viewBox="0 0 500 260" style="border-radius:8px;background:#f8f9fa;">
+    <!--
+      Diagonal line going from top-right to bottom-left at ~35deg below horizontal
+      angle = 35deg means: dx=cos(35°)≈0.819, dy=sin(35°)≈0.574
+      perpendicular to line = rotate 90°: perpX=-sin(35°)=-0.574, perpY=-cos(35°)=-0.819 (upward side)
+    -->
+    <line x1="420" y1="50" x2="80" y2="245" stroke="#FFD900" stroke-width="7" stroke-linecap="round" stroke-opacity="0.85"/>
+
+    <!-- Station 1 at (380, 73) — label ABOVE line (perpendicular up-left) -->
+    <!-- perp direction (above line): (-sin35, -cos35) = (-0.574, -0.819) * 26px -->
+    <!-- tick end: (380 - 14.9, 73 - 21.3) = (365, 52) -->
+    <circle cx="380" cy="73" r="6" fill="#fff" stroke="#c8a800" stroke-width="2.5"/>
+    <line x1="380" y1="73" x2="365" y2="52" stroke="#bbb" stroke-width="1.3" stroke-dasharray="3,3"/>
+    <!-- text rotated -35deg at tick end -->
+    <text transform="translate(365,52) rotate(-35)" x="0" y="-4" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Luz</text>
+
+    <!-- Station 2 at (290, 118) — label BELOW line (perp down-right) -->
+    <!-- perp direction (below line): (sin35, cos35) = (0.574, 0.819) * 26px = (+14.9, +21.3) -->
+    <!-- tick end: (290+14.9, 118+21.3) = (305, 139) -->
+    <circle cx="290" cy="118" r="9" fill="#fff" stroke="#ccc" stroke-width="1.5"/>
+    <circle cx="290" cy="118" r="6" fill="#fff" stroke="#444" stroke-width="2.5"/>
+    <line x1="290" y1="118" x2="305" y2="139" stroke="#bbb" stroke-width="1.3" stroke-dasharray="3,3"/>
+    <text transform="translate(305,139) rotate(-35)" x="0" y="14" font-size="11" fill="#111" font-family="-apple-system,sans-serif" font-weight="700" text-anchor="middle">Higienópolis-Mackenzie</text>
+
+    <!-- Station 3 at (210, 163) — label ABOVE -->
+    <circle cx="210" cy="163" r="6" fill="#fff" stroke="#c8a800" stroke-width="2.5"/>
+    <line x1="210" y1="163" x2="195" y2="142" stroke="#bbb" stroke-width="1.3" stroke-dasharray="3,3"/>
+    <text transform="translate(195,142) rotate(-35)" x="0" y="-4" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Faria Lima</text>
+
+    <!-- Station 4 at (135, 206) — label BELOW -->
+    <circle cx="135" cy="206" r="6" fill="#fff" stroke="#c8a800" stroke-width="2.5"/>
+    <line x1="135" y1="206" x2="150" y2="227" stroke="#bbb" stroke-width="1.3" stroke-dasharray="3,3"/>
+    <text transform="translate(150,227) rotate(-35)" x="0" y="14" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Vila Sônia</text>
+
+    <!-- Angle indicator -->
+    <text x="8" y="18" font-size="10" fill="#888" font-family="sans-serif">ângulo da linha ≈ 35° · tracejado perpendicular · texto rotacionado -35°</text>
+  </svg>
+  <p style="font-size:12px;color:#666;margin-top:10px;">O tracejado sai <strong>perpendicular à linha</strong> (90° do ângulo dela). O texto é rotacionado exatamente no mesmo ângulo da linha — alternando acima/abaixo ao longo das estações.</p>
+</div>
+
+<!-- Steep diagonal ~60° -->
+<div class="section">
+  <h3>Linha mais íngreme ~60° (L7 Rubi, L9 Esmeralda)</h3>
+  <svg width="100%" height="260" viewBox="0 0 360 260" style="border-radius:8px;background:#f8f9fa;">
+    <!-- ~60° diagonal top-left to bottom-right -->
+    <line x1="80" y1="30" x2="280" y2="240" stroke="#CF202E" stroke-width="7" stroke-linecap="round" stroke-opacity="0.85"/>
+
+    <!-- Station 1 — label left side -->
+    <!-- perp left of line direction: (-cos60, sin60)=(-0.5, 0.866)*26 = (-13, 22.5) flip: right side = (13,-22.5)-->
+    <!-- Actually for 60deg line going down-right: dx=sin60=0.866, dy=cos60=0.5 -->
+    <!-- perp left (above-left): (-dy, dx)=(-0.5, 0.866) · NO, let me just place manually -->
+    <circle cx="120" cy="73" r="6" fill="#fff" stroke="#CF202E" stroke-width="2.5"/>
+    <line x1="120" y1="73" x2="96" y2="86" stroke="#bbb" stroke-width="1.3" stroke-dasharray="3,3"/>
+    <text transform="translate(96,86) rotate(60)" x="0" y="-4" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Carandiru</text>
+
+    <!-- Integration -->
+    <circle cx="160" cy="116" r="10" fill="#fff" stroke="#ccc" stroke-width="1.5"/>
+    <circle cx="160" cy="116" r="6.5" fill="#fff" stroke="#444" stroke-width="2.5"/>
+    <line x1="160" y1="116" x2="184" y2="103" stroke="#bbb" stroke-width="1.3" stroke-dasharray="3,3"/>
+    <text transform="translate(184,103) rotate(60)" x="0" y="-5" font-size="11" fill="#111" font-family="-apple-system,sans-serif" font-weight="700" text-anchor="middle">Luz</text>
+
+    <circle cx="200" cy="158" r="6" fill="#fff" stroke="#CF202E" stroke-width="2.5"/>
+    <line x1="200" y1="158" x2="176" y2="171" stroke="#bbb" stroke-width="1.3" stroke-dasharray="3,3"/>
+    <text transform="translate(176,171) rotate(60)" x="0" y="-4" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Pinheiros</text>
+
+    <circle cx="240" cy="202" r="6" fill="#fff" stroke="#CF202E" stroke-width="2.5"/>
+    <line x1="240" y1="202" x2="264" y2="189" stroke="#bbb" stroke-width="1.3" stroke-dasharray="3,3"/>
+    <text transform="translate(264,189) rotate(60)" x="0" y="-4" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Osasco</text>
+
+    <text x="8" y="18" font-size="10" fill="#888" font-family="sans-serif">ângulo ~60° · mesmo princípio · texto sempre alinhado à linha</text>
+  </svg>
+</div>
+
+<div style="text-align:center;margin-top:8px;">
+  <p style="font-size:13px;color:#555;">Ficou correto agora? Responda no terminal.</p>
+</div>
+
+</body>
+</html>

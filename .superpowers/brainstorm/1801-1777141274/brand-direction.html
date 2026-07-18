@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trilho — Direção de Brand</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, 'Inter', sans-serif; background: #f5f5f5; padding: 24px; }
+  h1 { font-size: 20px; font-weight: 700; color: #111; margin-bottom: 6px; }
+  p.sub { font-size: 13px; color: #666; margin-bottom: 24px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .card {
+    background: white; border-radius: 16px; overflow: hidden;
+    border: 2px solid transparent; cursor: pointer; transition: border-color .15s, transform .1s;
+    box-shadow: 0 2px 12px rgba(0,0,0,.08);
+  }
+  .card:hover { transform: translateY(-2px); }
+  .card.selected { border-color: #007AFF; }
+  .card-preview { height: 180px; display: flex; align-items: center; justify-content: center; font-size: 13px; }
+  .card-body { padding: 14px 16px 16px; }
+  .card-body h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .card-body p { font-size: 12px; color: #666; line-height: 1.5; }
+  .badge { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; margin-bottom: 6px; }
+
+  /* A — Tech Dark */
+  .preview-a { background: linear-gradient(135deg, #0a0a0f 0%, #0d1b2a 100%); flex-direction: column; gap: 12px; }
+  .logo-a { width: 52px; height: 52px; background: linear-gradient(135deg, #00d4ff, #0070ff); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+  .name-a { font-size: 22px; font-weight: 800; color: white; letter-spacing: -0.5px; }
+  .tag-a { font-size: 10px; color: #00d4ff; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+
+  /* B — Urban Bold */
+  .preview-b { background: #111; flex-direction: column; gap: 10px; }
+  .logo-b { width: 52px; height: 52px; background: #FFE500; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: 900; color: #111; }
+  .name-b { font-size: 26px; font-weight: 900; color: white; letter-spacing: -1px; text-transform: uppercase; }
+  .tag-b { font-size: 10px; color: #FFE500; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+
+  /* C — Brasileiro */
+  .preview-c { background: linear-gradient(135deg, #006400 0%, #004aad 100%); flex-direction: column; gap: 10px; }
+  .logo-c { width: 52px; height: 52px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; }
+  .name-c { font-size: 22px; font-weight: 700; color: white; letter-spacing: -0.3px; }
+  .tag-c { font-size: 10px; color: rgba(255,255,255,.75); font-weight: 500; letter-spacing: 0.5px; }
+
+  /* D — Premium Minimal */
+  .preview-d { background: white; flex-direction: column; gap: 10px; border-bottom: 1px solid #eee; }
+  .logo-d { width: 52px; height: 52px; background: #111; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+  .logo-d svg { width: 28px; height: 28px; fill: white; }
+  .name-d { font-size: 22px; font-weight: 800; color: #111; letter-spacing: -0.8px; }
+  .tag-d { font-size: 10px; color: #888; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; }
+</style>
+</head>
+<body>
+<h1>Qual direção de brand para o Trilho?</h1>
+<p class="sub">Logo, cores, tipografia e personalidade geral — clique para selecionar</p>
+<div class="grid">
+
+  <div class="card" onclick="this.classList.toggle('selected')">
+    <div class="card-preview preview-a">
+      <div class="logo-a">🚇</div>
+      <div class="name-a">Trilho</div>
+      <div class="tag-a">Lotação em tempo real</div>
+    </div>
+    <div class="card-body">
+      <span class="badge" style="background:#e8f4ff;color:#0070ff">A</span>
+      <h3>Tech / Futurista</h3>
+      <p>Dark first, azul elétrico + cyan, logo geométrico. Sensação de app de tecnologia premium. Próximo de apps como Citymapper ou Transit.</p>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('selected')">
+    <div class="card-preview preview-b">
+      <div class="logo-b">T</div>
+      <div class="name-b">Trilho</div>
+      <div class="tag-b">SP em tempo real</div>
+    </div>
+    <div class="card-body">
+      <span class="badge" style="background:#fffde7;color:#b8a000">B</span>
+      <h3>Urban / Bold</h3>
+      <p>Preto + amarelo sinalético, tipografia pesada, impacto visual forte. Inspirado em MTA New York e TfL London. Memorável e assertivo.</p>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('selected')">
+    <div class="card-preview preview-c">
+      <div class="logo-c">🚆</div>
+      <div class="name-c">Trilho</div>
+      <div class="tag-c">Transporte público de SP</div>
+    </div>
+    <div class="card-body">
+      <span class="badge" style="background:#e8f5e9;color:#2e7d32">C</span>
+      <h3>Brasileiro / Caloroso</h3>
+      <p>Verde + azul (remetendo ao Brasil), forms arredondados, tom amigável. Acessível para todos os públicos do transporte público paulistano.</p>
+    </div>
+  </div>
+
+  <div class="card" onclick="this.classList.toggle('selected')">
+    <div class="card-preview preview-d">
+      <div class="logo-d"><svg viewBox="0 0 24 24"><path d="M4 4h16v2H4zm0 4h10v2H4zm0 4h16v2H4zm0 4h10v2H4z"/></svg></div>
+      <div class="name-d">trilho</div>
+      <div class="tag-d">Lotação · Tempo real</div>
+    </div>
+    <div class="card-body">
+      <span class="badge" style="background:#f5f5f5;color:#333">D</span>
+      <h3>Premium Minimalista</h3>
+      <p>Quase monocromático, muito espaço em branco, tipografia refinada. Sensação de app de finanças premium. Alto contraste, sem distrações.</p>
+    </div>
+  </div>
+
+</div>
+<p style="margin-top:16px;font-size:12px;color:#888;text-align:center">Clique numa opção ou responda no terminal</p>
+</body>
+</html>

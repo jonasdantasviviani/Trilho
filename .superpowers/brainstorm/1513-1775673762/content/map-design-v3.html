@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design do Mapa v3</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f5; color: #111; padding: 24px; }
+  h2 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+  .subtitle { color: #666; font-size: 14px; margin-bottom: 24px; }
+  .section { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+  .section h3 { font-size: 15px; font-weight: 700; margin-bottom: 14px; color: #333; }
+  .label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .6px; color: #888; margin-bottom: 8px; }
+  .row { display: flex; gap: 16px; flex-wrap: wrap; }
+  .col { flex: 1; min-width: 200px; }
+  code { background: #f0f0f0; border-radius: 4px; padding: 2px 6px; font-size: 12px; }
+</style>
+</head>
+<body>
+
+<h2>Labels — padrão unificado</h2>
+<p class="subtitle">Todos os nomes sempre horizontais, com tracejado linkando ao marcador — linha reta ou diagonal</p>
+
+<!-- Horizontal line demo -->
+<div class="section">
+  <h3>Linha horizontal (L3 Vermelha)</h3>
+  <svg width="100%" height="170" viewBox="0 0 620 170" style="border-radius:8px;background:#f8f9fa;">
+    <line x1="20" y1="88" x2="600" y2="88" stroke="#EF4136" stroke-width="7" stroke-linecap="round"/>
+
+    <!-- Estação 1 - label ACIMA -->
+    <circle cx="90" cy="88" r="6" fill="#fff" stroke="#EF4136" stroke-width="2.5"/>
+    <line x1="90" y1="82" x2="90" y2="58" stroke="#bbb" stroke-width="1.2" stroke-dasharray="3,3"/>
+    <text x="90" y="52" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Palmeiras-</text>
+    <text x="90" y="40" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Barra Funda</text>
+
+    <!-- Estação 2 - label ABAIXO -->
+    <circle cx="210" cy="88" r="6" fill="#fff" stroke="#EF4136" stroke-width="2.5"/>
+    <line x1="210" y1="94" x2="210" y2="116" stroke="#bbb" stroke-width="1.2" stroke-dasharray="3,3"/>
+    <text x="210" y="126" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Marechal</text>
+    <text x="210" y="138" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Deodoro</text>
+
+    <!-- Estação 3 integração -->
+    <circle cx="340" cy="88" r="11" fill="#fff" stroke="#ccc" stroke-width="1.5"/>
+    <circle cx="340" cy="88" r="7" fill="#fff" stroke="#444" stroke-width="2.5"/>
+    <line x1="340" y1="77" x2="340" y2="54" stroke="#bbb" stroke-width="1.2" stroke-dasharray="3,3"/>
+    <text x="340" y="48" font-size="11" fill="#111" font-family="-apple-system,sans-serif" font-weight="700" text-anchor="middle">Brás</text>
+
+    <!-- Estação 4 - label ABAIXO -->
+    <circle cx="460" cy="88" r="6" fill="#fff" stroke="#EF4136" stroke-width="2.5"/>
+    <line x1="460" y1="94" x2="460" y2="116" stroke="#bbb" stroke-width="1.2" stroke-dasharray="3,3"/>
+    <text x="460" y="126" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Tatuapé</text>
+
+    <!-- Estação 5 - label ACIMA -->
+    <circle cx="560" cy="88" r="6" fill="#fff" stroke="#EF4136" stroke-width="2.5"/>
+    <line x1="560" y1="82" x2="560" y2="58" stroke="#bbb" stroke-width="1.2" stroke-dasharray="3,3"/>
+    <text x="560" y="52" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Corinthians-</text>
+    <text x="560" y="40" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Itaquera</text>
+  </svg>
+</div>
+
+<!-- Diagonal line demo — labels horizontal igual -->
+<div class="section">
+  <h3>Linha diagonal (L4 Amarela) — labels horizontais, tracejado na vertical</h3>
+  <svg width="100%" height="220" viewBox="0 0 420 220" style="border-radius:8px;background:#f8f9fa;">
+    <!-- diagonal -->
+    <line x1="360" y1="30" x2="60" y2="190" stroke="#FFD900" stroke-width="7" stroke-linecap="round"/>
+
+    <!-- Estação 1 (topo-direita) - label ACIMA -->
+    <circle cx="310" cy="63" r="6" fill="#fff" stroke="#c8aa00" stroke-width="2.5"/>
+    <line x1="310" y1="57" x2="310" y2="36" stroke="#bbb" stroke-width="1.2" stroke-dasharray="3,3"/>
+    <text x="310" y="30" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Luz</text>
+
+    <!-- Estação 2 integração (meio) - label direita -->
+    <circle cx="210" cy="117" r="11" fill="#fff" stroke="#ccc" stroke-width="1.5"/>
+    <circle cx="210" cy="117" r="7" fill="#fff" stroke="#444" stroke-width="2.5"/>
+    <line x1="221" y1="117" x2="244" y2="117" stroke="#bbb" stroke-width="1.2" stroke-dasharray="3,3"/>
+    <text x="248" y="114" font-size="11" fill="#111" font-family="-apple-system,sans-serif" font-weight="700" text-anchor="start">Paulista</text>
+
+    <!-- Estação 3 - label ABAIXO -->
+    <circle cx="145" cy="155" r="6" fill="#fff" stroke="#c8aa00" stroke-width="2.5"/>
+    <line x1="145" y1="161" x2="145" y2="180" stroke="#bbb" stroke-width="1.2" stroke-dasharray="3,3"/>
+    <text x="145" y="191" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Faria Lima</text>
+
+    <!-- Estação 4 - label esquerda -->
+    <circle cx="85" cy="184" r="6" fill="#fff" stroke="#c8aa00" stroke-width="2.5"/>
+    <line x1="79" y1="184" x2="58" y2="184" stroke="#bbb" stroke-width="1.2" stroke-dasharray="3,3"/>
+    <text x="54" y="188" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="end">Vila Sônia</text>
+
+    <text x="8" y="16" font-size="10" fill="#888" font-family="sans-serif">Labels sempre horizontais — tracejado sai do marcador na direção mais livre</text>
+  </svg>
+  <p style="font-size:12px;color:#666;margin-top:10px;">O tracejado sai sempre <strong>perpendicular ao espaço disponível</strong> — para cima, baixo, esquerda ou direita — nunca diagonal. Texto horizontal em todos os casos.</p>
+</div>
+
+<!-- Multi-line crossing -->
+<div class="section">
+  <h3>Cruzamento de linhas (L1 × L3 × L4) — integração Luz</h3>
+  <svg width="100%" height="220" viewBox="0 0 400 220" style="border-radius:8px;background:#f8f9fa;">
+    <!-- L3 horizontal -->
+    <line x1="20" y1="110" x2="380" y2="110" stroke="#EF4136" stroke-width="7" stroke-linecap="round"/>
+    <!-- L1 vertical -->
+    <line x1="200" y1="20" x2="200" y2="200" stroke="#0455A1" stroke-width="7" stroke-linecap="round"/>
+    <!-- L4 diagonal -->
+    <line x1="200" y1="110" x2="80" y2="190" stroke="#FFD900" stroke-width="7" stroke-linecap="round"/>
+
+    <!-- Simples na L3 -->
+    <circle cx="80" cy="110" r="6" fill="#fff" stroke="#EF4136" stroke-width="2.5"/>
+    <line x1="80" y1="104" x2="80" y2="82" stroke="#bbb" stroke-width="1.2" stroke-dasharray="3,3"/>
+    <text x="80" y="78" font-size="9" fill="#333" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Marechal</text>
+    <text x="80" y="67" font-size="9" fill="#333" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Deodoro</text>
+
+    <circle cx="310" cy="110" r="6" fill="#fff" stroke="#EF4136" stroke-width="2.5"/>
+    <line x1="310" y1="116" x2="310" y2="138" stroke="#bbb" stroke-width="1.2" stroke-dasharray="3,3"/>
+    <text x="310" y="149" font-size="9" fill="#333" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Brás</text>
+
+    <!-- L1 simples -->
+    <circle cx="200" cy="55" r="6" fill="#fff" stroke="#0455A1" stroke-width="2.5"/>
+    <line x1="206" y1="55" x2="228" y2="55" stroke="#bbb" stroke-width="1.2" stroke-dasharray="3,3"/>
+    <text x="232" y="59" font-size="9" fill="#333" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="start">Armênia</text>
+
+    <circle cx="200" cy="170" r="6" fill="#fff" stroke="#0455A1" stroke-width="2.5"/>
+    <line x1="206" y1="170" x2="228" y2="170" stroke="#bbb" stroke-width="1.2" stroke-dasharray="3,3"/>
+    <text x="232" y="174" font-size="9" fill="#333" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="start">Sé</text>
+
+    <!-- HUB Luz -->
+    <circle cx="200" cy="110" r="14" fill="#fff" stroke="#ddd" stroke-width="1.5"/>
+    <circle cx="200" cy="110" r="9" fill="#fff" stroke="#333" stroke-width="2.5"/>
+    <line x1="200" y1="96" x2="200" y2="68" stroke="#bbb" stroke-width="1.2" stroke-dasharray="3,3"/>
+    <text x="200" y="62" font-size="12" fill="#000" font-family="-apple-system,sans-serif" font-weight="800" text-anchor="middle">Luz</text>
+  </svg>
+  <p style="font-size:12px;color:#666;margin-top:10px;">Integração usa marcador duplo (anel 14px + núcleo 9px). Label <strong>negrito 800</strong> e tamanho maior. Tracejado sempre vertical ou horizontal para o espaço livre.</p>
+</div>
+
+<div style="text-align:center;margin-top:8px;">
+  <p style="font-size:13px;color:#555;">Ficou bom assim? Responda no terminal para continuarmos para o design do app.</p>
+</div>
+
+</body>
+</html>

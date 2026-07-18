@@ -1,0 +1,109 @@
+<h2>Como mostrar a lotação ao lado de cada estação no mapa?</h2>
+<p class="subtitle">Após o zoom na linha, cada estação terá um indicador de lotação</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="A" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0d1117;padding:20px;min-height:200px;display:flex;align-items:center;justify-content:center">
+      <div style="display:flex;flex-direction:column;gap:16px;width:100%">
+        <!-- Station with vertical bar -->
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="width:12px;height:12px;border-radius:50%;background:#4caf50;border:2px solid white;flex-shrink:0"></div>
+          <div style="font-size:11px;color:#e0e0e0;flex:1">Consolação</div>
+          <div style="width:8px;height:40px;background:#1a3a1a;border-radius:4px;position:relative;overflow:hidden">
+            <div style="position:absolute;bottom:0;left:0;right:0;height:25%;background:#4caf50;border-radius:4px"></div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="width:12px;height:12px;border-radius:50%;background:#ff9800;border:2px solid white;flex-shrink:0"></div>
+          <div style="font-size:11px;color:#e0e0e0;flex:1">Paraíso</div>
+          <div style="width:8px;height:40px;background:#2a2a1a;border-radius:4px;position:relative;overflow:hidden">
+            <div style="position:absolute;bottom:0;left:0;right:0;height:65%;background:#ff9800;border-radius:4px"></div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="width:12px;height:12px;border-radius:50%;background:#f44336;border:2px solid white;flex-shrink:0"></div>
+          <div style="font-size:11px;color:#e0e0e0;flex:1">Ana Rosa</div>
+          <div style="width:8px;height:40px;background:#2a1a1a;border-radius:4px;position:relative;overflow:hidden">
+            <div style="position:absolute;bottom:0;left:0;right:0;height:90%;background:#f44336;border-radius:4px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Barra vertical ao lado do marcador</h3>
+      <p>Barra fina e vertical preenchida de baixo para cima. Compacta, fácil de comparar entre estações.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="B" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0d1117;padding:20px;min-height:200px;display:flex;align-items:center;justify-content:center">
+      <div style="display:flex;flex-direction:column;gap:20px;width:100%">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="position:relative;width:22px;height:22px;flex-shrink:0">
+            <div style="width:22px;height:22px;border-radius:50%;background:conic-gradient(#4caf50 90deg, #1a3a1a 90deg);border:2px solid white"></div>
+            <div style="position:absolute;inset:4px;border-radius:50%;background:#0d1117"></div>
+          </div>
+          <div style="font-size:11px;color:#e0e0e0">Consolação <span style="color:#4caf50">25%</span></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="position:relative;width:22px;height:22px;flex-shrink:0">
+            <div style="width:22px;height:22px;border-radius:50%;background:conic-gradient(#ff9800 234deg, #2a2a1a 234deg);border:2px solid white"></div>
+            <div style="position:absolute;inset:4px;border-radius:50%;background:#0d1117"></div>
+          </div>
+          <div style="font-size:11px;color:#e0e0e0">Paraíso <span style="color:#ff9800">65%</span></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="position:relative;width:22px;height:22px;flex-shrink:0">
+            <div style="width:22px;height:22px;border-radius:50%;background:conic-gradient(#f44336 324deg, #2a1a1a 324deg);border:2px solid white"></div>
+            <div style="position:absolute;inset:4px;border-radius:50%;background:#0d1117"></div>
+          </div>
+          <div style="font-size:11px;color:#e0e0e0">Ana Rosa <span style="color:#f44336">90%</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Anel de progresso no marcador</h3>
+      <p>O próprio marcador da estação vira um anel colorido com a lotação. Elegante, mas pode ficar pequeno no mapa.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="C" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0d1117;padding:20px;min-height:200px;display:flex;align-items:center;justify-content:center">
+      <div style="display:flex;flex-direction:column;gap:14px;width:100%">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="width:12px;height:12px;border-radius:50%;background:#4caf50;border:2px solid white;flex-shrink:0"></div>
+          <div style="flex:1">
+            <div style="font-size:10px;color:#e0e0e0;margin-bottom:3px">Consolação</div>
+            <div style="height:5px;background:#1a2a1a;border-radius:3px;overflow:hidden">
+              <div style="height:100%;width:25%;background:#4caf50;border-radius:3px"></div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="width:12px;height:12px;border-radius:50%;background:#ff9800;border:2px solid white;flex-shrink:0"></div>
+          <div style="flex:1">
+            <div style="font-size:10px;color:#e0e0e0;margin-bottom:3px">Paraíso</div>
+            <div style="height:5px;background:#2a2a1a;border-radius:3px;overflow:hidden">
+              <div style="height:100%;width:65%;background:#ff9800;border-radius:3px"></div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="width:12px;height:12px;border-radius:50%;background:#f44336;border:2px solid white;flex-shrink:0"></div>
+          <div style="flex:1">
+            <div style="font-size:10px;color:#e0e0e0;margin-bottom:3px">Ana Rosa</div>
+            <div style="height:5px;background:#2a1a1a;border-radius:3px;overflow:hidden">
+              <div style="height:100%;width:90%;background:#f44336;border-radius:3px"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Barra horizontal sob o nome</h3>
+      <p>Barra fina horizontal logo abaixo do nome da estação. Mais legível em zoom menor, mas ocupa mais espaço vertical.</p>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,70 @@
+# Ambiente DSV (desenvolvimento)
+# Uso: docker compose -f docker-compose.yml -f docker-compose.dsv.yml up -d
+
+services:
+  api:
+    image: ghcr.io/${GH_OWNER:-local}/trilho-api:${IMAGE_TAG:-latest}
+    build:
+      context: ./backend
+      dockerfile: Trilho.API/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - Jwt__Secret=${JWT_SECRET:-trilho_dsv_secret_change_me_32c}
+      - AdminApiKey=${ADMIN_API_KEY:-dev-admin-key}
+      - Firebase__ProjectId=${FIREBASE_PROJECT_ID:-}
+      - Firebase__ServiceAccountJson=${FIREBASE_SERVICE_ACCOUNT_JSON:-}
+      - OlhoVivo__Token=${OLHOVIVO_TOKEN:-}
+    ports:
+      - "5000:8080"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  web:
+    image: ghcr.io/${GH_OWNER:-local}/trilho-web:${IMAGE_TAG:-latest}
+    profiles: [web]
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - BACKEND_URL=http://api:8080
+      - JWT_SECRET=${JWT_SECRET:-trilho_dsv_secret_change_me_32c}
+      - NEXT_PUBLIC_FIREBASE_API_KEY=${NEXT_PUBLIC_FIREBASE_API_KEY:-}
+      - NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=${NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN:-}
+      - NEXT_PUBLIC_FIREBASE_PROJECT_ID=${NEXT_PUBLIC_FIREBASE_PROJECT_ID:-}
+      - NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=${NEXT_PUBLIC_GOOGLE_MAPS_API_KEY:-}
+      - NEXT_PUBLIC_APP_URL=http://localhost:3000
+    depends_on:
+      - api
+
+  admin:
+    image: ghcr.io/${GH_OWNER:-local}/trilho-admin:${IMAGE_TAG:-latest}
+    profiles: [admin]
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=development
+      - BACKEND_URL=http://api:8080
+      - ADMIN_API_KEY=${ADMIN_API_KEY:-dev-admin-key}
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET:-dev-nextauth-secret-32chars}
+      - NEXTAUTH_URL=http://localhost:3001
+    depends_on:
+      - api
+
+  db:
+    environment:
+      - POSTGRES_DB=trilho_dsv
+
+  # pgAdmin disponível em dsv para inspeção do banco
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    profiles: [tools]
+    ports:
+      - "5050:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@trilho.app
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    depends_on:
+      - db

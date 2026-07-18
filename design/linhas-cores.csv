@@ -1,0 +1,33 @@
+# Cores das Linhas - Trilho
+
+## Metrô São Paulo
+
+| Linha | Código | Nome | Cor Primária | Texto |
+|-------|--------|------|--------------|-------|
+| 1 | AZUL | Linha 1 - Azul | #0044AA | #FFFFFF |
+| 2 | VERDE | Linha 2 - Verde | #007A4D | #FFFFFF |
+| 3 | VERMELHA | Linha 3 - Vermelha | #EE1C25 | #FFFFFF |
+| 4 | AMARELA | Linha 4 - Amarela | #FFD400 | #000000 |
+| 5 | LILAS | Linha 5 - Lilás | #9B2990 | #FFFFFF |
+| 15 | PRATA | Linha 15 - Prata | #9E9E9E | #FFFFFF |
+
+## CPTM
+
+| Linha | Código | Nome | Cor Primária | Texto |
+|-------|--------|------|--------------|-------|
+| 7 | RUBI | Linha 7 - Rubi | #EE1C25 | #FFFFFF |
+| 8 | DIAMANTE | Linha 8 - Diamante | #9E9E9E | #FFFFFF |
+| 9 | ESMERALDA | Linha 9 - Esmeralda | #007A4D | #FFFFFF |
+| 10 | TURQUESA | Linha 10 - Turquesa | #008080 | #FFFFFF |
+| 11 | CORAL | Linha 11 - Coral | #F7941D | #000000 |
+| 12 | SAFIRA | Linha 12 - Safira | #003DA5 | #FFFFFF |
+| 13 | JADE | Linha 13 - Jade | #00A859 | #FFFFFF |
+
+## Status de Lotação
+
+| Status | Cor | Significado |
+|--------|-----|-------------|
+| Tranquilo | #4CAF50 | Baixa lotação (< 30%) |
+| Moderado | #FFC107 | Lotação média (30-60%) |
+| Cheio | #FF9800 | Alta lotação (60-85%) |
+| Lotado | #F44336 | Lotação máxima (> 85%) |

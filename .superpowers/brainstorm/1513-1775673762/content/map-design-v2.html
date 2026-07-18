@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design do Mapa v2</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f5; color: #111; padding: 24px; }
+  h2 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+  .subtitle { color: #666; font-size: 14px; margin-bottom: 24px; }
+  .section { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+  .section h3 { font-size: 15px; font-weight: 700; margin-bottom: 12px; color: #333; }
+  .row { display: flex; gap: 16px; flex-wrap: wrap; }
+  .col { flex: 1; min-width: 200px; }
+  .label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .6px; color: #888; margin-bottom: 8px; }
+  code { background: #f0f0f0; border-radius: 4px; padding: 2px 6px; font-size: 12px; }
+  .map-preview { border-radius: 8px; overflow: hidden; }
+  .tag { background:#e8f0fe;color:#1a73e8;font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px;margin-left:6px; }
+</style>
+</head>
+<body>
+
+<h2>Labels das estações — ajuste de distância</h2>
+<p class="subtitle">Nomes afastados dos marcadores com espaçamento generoso (igual ao mapa impresso oficial)</p>
+
+<!-- Labels demo -->
+<div class="section">
+  <h3>Linha horizontal — labels acima e abaixo com offset</h3>
+  <svg width="100%" height="160" viewBox="0 0 620 160" style="border-radius:8px;background:#f8f9fa;">
+    <!-- Linha -->
+    <line x1="20" y1="80" x2="600" y2="80" stroke="#EF4136" stroke-width="7" stroke-linecap="round"/>
+
+    <!-- Estação 1 - label ACIMA -->
+    <circle cx="90" cy="80" r="6" fill="#fff" stroke="#EF4136" stroke-width="2.5"/>
+    <!-- tick line acima -->
+    <line x1="90" y1="74" x2="90" y2="56" stroke="#aaa" stroke-width="1" stroke-dasharray="2,2"/>
+    <text x="90" y="52" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Palmeiras-</text>
+    <text x="90" y="41" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Barra Funda</text>
+
+    <!-- Estação 2 - label ABAIXO -->
+    <circle cx="210" cy="80" r="6" fill="#fff" stroke="#EF4136" stroke-width="2.5"/>
+    <line x1="210" y1="86" x2="210" y2="104" stroke="#aaa" stroke-width="1" stroke-dasharray="2,2"/>
+    <text x="210" y="116" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Marechal</text>
+    <text x="210" y="127" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Deodoro</text>
+
+    <!-- Estação 3 integração - label ACIMA -->
+    <circle cx="340" cy="80" r="11" fill="#fff" stroke="#aaa" stroke-width="1.5"/>
+    <circle cx="340" cy="80" r="7" fill="#fff" stroke="#444" stroke-width="2.5"/>
+    <line x1="340" y1="69" x2="340" y2="50" stroke="#aaa" stroke-width="1" stroke-dasharray="2,2"/>
+    <text x="340" y="46" font-size="11" fill="#111" font-family="-apple-system,sans-serif" font-weight="700" text-anchor="middle">Brás</text>
+
+    <!-- Estação 4 - label ABAIXO -->
+    <circle cx="460" cy="80" r="6" fill="#fff" stroke="#EF4136" stroke-width="2.5"/>
+    <line x1="460" y1="86" x2="460" y2="104" stroke="#aaa" stroke-width="1" stroke-dasharray="2,2"/>
+    <text x="460" y="116" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Tatuapé</text>
+
+    <!-- Estação 5 - label ACIMA -->
+    <circle cx="560" cy="80" r="6" fill="#fff" stroke="#EF4136" stroke-width="2.5"/>
+    <line x1="560" y1="74" x2="560" y2="56" stroke="#aaa" stroke-width="1" stroke-dasharray="2,2"/>
+    <text x="560" y="52" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Corinthians</text>
+    <text x="560" y="41" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Itaquera</text>
+  </svg>
+  <p style="font-size:12px;color:#666;margin-top:12px;">Offset mínimo do centro do marcador até o texto: <strong>18px</strong> estações simples · <strong>22px</strong> integrações. Linha pontilhada fina conecta o marker ao label (opcional — pode remover).</p>
+</div>
+
+<!-- Multi-line labels on diagonal -->
+<div class="section">
+  <h3>Linha diagonal — labels rotacionados</h3>
+  <svg width="100%" height="200" viewBox="0 0 400 200" style="border-radius:8px;background:#f8f9fa;">
+    <!-- L4 diagonal -->
+    <line x1="320" y1="40" x2="80" y2="170" stroke="#FFD900" stroke-width="7" stroke-linecap="round"/>
+
+    <!-- Estação 1 -->
+    <circle cx="280" cy="63" r="6" fill="#fff" stroke="#FFD900" stroke-width="2.5"/>
+    <text transform="translate(264,52) rotate(-35)" font-size="9.5" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">República</text>
+
+    <!-- Estação 2 -->
+    <circle cx="210" cy="100" r="10" fill="#fff" stroke="#aaa" stroke-width="1.5"/>
+    <circle cx="210" cy="100" r="6" fill="#fff" stroke="#444" stroke-width="2.5"/>
+    <text transform="translate(190,86) rotate(-35)" font-size="10" fill="#111" font-family="-apple-system,sans-serif" font-weight="700" text-anchor="middle">Paulista</text>
+
+    <!-- Estação 3 -->
+    <circle cx="145" cy="135" r="6" fill="#fff" stroke="#FFD900" stroke-width="2.5"/>
+    <text transform="translate(128,124) rotate(-35)" font-size="9.5" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Faria Lima</text>
+
+    <text x="8" y="18" font-size="10" fill="#888" font-family="sans-serif">Labels acompanham ângulo da linha diagonal</text>
+  </svg>
+  <p style="font-size:12px;color:#666;margin-top:10px;">Em linhas diagonais, o texto rotaciona perpendicular à direção da linha — igual ao mapa oficial impresso.</p>
+</div>
+
+<!-- Side-by-side comparison -->
+<div class="section">
+  <h3>Comparação: antes × depois</h3>
+  <div class="row">
+    <div class="col">
+      <div class="label">❌ Antes (muito próximo)</div>
+      <svg width="100%" height="100" viewBox="0 0 220 100" style="background:#f8f9fa;border-radius:6px;">
+        <line x1="10" y1="50" x2="210" y2="50" stroke="#0455A1" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="110" cy="50" r="5" fill="#fff" stroke="#0455A1" stroke-width="2"/>
+        <!-- label colado no marcador -->
+        <text x="112" y="48" font-size="9" fill="#333" font-family="sans-serif" font-weight="600">Sé</text>
+        <circle cx="50" cy="50" r="5" fill="#fff" stroke="#0455A1" stroke-width="2"/>
+        <text x="52" y="48" font-size="9" fill="#333" font-family="sans-serif">Liberdade</text>
+      </svg>
+    </div>
+    <div class="col">
+      <div class="label">✅ Depois (offset 18px)</div>
+      <svg width="100%" height="100" viewBox="0 0 220 100" style="background:#f8f9fa;border-radius:6px;">
+        <line x1="10" y1="58" x2="210" y2="58" stroke="#0455A1" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="110" cy="58" r="5" fill="#fff" stroke="#0455A1" stroke-width="2"/>
+        <!-- offset acima -->
+        <line x1="110" y1="53" x2="110" y2="38" stroke="#ccc" stroke-width="1" stroke-dasharray="2,2"/>
+        <text x="110" y="34" font-size="9" fill="#111" font-family="-apple-system,sans-serif" font-weight="700" text-anchor="middle">Sé</text>
+        <circle cx="50" cy="58" r="5" fill="#fff" stroke="#0455A1" stroke-width="2"/>
+        <!-- offset abaixo -->
+        <line x1="50" y1="63" x2="50" y2="78" stroke="#ccc" stroke-width="1" stroke-dasharray="2,2"/>
+        <text x="50" y="90" font-size="9" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Liberdade</text>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center;margin-top:8px;">
+  <p style="font-size:13px;color:#555;">Labels com offset e tick lines — está bom assim ou prefere sem as linhas pontilhadas? Responda no terminal.</p>
+</div>
+
+</body>
+</html>

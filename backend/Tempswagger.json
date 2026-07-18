@@ -1,0 +1,773 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Trilho API",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/admin/auth": {
+      "post": {
+        "tags": [
+          "AdminEndpoints"
+        ],
+        "operationId": "AdminLogin",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminLoginDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/admin/users": {
+      "get": {
+        "tags": [
+          "AdminEndpoints"
+        ],
+        "operationId": "AdminGetUsers",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/admin/users/{id}/vip": {
+      "patch": {
+        "tags": [
+          "AdminEndpoints"
+        ],
+        "operationId": "AdminPatchVip",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchVipDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/admin/stats/financial": {
+      "get": {
+        "tags": [
+          "AdminEndpoints"
+        ],
+        "operationId": "AdminGetFinancial",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/admin/stats/operational": {
+      "get": {
+        "tags": [
+          "AdminEndpoints"
+        ],
+        "operationId": "AdminGetOperational",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/lines": {
+      "get": {
+        "tags": [
+          "LineEndpoints"
+        ],
+        "operationId": "GetLines",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/lines/{code}/status": {
+      "get": {
+        "tags": [
+          "LineEndpoints"
+        ],
+        "operationId": "GetLineStatus",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/lines/{code}/vehicles": {
+      "get": {
+        "tags": [
+          "LineEndpoints"
+        ],
+        "operationId": "GetLineVehicles",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/notifications/register-token": {
+      "post": {
+        "tags": [
+          "NotificationEndpoints"
+        ],
+        "operationId": "RegisterFcmToken",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterTokenRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/notifications/token/{token}": {
+      "delete": {
+        "tags": [
+          "NotificationEndpoints"
+        ],
+        "operationId": "UnregisterFcmToken",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/notifications/subscriptions": {
+      "get": {
+        "tags": [
+          "NotificationEndpoints"
+        ],
+        "operationId": "GetNotificationSubscriptions",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/notifications/subscribe/{lineCode}": {
+      "post": {
+        "tags": [
+          "NotificationEndpoints"
+        ],
+        "operationId": "SubscribeLineNotifications",
+        "parameters": [
+          {
+            "name": "lineCode",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NotificationEndpoints"
+        ],
+        "operationId": "UnsubscribeLineNotifications",
+        "parameters": [
+          {
+            "name": "lineCode",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/payments/create-billing": {
+      "post": {
+        "tags": [
+          "PaymentEndpoints"
+        ],
+        "operationId": "CreateBilling",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBillingRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/payments/webhook": {
+      "post": {
+        "tags": [
+          "PaymentEndpoints"
+        ],
+        "operationId": "PaymentWebhook",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/payments/billing/{billingId}": {
+      "get": {
+        "tags": [
+          "PaymentEndpoints"
+        ],
+        "operationId": "GetBilling",
+        "parameters": [
+          {
+            "name": "billingId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/subscription/status": {
+      "get": {
+        "tags": [
+          "PaymentEndpoints"
+        ],
+        "operationId": "GetSubscriptionStatus",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/subscription/cancel": {
+      "post": {
+        "tags": [
+          "PaymentEndpoints"
+        ],
+        "operationId": "CancelSubscription",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/subscription/reactivate": {
+      "post": {
+        "tags": [
+          "PaymentEndpoints"
+        ],
+        "operationId": "ReactivateSubscription",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/subscription/change-plan": {
+      "post": {
+        "tags": [
+          "PaymentEndpoints"
+        ],
+        "operationId": "ChangePlan",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePlanRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/subscription/history": {
+      "get": {
+        "tags": [
+          "PaymentEndpoints"
+        ],
+        "operationId": "GetSubscriptionHistory",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/users/pings": {
+      "post": {
+        "tags": [
+          "PingEndpoints"
+        ],
+        "operationId": "RecordPing",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PingRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/stations/nearby": {
+      "get": {
+        "tags": [
+          "PingEndpoints"
+        ],
+        "operationId": "GetNearbyStations",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "radiusMeters",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/stations": {
+      "get": {
+        "tags": [
+          "StationEndpoints"
+        ],
+        "operationId": "GetStationsList",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/stations/{id}/crowd": {
+      "get": {
+        "tags": [
+          "StationEndpoints"
+        ],
+        "operationId": "GetStationCrowd",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/stations/{id}/forecast": {
+      "get": {
+        "tags": [
+          "StationEndpoints"
+        ],
+        "operationId": "GetStationForecast",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/trains/positions": {
+      "get": {
+        "tags": [
+          "Trains"
+        ],
+        "operationId": "GetTrainPositions",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/auth/register": {
+      "post": {
+        "tags": [
+          "UserEndpoints"
+        ],
+        "operationId": "Register",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/auth/firebase": {
+      "post": {
+        "tags": [
+          "UserEndpoints"
+        ],
+        "operationId": "FirebaseAuth",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FirebaseAuthRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/auth/social": {
+      "post": {
+        "tags": [
+          "UserEndpoints"
+        ],
+        "operationId": "SocialAuth",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/users/me/usage": {
+      "get": {
+        "tags": [
+          "UserEndpoints"
+        ],
+        "operationId": "GetUsage",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/users/premium/verify": {
+      "post": {
+        "tags": [
+          "UserEndpoints"
+        ],
+        "operationId": "VerifyPremium",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AdminLoginDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ChangePlanRequest": {
+        "type": "object",
+        "properties": {
+          "planType": {
+            "type": "string",
+            "nullable": true
+          },
+          "couponCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateBillingRequest": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "taxId": {
+            "type": "string",
+            "nullable": true
+          },
+          "productName": {
+            "type": "string",
+            "nullable": true
+          },
+          "productDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "priceInCents": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "isSubscription": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FirebaseAuthRequestDto": {
+        "type": "object",
+        "properties": {
+          "idToken": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatchVipDto": {
+        "type": "object",
+        "properties": {
+          "isVip": {
+            "type": "boolean"
+          },
+          "vipEmail": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PingRequestDto": {
+        "type": "object",
+        "properties": {
+          "lat": {
+            "type": "number",
+            "format": "double"
+          },
+          "lng": {
+            "type": "number",
+            "format": "double"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegisterTokenRequest": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "nullable": true
+          },
+          "platform": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

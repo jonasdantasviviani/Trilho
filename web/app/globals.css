@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Dark mode (default) ─────────────────────────────────── */
+:root {
+  --color-bg:            #0A0A14;
+  --color-surface:       #13131F;
+  --color-surface-raised:#1C1C2E;
+  --color-border:        #2A2A3A;
+  --color-text-primary:  #FFFFFF;
+  --color-text-secondary:#8888AA;
+  --color-text-disabled: #444455;
+
+  --color-primary:       #0055FF;
+  --color-accent:        #00C8FF;
+  /* dim variants — also available as bg-primary-dim / bg-accent-dim utilities */
+  --color-primary-dim:   rgba(0, 85, 255, 0.15);
+  --color-accent-dim:    rgba(0, 200, 255, 0.15);
+
+  --color-success:       #22CC88;
+  --color-warning:       #FFB800;
+  --color-danger:        #FF4455;
+
+  --crowd-empty:         #22CC88;
+  --crowd-low:           #88DD44;
+  --crowd-moderate:      #FFB800;
+  --crowd-high:          #FF7722;
+  --crowd-full:          #FF4455;
+
+  --shadow-sm:           0 2px 8px rgba(0,0,0,0.30);
+  --shadow-md:           0 4px 16px rgba(0,0,0,0.40);
+  --shadow-glow-primary: 0 0 16px rgba(0,85,255,0.30);
+  --shadow-glow-accent:  0 0 16px rgba(0,200,255,0.20);
+
+  --timing-fast:   150ms ease-out;
+  --timing-smooth: 300ms ease-out;
+  --timing-slow:   500ms ease-in-out;
+}
+
+/* ── Light mode override ─────────────────────────────────── */
+[data-theme="light"],
+.light {
+  --color-bg:            #F5F5F7;
+  --color-surface:       #FFFFFF;
+  --color-surface-raised:#EFEFEF;
+  --color-border:        #E0E0E8;
+  --color-text-primary:  #0A0A14;
+  --color-text-secondary:#555566;
+  --color-text-disabled: #AAAABC;
+
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --color-bg:            #F5F5F7;
+    --color-surface:       #FFFFFF;
+    --color-surface-raised:#EFEFEF;
+    --color-border:        #E0E0E8;
+    --color-text-primary:  #0A0A14;
+    --color-text-secondary:#555566;
+    --color-text-disabled: #AAAABC;
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+  }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .shadow-glow-primary { box-shadow: var(--shadow-glow-primary); }
+  .shadow-glow-accent  { box-shadow: var(--shadow-glow-accent); }
+}
+
+/* ── Hero animated map lines ────────────────────────────────── */
+@keyframes pulse-line {
+  0%, 100% { opacity: 0.15; }
+  50%       { opacity: 0.45; }
+}
+@keyframes pulse-node {
+  0%, 100% { r: 4; opacity: 0.5; }
+  50%       { r: 6; opacity: 1; }
+}
+.hero-line { animation: pulse-line 3s ease-in-out infinite; }
+.hero-line:nth-child(2) { animation-delay: 0.6s; }
+.hero-line:nth-child(3) { animation-delay: 1.2s; }
+.hero-node { animation: pulse-node 2s ease-in-out infinite; }
+.hero-node:nth-child(even) { animation-delay: 1s; }

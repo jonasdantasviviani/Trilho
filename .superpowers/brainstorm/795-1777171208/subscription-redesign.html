@@ -1,0 +1,93 @@
+<h2>SubscriptionScreen — redesign visual</h2>
+<p class="subtitle">Mantém a estrutura com abas (Plano Atual / Histórico), redesenha visualmente para o design system</p>
+
+<div class="split">
+
+  <!-- ANTES -->
+  <div class="mockup">
+    <div class="mockup-header">Antes</div>
+    <div class="mockup-body" style="background: #fff; padding: 0; border-radius: 0 0 10px 10px; overflow: hidden;">
+      <!-- AppBar -->
+      <div style="background: #f5f5f5; padding: 12px 16px; border-bottom: 1px solid #ddd;">
+        <div style="font-size: 14px; font-weight: 600; color: #333;">Assinatura</div>
+        <div style="display: flex; gap: 24px; margin-top: 8px;">
+          <div style="font-size: 12px; color: #1976d2; border-bottom: 2px solid #1976d2; padding-bottom: 4px;">Plano Atual</div>
+          <div style="font-size: 12px; color: #999;">Histórico</div>
+        </div>
+      </div>
+      <!-- Card status -->
+      <div style="margin: 12px; background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 16px; text-align: center;">
+        <div style="font-size: 32px; color: #4caf50;">✓</div>
+        <div style="font-size: 14px; font-weight: 600; color: #333; margin: 4px 0;">Premium</div>
+        <div style="font-size: 18px; font-weight: 700; color: #1976d2;">R$ 9,90/mês</div>
+        <div style="margin-top: 8px; display: inline-block; background: rgba(76,175,80,0.1); color: #4caf50; font-size: 11px; padding: 3px 10px; border-radius: 12px;">Assinatura Ativa</div>
+      </div>
+      <!-- Card details -->
+      <div style="margin: 0 12px; background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 12px;">
+        <div style="font-size: 12px; font-weight: 600; color: #333; margin-bottom: 8px;">Detalhes</div>
+        <div style="border-top: 1px solid #f0f0f0;"></div>
+        <div style="display: flex; justify-content: space-between; padding: 6px 0; font-size: 11px; color: #999;">
+          <span>📅 Próxima Cobrança</span><span style="color: #333;">28/05/2026</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; padding: 6px 0; font-size: 11px; color: #999;">
+          <span>💳 Método de Pagamento</span><span style="color: #333;">Google Play</span>
+        </div>
+      </div>
+      <div style="margin: 8px 12px; font-size: 10px; color: #bbb; text-align: center;">Colors.green / Colors.grey hardcoded ❌</div>
+    </div>
+  </div>
+
+  <!-- DEPOIS -->
+  <div class="mockup">
+    <div class="mockup-header">Depois</div>
+    <div class="mockup-body" style="background: #0a0a14; padding: 0; border-radius: 0 0 10px 10px; overflow: hidden;">
+      <!-- AppBar -->
+      <div style="background: #0a0a14; padding: 12px 16px; border-bottom: 1px solid #1e1e2e;">
+        <div style="font-size: 14px; font-weight: 600; color: #fff;">Assinatura</div>
+        <div style="display: flex; gap: 24px; margin-top: 8px;">
+          <div style="font-size: 12px; color: #00c8ff; border-bottom: 2px solid #00c8ff; padding-bottom: 4px;">Plano Atual</div>
+          <div style="font-size: 12px; color: #555;">Histórico</div>
+        </div>
+      </div>
+      <!-- Hero card com gradiente -->
+      <div style="margin: 12px; border-radius: 16px; background: linear-gradient(135deg, #0055FF 0%, #00c8ff 100%); padding: 20px; text-align: center;">
+        <div style="font-size: 28px; margin-bottom: 4px;">⭐</div>
+        <div style="font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 2px;">Premium</div>
+        <div style="font-size: 22px; font-weight: 800; color: #fff;">R$ 9,90<span style="font-size: 13px; font-weight: 400; opacity: 0.8;">/mês</span></div>
+        <div style="margin-top: 10px; display: inline-block; background: rgba(255,255,255,0.2); color: #fff; font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 12px;">✓ Ativa</div>
+      </div>
+      <!-- Card details dark -->
+      <div style="margin: 0 12px; background: #13131f; border-radius: 12px; padding: 12px;">
+        <div style="font-size: 11px; font-weight: 700; color: #555; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 8px;">Detalhes</div>
+        <div style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #1e1e2e; font-size: 11px;">
+          <span style="color: #555;">Próxima Cobrança</span><span style="color: #eee;">28/05/2026</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; padding: 6px 0; font-size: 11px;">
+          <span style="color: #555;">Método de Pagamento</span><span style="color: #eee;">Google Play</span>
+        </div>
+      </div>
+      <!-- Cancel button -->
+      <div style="margin: 8px 12px;">
+        <div style="border: 1px solid rgba(239,68,68,0.4); border-radius: 10px; padding: 10px 12px; display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 14px;">🚪</span>
+          <span style="font-size: 12px; color: #ef4444; font-weight: 500;">Cancelar Assinatura</span>
+          <span style="margin-left: auto; font-size: 12px; color: #ef4444;">›</span>
+        </div>
+      </div>
+      <div style="margin: 4px 12px; font-size: 10px; color: #444; text-align: center;">AppTheme tokens + AppColors.success/danger ✓</div>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top: 20px; background: rgba(99,102,241,0.08); border: 1px solid rgba(99,102,241,0.3); border-radius: 12px; padding: 16px;">
+  <div style="font-size: 12px; font-weight: 700; color: #818cf8; margin-bottom: 8px;">O que muda na SubscriptionScreen:</div>
+  <ul style="font-size: 12px; color: #aaa; margin: 0; padding-left: 16px; line-height: 1.8;">
+    <li>Hero card com gradiente <code style="font-size: 10px; color: #00c8ff;">primary → accent</code> quando ativa, cinza quando inativa</li>
+    <li><code style="font-size: 10px; color: #00c8ff;">Colors.green</code> → <code style="font-size: 10px; color: #00c8ff;">AppColors.success</code></li>
+    <li><code style="font-size: 10px; color: #00c8ff;">Colors.red</code> → <code style="font-size: 10px; color: #00c8ff;">AppColors.danger</code></li>
+    <li><code style="font-size: 10px; color: #00c8ff;">Colors.grey</code> → <code style="font-size: 10px; color: #00c8ff;">AppTheme.textSecDark/Light</code></li>
+    <li>Scaffold bg → <code style="font-size: 10px; color: #00c8ff;">AppTheme.bgDark/bgLight</code></li>
+    <li>Cards → <code style="font-size: 10px; color: #00c8ff;">AppTheme.cardDecoration(context)</code></li>
+    <li><code style="font-size: 10px; color: #00c8ff;">_ChangePlanSheet</code> badge verde → <code style="font-size: 10px; color: #00c8ff;">AppColors.success</code></li>
+  </ul>
+</div>

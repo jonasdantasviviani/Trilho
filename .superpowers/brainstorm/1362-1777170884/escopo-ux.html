@@ -1,0 +1,62 @@
+<h2>Escopo do redesign UX</h2>
+<p class="subtitle">Identificamos 5 áreas que precisam de atenção. Como quer abordar?</p>
+
+<div class="section" style="margin-bottom: 24px;">
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
+
+    <div style="background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.4); border-radius: 12px; padding: 14px;">
+      <div style="font-size: 11px; font-weight: 700; color: #ef4444; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px;">🐛 Bug funcional</div>
+      <div style="font-size: 14px; font-weight: 600; margin-bottom: 4px;">1. Dark mode não funciona</div>
+      <div style="font-size: 12px; opacity: 0.7;">Switch em Configurações não faz nada</div>
+    </div>
+
+    <div style="background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.4); border-radius: 12px; padding: 14px;">
+      <div style="font-size: 11px; font-weight: 700; color: #ef4444; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px;">🐛 Bug funcional</div>
+      <div style="font-size: 14px; font-weight: 600; margin-bottom: 4px;">2. Clique nas estações</div>
+      <div style="font-size: 12px; opacity: 0.7;">Tap no mapa não abre detalhe da estação</div>
+    </div>
+
+    <div style="background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.4); border-radius: 12px; padding: 14px;">
+      <div style="font-size: 11px; font-weight: 700; color: #ef4444; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px;">🐛 Bug funcional</div>
+      <div style="font-size: 14px; font-weight: 600; margin-bottom: 4px;">3. Linha na tela de detalhe</div>
+      <div style="font-size: 12px; opacity: 0.7;">Clicar na linha não faz nada</div>
+    </div>
+
+    <div style="background: rgba(250,204,21,0.1); border: 1px solid rgba(250,204,21,0.4); border-radius: 12px; padding: 14px;">
+      <div style="font-size: 11px; font-weight: 700; color: #facc15; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px;">🎨 Visual</div>
+      <div style="font-size: 14px; font-weight: 600; margin-bottom: 4px;">4. Mapa feio</div>
+      <div style="font-size: 12px; opacity: 0.7;">TransitMapPainter usa cores hardcoded</div>
+    </div>
+
+    <div style="background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.4); border-radius: 12px; padding: 14px; grid-column: span 2;">
+      <div style="font-size: 11px; font-weight: 700; color: #818cf8; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px;">✨ Redesign completo</div>
+      <div style="font-size: 14px; font-weight: 600; margin-bottom: 4px;">5. Telas pós-login não redesenhadas</div>
+      <div style="font-size: 12px; opacity: 0.7;">TransitMapScreen · SubscriptionScreen · EmailAuthScreen · AnonymousGateSheet</div>
+    </div>
+  </div>
+</div>
+
+<h3>Como quer abordar?</h3>
+<div class="options">
+  <div class="option" data-choice="tudo-junto" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Tudo em uma única spec</h3>
+      <p>Um documento de design cobre bugs + visual + redesign. Mais abrangente, um único plano de implementação.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="bugs-primeiro" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Bugs agora, redesign depois</h3>
+      <p>Corrige os 3 bugs funcionais (itens 1–3) em um plano curto, depois redesign visual (itens 4–5) separado.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="prioridade" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Me diga a prioridade</h3>
+      <p>Você define qual área é mais urgente e começamos por ela.</p>
+    </div>
+  </div>
+</div>

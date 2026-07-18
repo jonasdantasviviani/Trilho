@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login v2</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif; background: #f0f2f5; color: #111; padding: 24px; }
+  h2 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+  .subtitle { color: #666; font-size: 14px; margin-bottom: 28px; }
+  .section { background: #fff; border-radius: 16px; padding: 24px; margin-bottom: 24px; box-shadow: 0 1px 6px rgba(0,0,0,.08); }
+  .section h3 { font-size: 16px; font-weight: 700; margin-bottom: 20px; color: #111; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; }
+  .label-ui { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: #888; margin-bottom: 10px; text-align:center; }
+  .row { display: flex; gap: 28px; flex-wrap: wrap; align-items: flex-start; justify-content: center; }
+
+  /* Social buttons light */
+  .social-l { display:flex; align-items:center; gap:10px; width:100%; padding:11px 14px; border-radius:12px; font-size:13px; font-weight:600; cursor:pointer; margin-bottom:8px; border:1.5px solid #E0E4EA; background:#fff; color:#111; }
+  .social-l.apple { background:#000; color:#fff; border-color:#000; }
+  .social-l.google { border-color:#E0E4EA; }
+  .social-l.facebook { background:#1877F2; color:#fff; border-color:#1877F2; }
+  /* Social buttons dark */
+  .social-d { display:flex; align-items:center; gap:10px; width:100%; padding:11px 14px; border-radius:12px; font-size:13px; font-weight:600; cursor:pointer; margin-bottom:8px; border:1.5px solid #3A3A3A; background:#2A2A2A; color:#EEE; }
+  .social-d.apple { background:#fff; color:#000; border-color:#fff; }
+  .social-d.google { background:#2A2A2A; color:#EEE; border-color:#3A3A3A; }
+  .social-d.facebook { background:#1877F2; color:#fff; border-color:#1877F2; }
+
+  .divider-l { display:flex; align-items:center; gap:8px; margin:12px 0; color:#bbb; font-size:11px; }
+  .divider-l::before, .divider-l::after { content:''; flex:1; height:1px; background:#E0E4EA; }
+  .divider-d { display:flex; align-items:center; gap:8px; margin:12px 0; color:#444; font-size:11px; }
+  .divider-d::before, .divider-d::after { content:''; flex:1; height:1px; background:#3A3A3A; }
+
+  .btn-email-l { background:#F0F2F5; color:#111; border:none; border-radius:12px; padding:12px 14px; font-size:13px; font-weight:600; width:100%; cursor:pointer; display:flex; align-items:center; gap:10px; }
+  .btn-email-d { background:#2A2A2A; color:#EEE; border:1.5px solid #3A3A3A; border-radius:12px; padding:12px 14px; font-size:13px; font-weight:600; width:100%; cursor:pointer; display:flex; align-items:center; gap:10px; }
+  .btn-skip-l { background:transparent; color:#888; border:none; font-size:12px; font-weight:500; width:100%; cursor:pointer; padding:10px; text-decoration:underline; }
+  .btn-skip-d { background:transparent; color:#666; border:none; font-size:12px; font-weight:500; width:100%; cursor:pointer; padding:10px; text-decoration:underline; }
+</style>
+</head>
+<body>
+
+<h2>Login — com todas as opções</h2>
+<p class="subtitle">Apple · Google · Facebook · Email/Criar conta · Continuar sem conta</p>
+
+<div class="section">
+  <h3>Light × Dark</h3>
+  <div class="row">
+
+    <!-- Light -->
+    <div>
+      <div class="label-ui">Light</div>
+      <div style="width:210px;border-radius:32px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.18);background:#fff;">
+        <!-- Logo -->
+        <div style="background:#fff;padding:30px 20px 18px;text-align:center;">
+          <div style="width:60px;height:60px;background:#0455A1;border-radius:20px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 4px 16px rgba(4,85,161,.28);">🚇</div>
+          <div style="font-size:22px;font-weight:800;color:#111;letter-spacing:-0.5px;">Trilho</div>
+          <div style="font-size:12px;color:#999;margin-top:3px;">Transporte em tempo real</div>
+        </div>
+
+        <div style="padding:4px 20px 20px;">
+          <!-- Apple -->
+          <button class="social-l apple">
+            <span style="font-size:17px;line-height:1;"></span>
+            <span>Continuar com Apple</span>
+          </button>
+          <!-- Google -->
+          <button class="social-l google">
+            <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.2l6.8-6.8C35.8 2.3 30.2 0 24 0 14.8 0 6.9 5.4 3 13.3l7.9 6.1C12.8 13.3 17.9 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v8.5h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17z"/><path fill="#FBBC05" d="M10.9 28.6A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.8-4.6L2.4 13.3A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.7l8.3-6.1z"/><path fill="#34A853" d="M24 48c6.2 0 11.4-2 15.2-5.5l-7.5-5.8c-2 1.4-4.6 2.2-7.7 2.2-6.1 0-11.2-3.8-13.1-9.1L2.6 35.7C6.5 43 14.6 48 24 48z"/></svg>
+            <span>Continuar com Google</span>
+          </button>
+          <!-- Facebook -->
+          <button class="social-l facebook">
+            <span style="font-size:17px;font-weight:800;">f</span>
+            <span>Continuar com Facebook</span>
+          </button>
+
+          <div class="divider-l">ou</div>
+
+          <!-- Email/criar conta -->
+          <button class="btn-email-l">
+            <span style="font-size:16px;">✉️</span>
+            <span>Entrar com e-mail</span>
+          </button>
+
+          <!-- Continuar sem conta -->
+          <button class="btn-skip-l">Continuar sem conta</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dark -->
+    <div>
+      <div class="label-ui">Dark</div>
+      <div style="width:210px;border-radius:32px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.45);background:#121212;">
+        <!-- Logo -->
+        <div style="background:#1E1E1E;padding:30px 20px 18px;text-align:center;border-bottom:1px solid #2A2A2A;">
+          <div style="width:60px;height:60px;background:#2979FF;border-radius:20px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 4px 16px rgba(41,121,255,.32);">🚇</div>
+          <div style="font-size:22px;font-weight:800;color:#EEE;letter-spacing:-0.5px;">Trilho</div>
+          <div style="font-size:12px;color:#555;margin-top:3px;">Transporte em tempo real</div>
+        </div>
+
+        <div style="padding:16px 20px 20px;background:#121212;">
+          <!-- Apple -->
+          <button class="social-d apple">
+            <span style="font-size:17px;line-height:1;"></span>
+            <span>Continuar com Apple</span>
+          </button>
+          <!-- Google -->
+          <button class="social-d google">
+            <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.2l6.8-6.8C35.8 2.3 30.2 0 24 0 14.8 0 6.9 5.4 3 13.3l7.9 6.1C12.8 13.3 17.9 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v8.5h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17z"/><path fill="#FBBC05" d="M10.9 28.6A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.8-4.6L2.4 13.3A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.7l8.3-6.1z"/><path fill="#34A853" d="M24 48c6.2 0 11.4-2 15.2-5.5l-7.5-5.8c-2 1.4-4.6 2.2-7.7 2.2-6.1 0-11.2-3.8-13.1-9.1L2.6 35.7C6.5 43 14.6 48 24 48z"/></svg>
+            <span>Continuar com Google</span>
+          </button>
+          <!-- Facebook -->
+          <button class="social-d facebook">
+            <span style="font-size:17px;font-weight:800;">f</span>
+            <span>Continuar com Facebook</span>
+          </button>
+
+          <div class="divider-d">ou</div>
+
+          <!-- Email/criar conta -->
+          <button class="btn-email-d">
+            <span style="font-size:16px;">✉️</span>
+            <span>Entrar com e-mail</span>
+          </button>
+
+          <!-- Continuar sem conta -->
+          <button class="btn-skip-d">Continuar sem conta</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div style="text-align:center;margin-top:4px;">
+  <p style="font-size:13px;color:#555;">Ficou bom? Responda no terminal.</p>
+</div>
+
+</body>
+</html>

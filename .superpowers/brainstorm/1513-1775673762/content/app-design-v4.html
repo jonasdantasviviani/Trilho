@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>App Design v4</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif; background: #f0f2f5; color: #111; padding: 24px; }
+  h2 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+  .subtitle { color: #666; font-size: 14px; margin-bottom: 28px; }
+  .section { background: #fff; border-radius: 16px; padding: 24px; margin-bottom: 20px; box-shadow: 0 1px 6px rgba(0,0,0,.08); }
+  .section h3 { font-size: 16px; font-weight: 700; margin-bottom: 16px; color: #111; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; }
+  .label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: #888; margin-bottom: 8px; }
+  .row { display: flex; gap: 24px; flex-wrap: wrap; align-items: flex-start; justify-content: center; }
+</style>
+</head>
+<body>
+
+<h2>Chips finos centralizados — labels corretos</h2>
+<p class="subtitle">Labels com tracejado lateral, nunca sobre a linha</p>
+
+<div class="section">
+  <h3>Light × Dark</h3>
+  <div class="row">
+
+    <!-- Light -->
+    <div>
+      <div class="label" style="text-align:center;margin-bottom:8px;">Light</div>
+      <div style="width:200px;border-radius:28px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.18);">
+        <div style="background:#f5f5f5;height:26px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#111;border-bottom:1px solid #e8e8e8;">☀️ Trilho · SP</div>
+        <div style="position:relative;">
+          <svg width="200" height="290" viewBox="0 0 200 290" style="background:#fff;display:block;">
+            <!-- L3 horizontal -->
+            <line x1="10" y1="135" x2="190" y2="135" stroke="#EF4136" stroke-width="5"/>
+            <!-- L1 vertical -->
+            <line x1="100" y1="10" x2="100" y2="280" stroke="#0455A1" stroke-width="5"/>
+            <!-- L2 -->
+            <polyline points="20,210 70,135 148,135 182,100" fill="none" stroke="#007E5E" stroke-width="4"/>
+            <!-- L4 -->
+            <line x1="100" y1="135" x2="32" y2="222" stroke="#FFD900" stroke-width="4"/>
+            <!-- L5 -->
+            <polyline points="10,222 52,202 100,202 150,222" fill="none" stroke="#9B2990" stroke-width="4"/>
+            <!-- L7 CPTM -->
+            <polyline points="88,10 78,42 62,82 50,135" fill="none" stroke="#CF202E" stroke-width="3"/>
+            <!-- L8 -->
+            <polyline points="10,148 40,148 64,140" fill="none" stroke="#97999B" stroke-width="3"/>
+
+            <!-- Estações simples na L3 -->
+            <!-- estação na L3 a esquerda: (52,135) rotate(0) tick acima -->
+            <g transform="translate(52,135) rotate(0)">
+              <circle cx="0" cy="0" r="4" fill="#fff" stroke="#EF4136" stroke-width="1.8"/>
+              <line x1="0" y1="-4" x2="0" y2="-16" stroke="#ccc" stroke-width="0.9" stroke-dasharray="2,2"/>
+              <text x="0" y="-19" font-size="6.5" fill="#333" font-family="sans-serif" font-weight="600" text-anchor="middle">Marechal</text>
+              <text x="0" y="-27" font-size="6.5" fill="#333" font-family="sans-serif" font-weight="600" text-anchor="middle">Deodoro</text>
+            </g>
+
+            <!-- estação na L3 à direita: (150,135) rotate(0) tick abaixo — com densidade amarela -->
+            <g transform="translate(150,135) rotate(0)">
+              <circle cx="0" cy="0" r="4" fill="#FFD740" stroke="#EF4136" stroke-width="1.8"/>
+              <line x1="0" y1="4" x2="0" y2="16" stroke="#ccc" stroke-width="0.9" stroke-dasharray="2,2"/>
+              <text x="0" y="24" font-size="6.5" fill="#333" font-family="sans-serif" font-weight="600" text-anchor="middle">Tatuapé</text>
+            </g>
+
+            <!-- estação na L1 topo: (100,68) rotate(90) tick à direita -->
+            <g transform="translate(100,68) rotate(90)">
+              <circle cx="0" cy="0" r="4" fill="#fff" stroke="#0455A1" stroke-width="1.8"/>
+              <line x1="0" y1="-4" x2="0" y2="-16" stroke="#ccc" stroke-width="0.9" stroke-dasharray="2,2"/>
+              <text x="0" y="-19" font-size="6.5" fill="#333" font-family="sans-serif" font-weight="600" text-anchor="middle">Armênia</text>
+            </g>
+
+            <!-- estação na L1 baixo: (100,208) rotate(90) tick à direita -->
+            <g transform="translate(100,208) rotate(90)">
+              <circle cx="0" cy="0" r="4" fill="#fff" stroke="#0455A1" stroke-width="1.8"/>
+              <line x1="0" y1="4" x2="0" y2="16" stroke="#ccc" stroke-width="0.9" stroke-dasharray="2,2"/>
+              <text x="0" y="24" font-size="6.5" fill="#333" font-family="sans-serif" font-weight="600" text-anchor="middle">Sé</text>
+            </g>
+
+            <!-- INTEGRAÇÃO Luz: (100,135) — label à DIAGONAL 45° fora das linhas -->
+            <!-- Cruzamento L1×L3: ambas passam por (100,135). Tick vai para cima-esquerda em 45° -->
+            <circle cx="100" cy="135" r="8" fill="#fff" stroke="#ccc" stroke-width="1.5"/>
+            <circle cx="100" cy="135" r="5" fill="#fff" stroke="#333" stroke-width="1.8"/>
+            <!-- tick a 45° (não está sobre L1 nem L3) -->
+            <line x1="100" y1="135" x2="80" y2="115" stroke="#ccc" stroke-width="0.9" stroke-dasharray="2,2"/>
+            <!-- texto a 45°, paralelo ao tracejado -->
+            <text transform="translate(80,115) rotate(-45)" x="0" y="-4" font-size="7.5" fill="#111" font-family="sans-serif" font-weight="800" text-anchor="middle">Luz</text>
+          </svg>
+
+          <!-- chips finos centralizados -->
+          <div style="position:absolute;top:8px;left:0;right:0;display:flex;justify-content:center;">
+            <div style="display:flex;gap:3px;padding:4px 8px;background:rgba(255,255,255,0.90);backdrop-filter:blur(10px);border-radius:20px;box-shadow:0 1px 8px rgba(0,0,0,.13);">
+              <span style="background:#0455A1;color:#fff;font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;outline:2px solid #000;outline-offset:1px;line-height:1.4;">● 1</span>
+              <span style="background:#007E5E;color:#fff;font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;line-height:1.4;">● 2</span>
+              <span style="background:#EF4136;color:#fff;font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;line-height:1.4;">● 3</span>
+              <span style="background:#FFD900;color:#111;font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;line-height:1.4;">● 4</span>
+              <span style="background:#9B2990;color:#fff;font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;line-height:1.4;">● 5</span>
+              <span style="background:#808285;color:#fff;font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;line-height:1.4;">15</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dark -->
+    <div>
+      <div class="label" style="text-align:center;margin-bottom:8px;">Dark</div>
+      <div style="width:200px;border-radius:28px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.35);">
+        <div style="background:#1e1e1e;height:26px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#fff;border-bottom:1px solid #333;">🌙 Trilho · SP</div>
+        <div style="position:relative;">
+          <svg width="200" height="290" viewBox="0 0 200 290" style="background:#121212;display:block;">
+            <line x1="10" y1="135" x2="190" y2="135" stroke="#c62828" stroke-width="5"/>
+            <line x1="100" y1="10" x2="100" y2="280" stroke="#1565C0" stroke-width="5"/>
+            <polyline points="20,210 70,135 148,135 182,100" fill="none" stroke="#00695C" stroke-width="4"/>
+            <line x1="100" y1="135" x2="32" y2="222" stroke="#F9A825" stroke-width="4"/>
+            <polyline points="10,222 52,202 100,202 150,222" fill="none" stroke="#6A1B9A" stroke-width="4"/>
+            <polyline points="88,10 78,42 62,82 50,135" fill="none" stroke="#b71c1c" stroke-width="3"/>
+            <polyline points="10,148 40,148 64,140" fill="none" stroke="#616161" stroke-width="3"/>
+
+            <g transform="translate(52,135) rotate(0)">
+              <circle cx="0" cy="0" r="4" fill="#121212" stroke="#c62828" stroke-width="1.8"/>
+              <line x1="0" y1="-4" x2="0" y2="-16" stroke="#555" stroke-width="0.9" stroke-dasharray="2,2"/>
+              <text x="0" y="-19" font-size="6.5" fill="#ccc" font-family="sans-serif" font-weight="600" text-anchor="middle">Marechal</text>
+              <text x="0" y="-27" font-size="6.5" fill="#ccc" font-family="sans-serif" font-weight="600" text-anchor="middle">Deodoro</text>
+            </g>
+
+            <g transform="translate(150,135) rotate(0)">
+              <circle cx="0" cy="0" r="4" fill="#FFD740" stroke="#c62828" stroke-width="1.8"/>
+              <line x1="0" y1="4" x2="0" y2="16" stroke="#555" stroke-width="0.9" stroke-dasharray="2,2"/>
+              <text x="0" y="24" font-size="6.5" fill="#ccc" font-family="sans-serif" font-weight="600" text-anchor="middle">Tatuapé</text>
+            </g>
+
+            <g transform="translate(100,68) rotate(90)">
+              <circle cx="0" cy="0" r="4" fill="#121212" stroke="#1565C0" stroke-width="1.8"/>
+              <line x1="0" y1="-4" x2="0" y2="-16" stroke="#555" stroke-width="0.9" stroke-dasharray="2,2"/>
+              <text x="0" y="-19" font-size="6.5" fill="#ccc" font-family="sans-serif" font-weight="600" text-anchor="middle">Armênia</text>
+            </g>
+
+            <g transform="translate(100,208) rotate(90)">
+              <circle cx="0" cy="0" r="4" fill="#121212" stroke="#1565C0" stroke-width="1.8"/>
+              <line x1="0" y1="4" x2="0" y2="16" stroke="#555" stroke-width="0.9" stroke-dasharray="2,2"/>
+              <text x="0" y="24" font-size="6.5" fill="#ccc" font-family="sans-serif" font-weight="600" text-anchor="middle">Sé</text>
+            </g>
+
+            <!-- Luz integração - tick a 45° fora das linhas -->
+            <circle cx="100" cy="135" r="8" fill="#1e1e1e" stroke="#555" stroke-width="1.5"/>
+            <circle cx="100" cy="135" r="5" fill="#1e1e1e" stroke="#ddd" stroke-width="1.8"/>
+            <line x1="100" y1="135" x2="80" y2="115" stroke="#555" stroke-width="0.9" stroke-dasharray="2,2"/>
+            <text transform="translate(80,115) rotate(-45)" x="0" y="-4" font-size="7.5" fill="#eee" font-family="sans-serif" font-weight="800" text-anchor="middle">Luz</text>
+          </svg>
+
+          <div style="position:absolute;top:8px;left:0;right:0;display:flex;justify-content:center;">
+            <div style="display:flex;gap:3px;padding:4px 8px;background:rgba(18,18,18,0.88);backdrop-filter:blur(10px);border-radius:20px;box-shadow:0 1px 8px rgba(0,0,0,.5);">
+              <span style="background:#1565C0;color:#fff;font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;outline:2px solid #90caf9;outline-offset:1px;line-height:1.4;">● 1</span>
+              <span style="background:#00695C;color:#fff;font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;line-height:1.4;">● 2</span>
+              <span style="background:#c62828;color:#fff;font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;line-height:1.4;">● 3</span>
+              <span style="background:#F9A825;color:#111;font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;line-height:1.4;">● 4</span>
+              <span style="background:#6A1B9A;color:#fff;font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;line-height:1.4;">● 5</span>
+              <span style="background:#616161;color:#fff;font-size:9px;font-weight:700;padding:2px 7px;border-radius:10px;line-height:1.4;">15</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <p style="font-size:12px;color:#666;margin-top:20px;text-align:center;">
+    Estações simples: tick perpendicular à linha · Integrações em cruzamento: tick a 45° para o espaço livre, fora de ambas as linhas
+  </p>
+</div>
+
+<div style="text-align:center;margin-top:8px;">
+  <p style="font-size:13px;color:#555;">Aprovado? Responda no terminal.</p>
+</div>
+
+</body>
+</html>

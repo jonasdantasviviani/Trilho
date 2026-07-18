@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design do Mapa</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f5; color: #111; padding: 24px; }
+  h2 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+  .subtitle { color: #666; font-size: 14px; margin-bottom: 24px; }
+  .section { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+  .section h3 { font-size: 15px; font-weight: 700; margin-bottom: 12px; color: #333; }
+  .row { display: flex; gap: 16px; flex-wrap: wrap; }
+  .col { flex: 1; min-width: 200px; }
+  .label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .6px; color: #888; margin-bottom: 8px; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 700; color: #fff; margin: 3px; }
+  .chip.dark { color: #111; }
+  .station-demo { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 8px; }
+  .station-item { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 11px; color: #555; }
+  .dot { border-radius: 50%; border: 2.5px solid; }
+  code { background: #f0f0f0; border-radius: 4px; padding: 2px 6px; font-size: 12px; }
+  .map-preview { border-radius: 8px; overflow: hidden; }
+  .tag { display: inline-block; background: #e8f0fe; color: #1a73e8; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 10px; margin-left: 6px; }
+</style>
+</head>
+<body>
+
+<h2>Design do Mapa — Seção 1</h2>
+<p class="subtitle">Arquitetura visual: linhas, estações, labels e dark mode</p>
+
+<!-- Lines -->
+<div class="section">
+  <h3>Linhas — todas as 16 linhas Metro + CPTM</h3>
+  <div class="label">Cores oficiais (hex exato)</div>
+  <div style="margin-top:4px;">
+    <span class="chip" style="background:#0455A1">L1 Azul</span>
+    <span class="chip" style="background:#007E5E">L2 Verde</span>
+    <span class="chip" style="background:#EF4136">L3 Vermelha</span>
+    <span class="chip dark" style="background:#FFD900">L4 Amarela</span>
+    <span class="chip" style="background:#9B2990">L5 Lilás</span>
+    <span class="chip" style="background:#808285">L15 Prata</span>
+    <br>
+    <span class="chip" style="background:#CF202E">L7 Rubi</span>
+    <span class="chip" style="background:#97999B">L8 Diamante</span>
+    <span class="chip" style="background:#00945A">L9 Esmeralda</span>
+    <span class="chip" style="background:#007A87">L10 Turquesa</span>
+    <span class="chip" style="background:#F26522">L11 Coral</span>
+    <span class="chip" style="background:#133A8F">L12 Safira</span>
+    <span class="chip" style="background:#00A859">L13 Jade</span>
+    <span class="chip dark" style="background:#BE9B2F">L17 Ouro</span>
+    <span class="chip" style="background:#6B3A2A">L-A Santos-Jundiaí</span>
+    <span class="chip" style="background:#005A8B">L-B Diamante</span>
+  </div>
+  <div class="label" style="margin-top:14px;">Espessura das linhas no canvas</div>
+  <p style="font-size:13px;color:#555;">Metro (L1–L5, L15): <strong>10px</strong> · CPTM (L7–L13, L17, A, B): <strong>8px</strong> · Linha selecionada: <strong>+2px</strong> · Linhas não selecionadas: <strong>opacity 20%</strong></p>
+</div>
+
+<!-- Station markers -->
+<div class="section">
+  <h3>Marcadores de estação</h3>
+  <div class="row">
+    <div class="col">
+      <div class="label">Estação simples</div>
+      <div class="station-demo">
+        <div class="station-item">
+          <svg width="24" height="24"><circle cx="12" cy="12" r="7" fill="#fff" stroke="#0455A1" stroke-width="2.5"/></svg>
+          <span>Normal</span>
+        </div>
+        <div class="station-item">
+          <svg width="24" height="24"><circle cx="12" cy="12" r="7" fill="#FF5252" stroke="#FF5252" stroke-width="2"/></svg>
+          <span>Lotado</span>
+        </div>
+        <div class="station-item">
+          <svg width="24" height="24"><circle cx="12" cy="12" r="7" fill="#FFD740" stroke="#FFD740" stroke-width="2"/></svg>
+          <span>Moderado</span>
+        </div>
+      </div>
+      <p style="font-size:12px;color:#777;margin-top:8px;">• Borda = cor da linha<br>• Interior = cor da densidade (vazia→lotada)<br>• Raio: 5px canvas (8px estação selecionada)</p>
+    </div>
+    <div class="col">
+      <div class="label">Estação de integração</div>
+      <div class="station-demo">
+        <div class="station-item">
+          <svg width="32" height="32">
+            <circle cx="16" cy="16" r="11" fill="#fff" stroke="#ccc" stroke-width="1.5"/>
+            <circle cx="16" cy="16" r="7" fill="#fff" stroke="#555" stroke-width="2"/>
+            <!-- colored arcs to indicate crossing lines -->
+            <path d="M9,13 A7,7 0 0,1 23,13" fill="none" stroke="#0455A1" stroke-width="3"/>
+            <path d="M9,19 A7,7 0 0,0 23,19" fill="none" stroke="#EF4136" stroke-width="3"/>
+          </svg>
+          <span>Integração</span>
+        </div>
+        <div class="station-item">
+          <svg width="32" height="32">
+            <circle cx="16" cy="16" r="12" fill="#fff" stroke="#ccc" stroke-width="1.5"/>
+            <circle cx="16" cy="16" r="8" fill="#fff" stroke="#555" stroke-width="2.5"/>
+          </svg>
+          <span>Hub</span>
+        </div>
+      </div>
+      <p style="font-size:12px;color:#777;margin-top:8px;">• Anel externo: raio 10–13px<br>• Arcos coloridos por linha que passa<br>• Luz (3 linhas), Brás (3), Sé (2)…</p>
+    </div>
+  </div>
+</div>
+
+<!-- Labels -->
+<div class="section">
+  <h3>Labels das estações</h3>
+  <svg width="100%" height="120" viewBox="0 0 600 120" style="border-radius:8px;background:#f8f9fa;">
+    <!-- Linha horizontal -->
+    <line x1="20" y1="60" x2="580" y2="60" stroke="#EF4136" stroke-width="6" stroke-linecap="round"/>
+    <!-- Estações -->
+    <circle cx="80" cy="60" r="5" fill="#fff" stroke="#EF4136" stroke-width="2"/>
+    <circle cx="200" cy="60" r="5" fill="#fff" stroke="#EF4136" stroke-width="2"/>
+    <circle cx="320" cy="60" r="9" fill="#fff" stroke="#555" stroke-width="2"/><!-- integração -->
+    <circle cx="440" cy="60" r="5" fill="#fff" stroke="#EF4136" stroke-width="2"/>
+    <!-- Labels above/below alternating -->
+    <text x="80" y="48" font-size="9" fill="#333" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Palmeiras</text>
+    <text x="80" y="56" font-size="7.5" fill="#333" font-family="sans-serif" text-anchor="middle">Barra Funda</text>
+    <text x="200" y="78" font-size="9" fill="#333" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Marechal</text>
+    <text x="200" y="87" font-size="7.5" fill="#555" font-family="sans-serif" text-anchor="middle">Deodoro</text>
+    <text x="320" y="45" font-size="10" fill="#111" font-family="-apple-system,sans-serif" font-weight="700" text-anchor="middle">Brás</text>
+    <text x="440" y="78" font-size="9" fill="#333" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Tatuapé</text>
+  </svg>
+  <p style="font-size:12px;color:#666;margin-top:10px;">• Labels alternam acima/abaixo da linha (igual ao mapa impresso) · Fonte: <strong>SF Pro / Inter</strong> 9–11px · Peso 600 para estações normais, 700 para integrações · Desaparecem com <code>opacity</code> proporcional ao zoom quando muito pequenos</p>
+</div>
+
+<!-- Dark mode -->
+<div class="section">
+  <h3>Dark mode</h3>
+  <div class="row">
+    <div class="col map-preview">
+      <div style="background:#fff;padding:16px;border-radius:8px;border:1px solid #e0e0e0;">
+        <div class="label" style="margin-bottom:8px;">☀️ Light</div>
+        <svg width="100%" height="100" viewBox="0 0 300 100">
+          <rect width="300" height="100" fill="#fff"/>
+          <line x1="10" y1="50" x2="290" y2="50" stroke="#0455A1" stroke-width="6" stroke-linecap="round"/>
+          <line x1="150" y1="10" x2="150" y2="90" stroke="#EF4136" stroke-width="6" stroke-linecap="round"/>
+          <circle cx="150" cy="50" r="8" fill="#fff" stroke="#555" stroke-width="2"/>
+          <circle cx="80" cy="50" r="5" fill="#fff" stroke="#0455A1" stroke-width="2"/>
+          <circle cx="220" cy="50" r="5" fill="#fff" stroke="#0455A1" stroke-width="2"/>
+          <circle cx="150" cy="25" r="5" fill="#fff" stroke="#EF4136" stroke-width="2"/>
+          <text x="152" y="47" font-size="8" fill="#111" font-family="sans-serif" font-weight="700">Luz</text>
+          <text x="82" y="45" font-size="7" fill="#555" font-family="sans-serif">Palmeiras</text>
+        </svg>
+      </div>
+    </div>
+    <div class="col map-preview">
+      <div style="background:#121212;padding:16px;border-radius:8px;border:1px solid #333;">
+        <div class="label" style="margin-bottom:8px;color:#aaa;">🌙 Dark</div>
+        <svg width="100%" height="100" viewBox="0 0 300 100">
+          <rect width="300" height="100" fill="#121212"/>
+          <line x1="10" y1="50" x2="290" y2="50" stroke="#4D8FD6" stroke-width="6" stroke-linecap="round"/>
+          <line x1="150" y1="10" x2="150" y2="90" stroke="#F47B6E" stroke-width="6" stroke-linecap="round"/>
+          <circle cx="150" cy="50" r="8" fill="#1e1e1e" stroke="#ddd" stroke-width="2"/>
+          <circle cx="80" cy="50" r="5" fill="#121212" stroke="#4D8FD6" stroke-width="2"/>
+          <circle cx="220" cy="50" r="5" fill="#121212" stroke="#4D8FD6" stroke-width="2"/>
+          <circle cx="150" cy="25" r="5" fill="#121212" stroke="#F47B6E" stroke-width="2"/>
+          <text x="152" y="47" font-size="8" fill="#eee" font-family="sans-serif" font-weight="700">Luz</text>
+          <text x="82" y="45" font-size="7" fill="#aaa" font-family="sans-serif">Palmeiras</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:12px;color:#666;margin-top:10px;">No dark mode as cores das linhas ficam 15% mais claras (luminosidade +20) para manter contraste sobre fundo escuro. Fundo do mapa: <code>#121212</code>. Labels: <code>#EEEEEE</code>. Interchanges: borda <code>#555</code>.</p>
+</div>
+
+<div style="text-align:center;margin-top:8px;">
+  <p style="font-size:13px;color:#555;">Esse design visual do mapa está OK? Responda no terminal.</p>
+</div>
+
+</body>
+</html>

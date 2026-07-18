@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design do Mapa v5</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f5; color: #111; padding: 24px; }
+  h2 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+  .subtitle { color: #666; font-size: 14px; margin-bottom: 24px; }
+  .section { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+  .section h3 { font-size: 15px; font-weight: 700; margin-bottom: 14px; color: #333; }
+  .note { font-size:12px; color:#666; margin-top:10px; line-height:1.6; }
+</style>
+</head>
+<body>
+
+<h2>Labels — estações centralizadas na linha</h2>
+<p class="subtitle">Dot centrado na linha · tracejado perpendicular · texto paralelo à linha</p>
+
+<!-- Técnica: cada estação usa transform="translate(x,y) rotate(ângulo)" -->
+<!-- Dentro do grupo: dot em (0,0), tick sobe em y negativo, texto no final -->
+
+<!-- Horizontal L3 -->
+<div class="section">
+  <h3>Linha horizontal — L3 Vermelha (ângulo 0°)</h3>
+  <svg width="100%" height="160" viewBox="0 0 600 160" style="border-radius:8px;background:#f8f9fa;">
+    <line x1="30" y1="90" x2="570" y2="90" stroke="#EF4136" stroke-width="7" stroke-linecap="round"/>
+
+    <!-- Estação 1: acima -->
+    <g transform="translate(100,90) rotate(0)">
+      <circle cx="0" cy="0" r="6" fill="#fff" stroke="#EF4136" stroke-width="2.5"/>
+      <line x1="0" y1="-6" x2="0" y2="-28" stroke="#bbb" stroke-width="1.3" stroke-dasharray="3,3"/>
+      <text x="0" y="-33" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Palmeiras-Barra Funda</text>
+    </g>
+
+    <!-- Estação 2: abaixo -->
+    <g transform="translate(240,90) rotate(0)">
+      <circle cx="0" cy="0" r="6" fill="#fff" stroke="#EF4136" stroke-width="2.5"/>
+      <line x1="0" y1="6" x2="0" y2="28" stroke="#bbb" stroke-width="1.3" stroke-dasharray="3,3"/>
+      <text x="0" y="40" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Marechal Deodoro</text>
+    </g>
+
+    <!-- Integração: acima, maior -->
+    <g transform="translate(380,90) rotate(0)">
+      <circle cx="0" cy="0" r="11" fill="#fff" stroke="#ccc" stroke-width="1.5"/>
+      <circle cx="0" cy="0" r="7" fill="#fff" stroke="#444" stroke-width="2.5"/>
+      <line x1="0" y1="-11" x2="0" y2="-30" stroke="#bbb" stroke-width="1.3" stroke-dasharray="3,3"/>
+      <text x="0" y="-35" font-size="11" fill="#111" font-family="-apple-system,sans-serif" font-weight="700" text-anchor="middle">Brás</text>
+    </g>
+
+    <!-- Estação 4: abaixo -->
+    <g transform="translate(510,90) rotate(0)">
+      <circle cx="0" cy="0" r="6" fill="#fff" stroke="#EF4136" stroke-width="2.5"/>
+      <line x1="0" y1="6" x2="0" y2="28" stroke="#bbb" stroke-width="1.3" stroke-dasharray="3,3"/>
+      <text x="0" y="40" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Corinthians-Itaquera</text>
+    </g>
+  </svg>
+</div>
+
+<!-- Diagonal L4 ~30° descendo para a esquerda -->
+<div class="section">
+  <h3>Linha diagonal ~30° — L4 Amarela</h3>
+  <!-- Line from (520,50) to (80,210): dx=-440 dy=160 → angle=atan2(160,-440)≈-20° from horizontal going left-down -->
+  <!-- Using angle = 20° below horizontal going left = rotate(200) on SVG... simpler: just use rotate(-20) -->
+  <svg width="100%" height="260" viewBox="0 0 600 260" style="border-radius:8px;background:#f8f9fa;">
+    <!-- angle ~-20deg (going left and slightly down) -->
+    <line x1="530" y1="60" x2="70" y2="220" stroke="#FFD900" stroke-width="7" stroke-linecap="round" stroke-opacity="0.9"/>
+
+    <!-- Station 1: acima da linha (tick sobe = y negativo no grupo rotacionado) -->
+    <!-- posição na linha: ~(460, 84) -->
+    <g transform="translate(460,84) rotate(-20)">
+      <circle cx="0" cy="0" r="6" fill="#fff" stroke="#c8a800" stroke-width="2.5"/>
+      <line x1="0" y1="-6" x2="0" y2="-28" stroke="#bbb" stroke-width="1.3" stroke-dasharray="3,3"/>
+      <text x="0" y="-33" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Luz</text>
+    </g>
+
+    <!-- Station 2 integração: abaixo -->
+    <!-- posição na linha: ~(340, 124) -->
+    <g transform="translate(340,124) rotate(-20)">
+      <circle cx="0" cy="0" r="11" fill="#fff" stroke="#ccc" stroke-width="1.5"/>
+      <circle cx="0" cy="0" r="7" fill="#fff" stroke="#444" stroke-width="2.5"/>
+      <line x1="0" y1="11" x2="0" y2="32" stroke="#bbb" stroke-width="1.3" stroke-dasharray="3,3"/>
+      <text x="0" y="43" font-size="11" fill="#111" font-family="-apple-system,sans-serif" font-weight="700" text-anchor="middle">Pinheiros</text>
+    </g>
+
+    <!-- Station 3: acima -->
+    <!-- posição na linha: ~(230, 162) -->
+    <g transform="translate(230,162) rotate(-20)">
+      <circle cx="0" cy="0" r="6" fill="#fff" stroke="#c8a800" stroke-width="2.5"/>
+      <line x1="0" y1="-6" x2="0" y2="-28" stroke="#bbb" stroke-width="1.3" stroke-dasharray="3,3"/>
+      <text x="0" y="-33" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Faria Lima</text>
+    </g>
+
+    <!-- Station 4: abaixo -->
+    <!-- posição na linha: ~(130, 196) -->
+    <g transform="translate(130,196) rotate(-20)">
+      <circle cx="0" cy="0" r="6" fill="#fff" stroke="#c8a800" stroke-width="2.5"/>
+      <line x1="0" y1="6" x2="0" y2="28" stroke="#bbb" stroke-width="1.3" stroke-dasharray="3,3"/>
+      <text x="0" y="40" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Vila Sônia</text>
+    </g>
+
+    <text x="8" y="16" font-size="10" fill="#888" font-family="sans-serif">rotate(-20°) — dots na linha, tick perpendicular, texto paralelo</text>
+  </svg>
+  <p class="note">Cada estação usa <code>transform="translate(x,y) rotate(ângulo)"</code> — o dot fica exatamente na linha, o tick vai perpendicular e o texto acompanha o mesmo ângulo.</p>
+</div>
+
+<!-- Steep diagonal L7 ~55° -->
+<div class="section">
+  <h3>Linha íngreme ~55° — L7 Rubi (sentido noroeste)</h3>
+  <svg width="100%" height="260" viewBox="0 0 400 260" style="border-radius:8px;background:#f8f9fa;">
+    <!-- going top-left steep: from (300,220) to (80,60) → dx=-220 dy=-160 → angle≈-54° from horizontal -->
+    <line x1="300" y1="220" x2="80" y2="60" stroke="#CF202E" stroke-width="7" stroke-linecap="round" stroke-opacity="0.9"/>
+
+    <!-- Station 1 bottom-right -->
+    <g transform="translate(272,199) rotate(-54)">
+      <circle cx="0" cy="0" r="6" fill="#fff" stroke="#CF202E" stroke-width="2.5"/>
+      <line x1="0" y1="-6" x2="0" y2="-26" stroke="#bbb" stroke-width="1.3" stroke-dasharray="3,3"/>
+      <text x="0" y="-31" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Luz</text>
+    </g>
+
+    <!-- Station 2 -->
+    <g transform="translate(216,159) rotate(-54)">
+      <circle cx="0" cy="0" r="6" fill="#fff" stroke="#CF202E" stroke-width="2.5"/>
+      <line x1="0" y1="6" x2="0" y2="26" stroke="#bbb" stroke-width="1.3" stroke-dasharray="3,3"/>
+      <text x="0" y="37" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Pinheiros</text>
+    </g>
+
+    <!-- Station 3 integração -->
+    <g transform="translate(162,120) rotate(-54)">
+      <circle cx="0" cy="0" r="11" fill="#fff" stroke="#ccc" stroke-width="1.5"/>
+      <circle cx="0" cy="0" r="7" fill="#fff" stroke="#444" stroke-width="2.5"/>
+      <line x1="0" y1="-11" x2="0" y2="-30" stroke="#bbb" stroke-width="1.3" stroke-dasharray="3,3"/>
+      <text x="0" y="-35" font-size="11" fill="#111" font-family="-apple-system,sans-serif" font-weight="700" text-anchor="middle">Francisco Morato</text>
+    </g>
+
+    <!-- Station 4 -->
+    <g transform="translate(110,82) rotate(-54)">
+      <circle cx="0" cy="0" r="6" fill="#fff" stroke="#CF202E" stroke-width="2.5"/>
+      <line x1="0" y1="6" x2="0" y2="26" stroke="#bbb" stroke-width="1.3" stroke-dasharray="3,3"/>
+      <text x="0" y="37" font-size="10" fill="#222" font-family="-apple-system,sans-serif" font-weight="600" text-anchor="middle">Jaraguá</text>
+    </g>
+
+    <text x="8" y="18" font-size="10" fill="#888" font-family="sans-serif">rotate(-54°) — mesmo padrão, qualquer ângulo</text>
+  </svg>
+</div>
+
+<div style="text-align:center;margin-top:8px;">
+  <p style="font-size:13px;color:#555;">Assim ficou correto? Responda no terminal para continuarmos.</p>
+</div>
+
+</body>
+</html>
