@@ -4,7 +4,7 @@ services:
       context: ./backend
       dockerfile: Trilho.API/Dockerfile
     ports:
-      - "5000:8080"
+      - "5050:8080"
     environment:
       - ConnectionStrings__Default=Host=db;Database=trilho;Username=postgres;Password=postgres
       - Redis__Connection=redis:6379
@@ -53,7 +53,7 @@ services:
       retries: 5
 
   # ── Observabilidade (métricas e dashboards) ────────────────────────────────
-  # Acesse Grafana em http://localhost:3001 (admin / trilho123)
+  # Acesse Grafana em http://localhost:3002 (admin / trilho123)
   # Acesse Prometheus em http://localhost:9090
   prometheus:
     image: prom/prometheus:latest
@@ -67,7 +67,7 @@ services:
   grafana:
     image: grafana/grafana:latest
     ports:
-      - "3001:3000"
+      - "3002:3000"
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=trilho123
       - GF_USERS_ALLOW_SIGN_UP=false
