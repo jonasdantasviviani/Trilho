@@ -1,0 +1,57 @@
+# Configuração do Éden para este repositório (docs/eden-yaml.md no repo do Éden).
+# Comandos rodam num ambiente temporário, sem segredos. Revise e ajuste à vontade.
+version: 1
+components:
+- name: admin
+  path: admin
+  stack: node
+  setup:
+  - npm ci
+  test:
+  - npm test --prefix web
+  build:
+  - npm run build
+- name: backend
+  path: backend
+  stack: dotnet
+  setup:
+  - dotnet restore
+  test:
+  - dotnet test --no-build
+  build:
+  - dotnet build --no-restore
+- name: mobile
+  path: mobile
+  stack: flutter
+  setup:
+  - flutter pub get
+  lint:
+  - flutter analyze
+  test:
+  - flutter test
+- name: android
+  path: mobile/android
+  stack: gradle
+  test:
+  - gradle test
+  build:
+  - gradle build -x test
+- name: web
+  path: web
+  stack: node
+  setup:
+  - npm ci
+  lint:
+  - npm run lint
+  test:
+  - npm test
+  build:
+  - npm run build
+env:
+  optional:
+  - JWT_SECRET
+  - OLHOVIVO_TOKEN
+services:
+- postgis
+- redis
+timeout_minutes: 30
